@@ -28,45 +28,14 @@ void *timer_free (timer *t);
  * |_| \_\___|\___\___/|_|  \__,_|\___|_|
  */
 
-long int overhead = -1;
-long int get_overhead () {
-  if (-1 == overhead) {
-    timer *t = timer_alloc();
-    start_timer(t);
-    overhead = stop_timer(t);
-    timer_free(t);
-    printf("overhead: %ld\n", overhead);
-  }
-  return overhead;
-}
+long int update_overhead ();
+long int get_overhead ();
 
 typedef struct recorder recorder;
-struct recorder {
-  FILE *output;
-  long int overhead;
-};
+struct recorder;
 
-recorder *recorder_alloc (char *filename) {
-  recorder *rec = (recorder *) malloc(sizeof(recorder));
-  if (rec == NULL) {
-    perror("malloc");
-    return NULL;
-  }
-  rec->output = fopen(filename, "w");
-  if (rec->output == NULL) {
-    perror("fopen");
-    free(rec);
-    return NULL;
-  }
-  rec->overhead = get_overhead();
-  return rec;
-}
+recorder *recorder_alloc (char *filename);
 
-void write_record (recorder *rec, long int x, long int time) {
-  fprintf(rec->output, "%ld, %ld\n", x, time - rec->overhead);
-}
+void write_record (recorder *rec, long int x, long int time);
 
-void recorder_free (recorder *rec) {
-  fclose(rec->output);
-  free(rec);
-}
+void recorder_free (recorder *rec);

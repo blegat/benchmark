@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <error.h>
 #include <unistd.h>
+#include "benchmark.h"
 
 /*  _____ _
  * |_   _(_)_ __ ___   ___ _ __
@@ -50,14 +51,17 @@ void *timer_free (timer *t) {
  * |_| \_\___|\___\___/|_|  \__,_|\___|_|
  */
 
-long int overhead = -1;
+volatile long int overhead = -1;
+long int update_overhead() {
+  timer *t = timer_alloc();
+  start_timer(t);
+  overhead = stop_timer(t);
+  timer_free(t);
+  printf("overhead updated: %ld\n", overhead);
+}
 long int get_overhead () {
   if (-1 == overhead) {
-    timer *t = timer_alloc();
-    start_timer(t);
-    overhead = stop_timer(t);
-    timer_free(t);
-    printf("overhead: %ld\n", overhead);
+    update_overhead();
   }
   return overhead;
 }

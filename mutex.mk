@@ -1,11 +1,7 @@
-#include thread.mk
-#include mutex.mk
-#include alloc.mk
-#include fork.mk
-include file.mk
-
-CC      = gcc
-CFLAGS += -I.
+CC     = gcc
+CFLAGS = -I.
+DEPS   = benchmark.h
+OBJ    = benchmark.o alloc.o 
 
 # Lorsqu'on fait `make`, c'est la première règle qui est exécutée
 # donc dans ce cas-ci, c'est sa dependance.
@@ -17,16 +13,19 @@ default: show
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(PROG): $(OBJ)
+alloc: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
-$(GRAPHS): $(PROG)
-	./$(PROG)
+free.csv malloc.csv calloc.csv: alloc
+	./alloc --free
 
-show: $(GRAPHS)
-	gnuplot -p $(PROG).gnuplot
+brk.csv sbrk.csv: alloc
+	./alloc --brk
+
+show: free.csv malloc.csv calloc.csv brk.csv sbrk.csv
+	gnuplot -p alloc.gnuplot
 
 .PHONY: run show clean default
 
 clean:
-	$(RM) $(PROG) $(GRAPHS) $(OBJ) $(TMP)
+	$(RM) alloc *.csv *.o

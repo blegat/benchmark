@@ -6,6 +6,5 @@ set logscale x
 plot 'free.csv' using 1:2 title 'free',\
   'malloc.csv' using 1:2 title 'malloc',\
   'calloc.csv' using 1:2 title 'calloc',\
-  'malloc_nofree.csv' using 1:2 title 'malloc no free',\
   'sbrk.csv' using 1:2 title 'sbrk',\
   'brk.csv' using 1:2 title 'brk'
