@@ -6,7 +6,7 @@
 include shm.mk
 
 CC      = gcc
-CFLAGS += -I.
+CFLAGS += -I. -g
 
 # Lorsqu'on fait `make`, c'est la première règle qui est exécutée
 # donc dans ce cas-ci, c'est sa dependance.
@@ -21,6 +21,9 @@ default: show
 $(PROG): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
+valgrind: $(PROG)
+	valgrind --leak-check=full ./$(PROG)
+
 $(GRAPHS): $(PROG)
 	./$(PROG)
 
@@ -31,7 +34,10 @@ export: $(GRAPHS)
 	gnuplot -p -e "set terminal png size 800,600 enhanced font 'Helvetica,12';\
 	  set output '$(PROG).png'" $(PROG).gpi
 
-.PHONY: run show export clean default
+.PHONY: run show export clean default mrproper
 
 clean:
 	$(RM) $(PROG) $(GRAPHS) $(OBJ) $(TMP)
+
+mrproper: clean
+	$(RM) *.png
