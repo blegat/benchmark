@@ -1,12 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <error.h>
-#include <unistd.h>
 #include <pthread.h>
 
 #include "benchmark.h"
 
-#define N 100
+#define N 42
 
 void *thread(void * param) {
   sleep(1); // pas un `while (true)` comme ça le thread est pas "ready"
@@ -15,7 +13,7 @@ void *thread(void * param) {
 
 int main (int argc, char *argv[])  {
   pthread_t threads[N];
-  int err, i;
+  int err = 0, i;
 
   timer *t = timer_alloc();
   recorder *create_rec = recorder_alloc("create.csv");

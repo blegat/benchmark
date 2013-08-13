@@ -1,8 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <error.h>
-#include <unistd.h>
-#include <pthread.h>
 
 #include "benchmark.h"
 
@@ -30,19 +27,23 @@ int main (int argc, char *argv[])  {
     if (pid == 0) {
       // processus fils
       write_record(child_rec, i, stop_timer(t));
+
+      recorder_free(child_rec);
+      recorder_free(parent_rec);
+      timer_free(t);
+
       return EXIT_SUCCESS;
     }
     else {
       // processus père
       write_record(parent_rec, i, stop_timer(t));
-      pid = wait(&status);
+      pid = waitpid(pid, &status, 0);
       if (pid == -1) {
         perror("wait");
         return EXIT_FAILURE;
       }
     }
     // END
-    printf("%d\n", pid);
   }
 
   recorder_free(child_rec);

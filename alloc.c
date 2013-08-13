@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <error.h>
 #include <unistd.h>
 
 #include "benchmark.h"
 
-#define MAX_SIZE 0x10000000 // 1 MB
+#define MAX_SIZE 0x100000 // 1 MB
 #define MAX_ALLOCS 100 // largement assez
 
 int main (int argc, char *argv[]) {
@@ -14,7 +13,6 @@ int main (int argc, char *argv[]) {
   void *p;
   timer *t = timer_alloc();
 
-  printf("free\n");
   recorder *malloc_rec = recorder_alloc("malloc.csv");
   recorder *calloc_rec = recorder_alloc("calloc.csv");
   recorder *free_rec = recorder_alloc("free.csv");
@@ -26,12 +24,12 @@ int main (int argc, char *argv[]) {
       perror("malloc");
       return -1;
     }
-    printf("malloc\t%p\t%p\n", p, sbrk(0));
+    //printf("malloc\t%p\t%p\n", p, sbrk(0));
 
     start_timer(t);
     free(p);
     write_record(free_rec, size, stop_timer(t));
-    printf("free\t%p\t%p\n", p, sbrk(0));
+    //printf("free\t%p\t%p\n", p, sbrk(0));
 
     start_timer(t);
     p = calloc(size, 1);
@@ -40,14 +38,15 @@ int main (int argc, char *argv[]) {
       perror("calloc");
       return -1;
     }
-    printf("calloc\t%p\t%p\n", p, sbrk(0));
+    //printf("calloc\t%p\t%p\n", p, sbrk(0));
 
     start_timer(t);
     free(p);
     write_record(free_rec, size, stop_timer(t));
-    printf("free\t%p\t%p\n", p, sbrk(0));
+    //printf("free\t%p\t%p\n", p, sbrk(0));
   }
   recorder_free(malloc_rec);
+  recorder_free(calloc_rec);
   recorder_free(free_rec);
 
   // brk/sbrk

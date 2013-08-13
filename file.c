@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <error.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+#include <string.h>
 #include <fcntl.h>
 
 #include "benchmark.h"
@@ -27,6 +24,7 @@ int main (int argc, char *argv[])  {
     exit(EXIT_FAILURE);
   }
   char *s = (char *) malloc((MAX_SIZE + 1) * sizeof(char));
+  memset(s, 0, MAX_SIZE + 1);
   for (size = 1; size <= MAX_SIZE; size *= 2) {
     start_timer(t);
     len = write(fd, (void *) s, size);
@@ -71,6 +69,7 @@ int main (int argc, char *argv[])  {
   }
   // END
 
+  free(s);
   recorder_free(open_rec);
   recorder_free(write_rec);
   recorder_free(read_rec);
