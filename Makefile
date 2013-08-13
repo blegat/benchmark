@@ -1,8 +1,9 @@
-#include thread.mk
-#include mutex.mk
 #include alloc.mk
+#include thread.mk
 #include fork.mk
-include file.mk
+#include file.mk
+#include mmap.mk
+include shm.mk
 
 CC      = gcc
 CFLAGS += -I.
@@ -24,9 +25,13 @@ $(GRAPHS): $(PROG)
 	./$(PROG)
 
 show: $(GRAPHS)
-	gnuplot -p $(PROG).gnuplot
+	gnuplot -p $(PROG).gpi
 
-.PHONY: run show clean default
+export: $(GRAPHS)
+	gnuplot -p -e "set terminal png size 800,600 enhanced font 'Helvetica,12';\
+	  set output '$(PROG).png'" $(PROG).gpi
+
+.PHONY: run show export clean default
 
 clean:
 	$(RM) $(PROG) $(GRAPHS) $(OBJ) $(TMP)

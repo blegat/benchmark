@@ -56,6 +56,7 @@ int main (int argc, char *argv[]) {
   recorder *sbrk_rec = recorder_alloc("sbrk.csv");
   recorder *brk_rec = recorder_alloc("brk.csv");
   for (size = 1; size <= MAX_SIZE; size *= 2) {
+    // BEGIN
     start_timer(t);
     p = sbrk(size); // alloc
     write_record(sbrk_rec, size, stop_timer(t));
@@ -68,6 +69,7 @@ int main (int argc, char *argv[]) {
     if (err == -1) {
       perror("brk");
     }
+    // END
   }
   recorder_free(sbrk_rec);
   recorder_free(brk_rec);

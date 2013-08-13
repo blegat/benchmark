@@ -1,0 +1,8 @@
+# backslash nécessaire pour l'exportation en .png sinon, gnuplot croira
+# que c'est pour faire un subscript comme en LaTeX
+set title 'Benchmark of pthread\_alloc/pthread\_join'
+set xlabel 'number of threads sleeping'
+set ylabel 'time [us]'
+set key right bottom
+plot 'create.csv' using 1:2 title 'pthread\_create',\
+  'join.csv' using 1:2 title 'pthread\_join'

@@ -21,7 +21,7 @@ int main (int argc, char *argv[])  {
   ssize_t len;
   start_timer(t);
   int fd = open("tmp.dat", O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR);
-  write_record(open_rec, 0, stop_timer(t));
+  write_record(open_rec, 1, stop_timer(t));
   if(fd == -1) {
     perror("open");
     exit(EXIT_FAILURE);
@@ -39,12 +39,13 @@ int main (int argc, char *argv[])  {
   int file_size = size - 1; // e.g. 1 + 2 + 4 + 8 + 16 = 32 - 1
   start_timer(t);
   err = close(fd);
-  write_record(close_rec, 0, stop_timer(t));
+  write_record(close_rec, 1, stop_timer(t));
   if (err == -1) {
     perror("close");
     exit(EXIT_FAILURE);
   }
 
+  // BEGIN
   start_timer(t);
   fd = open("tmp.dat", O_RDONLY);
   write_record(open_rec, file_size, stop_timer(t));
@@ -68,6 +69,7 @@ int main (int argc, char *argv[])  {
     perror("close");
     exit(EXIT_FAILURE);
   }
+  // END
 
   recorder_free(open_rec);
   recorder_free(write_rec);

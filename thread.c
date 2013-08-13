@@ -21,6 +21,7 @@ int main (int argc, char *argv[])  {
   recorder *create_rec = recorder_alloc("create.csv");
   recorder *join_rec = recorder_alloc("join.csv");
 
+  // BEGIN
   for (i = 0; i < N; i++) {
     start_timer(t);
     err = pthread_create(&threads[i], NULL, &thread, NULL);
@@ -28,9 +29,11 @@ int main (int argc, char *argv[])  {
     if (err != 0)
       error(1, err, "pthread_create");
   }
+  // END
 
   sleep(2); // Pour s'assurer que les pthread_join ne patientent pas
 
+  // BEGIN
   for (i = 0; i < N; i++) {
     start_timer(t);
     err = pthread_join(threads[i], NULL);
@@ -38,6 +41,7 @@ int main (int argc, char *argv[])  {
     if (err != 0)
       error(1, err, "pthread_join");
   }
+  // END
 
   recorder_free(join_rec);
   recorder_free(create_rec);

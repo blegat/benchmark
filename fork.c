@@ -6,7 +6,7 @@
 
 #include "benchmark.h"
 
-#define N 100
+#define N 42
 
 int main (int argc, char *argv[])  {
   timer *t = timer_alloc();
@@ -17,7 +17,6 @@ int main (int argc, char *argv[])  {
   int status, i;
 
   for (i = 0; i < N; i++) {
-    update_overhead(); // does not change anything
     start_timer(t);
     pid = fork();
 
@@ -27,6 +26,7 @@ int main (int argc, char *argv[])  {
       return EXIT_FAILURE;
     }
     // pas d'erreur
+    // BEGIN
     if (pid == 0) {
       // processus fils
       write_record(child_rec, i, stop_timer(t));
@@ -41,6 +41,7 @@ int main (int argc, char *argv[])  {
         return EXIT_FAILURE;
       }
     }
+    // END
     printf("%d\n", pid);
   }
 
