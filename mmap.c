@@ -33,6 +33,8 @@ int main (int argc, char *argv[])  {
       return EXIT_FAILURE;
     }
     err = close(fd);
+    // FIXME remove from cache
+    // TODO cmp cp mmap et pas mmap
 
     // open
     start_timer(t);
