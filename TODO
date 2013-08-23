@@ -1,0 +1,27 @@
+S1: Nicolas
+  bash loop vs C loop
+S2: Maxime
+  int vs long long int vs float
+S3: Benoît
+  malloc vs calloc vs free vs stack
+  fragmentation
+S4:
+  matrice ligne par ligne ou colonne par colonne (use perf)
+S5:
+  passer tableau ou pointeur Nicolas
+  thread (Ahmdal) Maxime
+S7:
+  1 attends 2, 2 attends 3, etc...
+S8: Maxime
+  thread vs processus
+S9: Benoît
+  pipe ping pong
+  read vs right vs printf vs scanf vs SYNC
+  putc (en moyenne !)
+  ficher texte vs fichiers binaires (int, float)
+   place et perf
+S11:
+  perf, mmap
+S12:
+  shm, process vs threads (cache, forcer sur un processeur)
+  fork -> modifier la mémoire ! lecture vs écriture
