@@ -37,5 +37,6 @@ struct recorder;
 recorder *recorder_alloc (char *filename);
 
 void write_record (recorder *rec, long int x, long int time);
+void write_record_n (recorder *rec, long int x, long int time, long n);
 
 void recorder_free (recorder *rec);

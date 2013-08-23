@@ -4,7 +4,7 @@
 
 #include "benchmark.h"
 
-#define N 42
+#define N 1000
 
 void *thread(void * param) {
   sleep(1); // pas un `while (true)` comme ça le thread est pas "ready"
@@ -20,25 +20,25 @@ int main (int argc, char *argv[])  {
   recorder *join_rec = recorder_alloc("join.csv");
 
   // BEGIN
+  start_timer(t);
   for (i = 0; i < N; i++) {
-    start_timer(t);
     err = pthread_create(&threads[i], NULL, &thread, NULL);
-    write_record(create_rec, i, stop_timer(t));
-    if (err != 0)
-      error(1, err, "pthread_create");
+    /*if (err != 0)
+      error(1, err, "pthread_create");*/
   }
+  write_record_n(create_rec, i, stop_timer(t), N);
   // END
 
   sleep(2); // Pour s'assurer que les pthread_join ne patientent pas
 
   // BEGIN
+  start_timer(t);
   for (i = 0; i < N; i++) {
-    start_timer(t);
     err = pthread_join(threads[i], NULL);
-    write_record(join_rec, i, stop_timer(t));
-    if (err != 0)
-      error(1, err, "pthread_join");
+    /*if (err != 0)
+      error(1, err, "pthread_join");*/
   }
+  write_record_n(join_rec, i, stop_timer(t), N);
   // END
 
   recorder_free(join_rec);
