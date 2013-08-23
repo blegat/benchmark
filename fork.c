@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// mesure copy-on-write, also with pthread
+
 #include "benchmark.h"
 
 #define N 42
