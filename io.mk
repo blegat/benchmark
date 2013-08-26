@@ -1,5 +1,5 @@
 DEPS   = benchmark.h
 OBJ    = benchmark.o io.o
-GRAPHS = write_nosync.csv read_nosync.csv write_sync.csv read_sync.csv
+GRAPHS = sys_sync.csv sys_nosync.csv sys_direct.csv std_buf.csv std_nobuf.csv
 PROG   = io
-TMP    = tmp.dat
+TMP    = tmpin.dat tmpout.dat
