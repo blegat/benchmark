@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <sys/times.h>
 #include <time.h>
-#include <error.h>
+//#include <error.h>
 #include <unistd.h>
 #include "benchmark.h"
 
@@ -133,7 +133,7 @@ long int update_overhead() {
   overhead = stop_timer(t);
   timer_free(t);
   printf("overhead updated: %ld\n", overhead);
-  printf("clocks per sec: %ld\n", CLOCKS_PER_SEC);
+  printf("clocks per sec: %d\n", CLOCKS_PER_SEC);
 }
 long int get_overhead () {
   if (-1 == overhead) {
@@ -142,7 +142,7 @@ long int get_overhead () {
   return overhead;
 }
 
-typedef struct recorder recorder;
+//typedef struct recorder recorder;
 struct recorder {
   FILE *output;
   long int overhead;
