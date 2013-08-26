@@ -4,7 +4,7 @@
 
 #include "benchmark.h"
 
-#define N 29999
+#define N 999
 
 int primeInt (int nMax, timer* t, recorder* r) {
 	int count, i = 3, c;
