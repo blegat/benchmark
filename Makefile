@@ -5,7 +5,8 @@
 #include io.mk
 #include mmap.mk
 #include shm.mk
-include types.mk
+#include types.mk
+include amdahl.mk
 # TODO mesure function call
 # TODO memcpy taille de la zone mémoire, alignement 32 Bits (remove packed)
 # TODO matrice ligne par ligne colonne par colonne
