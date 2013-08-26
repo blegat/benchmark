@@ -1,10 +1,11 @@
 #include alloc.mk
-include thread.mk
+#include thread.mk
 #include fork.mk
 #include file.mk
 #include io.mk
 #include mmap.mk
 #include shm.mk
+include types.mk
 # TODO mesure function call
 # TODO memcpy taille de la zone mémoire, alignement 32 Bits (remove packed)
 # TODO matrice ligne par ligne colonne par colonne
