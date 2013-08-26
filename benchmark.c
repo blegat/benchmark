@@ -5,7 +5,7 @@
  **************************************/
 
 //#define BM_USE_CLOCK_GETTIME
-#define BM_USE_CLOCK
+//#define BM_USE_CLOCK
 //#define BM_USE_TIMES
 
 #include <stdio.h>
@@ -24,7 +24,7 @@
  */
 
 struct timer {
-#if   defined(BM_USE_CLOCK_GETTIME)
+#if   defined(BM_USE_CLOCK_GETTIME) || defined(BM_USE_CLOCK_GETTIME_RT)
   struct timespec start;
 #elif defined(BM_USE_CLOCK)
   clock_t start;
@@ -60,6 +60,12 @@ void start_timer (timer *t) {
     perror("clock_gettime");
     exit(EXIT_FAILURE);
   }
+#elif defined(BM_USE_CLOCK_GETTIME)
+  if (clock_gettime(CLOCK_REALTIME, &t->start)) {
+  //if (clock_gettime(CLOCK_REALTIME, &t->start)) {
+    perror("clock_gettime");
+    exit(EXIT_FAILURE);
+  }
 #elif defined(BM_USE_CLOCK)
   t->start = clock();
   if (t->start == (clock_t) -1) {
@@ -83,7 +89,7 @@ void start_timer (timer *t) {
 
 long int stop_timer (timer *t) {
   // time_t is only a 32 bits int on 32 bits machines
-#if   defined(BM_USE_CLOCK_GETTIME)
+#if   defined(BM_USE_CLOCK_GETTIME) || defined(BM_USE_CLOCK_GETTIME_RT)
   struct timespec end;
   if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end)) {
   //if (clock_gettime(CLOCK_REALTIME, &end)) {
