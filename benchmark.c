@@ -4,8 +4,8 @@
  * Des fonctions simples de benchmark.
  **************************************/
 
-//#define BM_USE_CLOCK_GETTIME
-#define BM_USE_CLOCK
+#define BM_USE_CLOCK_GETTIME
+//#define BM_USE_CLOCK
 //#define BM_USE_TIMES
 
 #include <stdio.h>
