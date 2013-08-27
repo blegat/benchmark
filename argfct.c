@@ -11,13 +11,13 @@
 
 //#define BM_USE_TIMES
 
-struct arg1 { char s[1]; };
-struct arg2 { char s[2]; };
-struct arg4 { char s[4]; };
-struct arg8 { char s[8]; };
-struct arg16 { char s[16]; };
-struct arg32 { char s[32]; };
-struct arg64 { char s[64]; };
+struct arg1   { char s[1];   };
+struct arg2   { char s[2];   };
+struct arg4   { char s[4];   };
+struct arg8   { char s[8];   };
+struct arg16  { char s[16];  };
+struct arg32  { char s[32];  };
+struct arg64  { char s[64];  };
 struct arg128 { char s[128]; };
 
 void fctpt(void* arg) { arg++; }
@@ -30,6 +30,8 @@ void fctval16(struct arg16 arg) {}
 void fctval32(struct arg32 arg) {}
 void fctval64(struct arg64 arg) { }
 void fctval128(struct arg128 arg) { }
+
+void (*fctval1)(struct arg1)
 
 
 
@@ -55,6 +57,9 @@ int main (int argc, char *argv[])  {
 				sizeof(struct arg16), 
 				sizeof(struct arg32), 
 				sizeof(struct arg128)};
+
+	
+	
 
 	long long int * timeval = calloc(8, sizeof(double));
 	long long int * timept = calloc(8, sizeof(double));

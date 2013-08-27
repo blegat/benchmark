@@ -4,7 +4,7 @@
  * Des fonctions simples de benchmark.
  **************************************/
 
-//#define BM_USE_CLOCK_GETTIME
+//#define BM_USE_CLOCK_
 //#define BM_USE_CLOCK
 //#define BM_USE_TIMES
 
@@ -116,7 +116,7 @@ long int stop_timer (timer *t) {
   struct timeval end;
   gettimeofday(&end, NULL);
   long total = ((long) end.tv_sec) * 1000000 + end.tv_usec -
-    ((long) t->start.tv_sec) * 1000000 + t->start.tv_usec;
+    (((long) t->start.tv_sec) * 1000000 + t->start.tv_usec);
 #endif
   return total;
 }

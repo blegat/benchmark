@@ -5,6 +5,7 @@ a=0
 
 while ((i <= $1))
 do
-expr ((a=a+1))
-((i += 1))
+i=$(expr $i + 1)
+#expr 1 + 1 >/dev/null
+#((i += 1))
 done 

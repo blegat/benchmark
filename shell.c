@@ -6,7 +6,7 @@
 
 #include "benchmark.h"
 
-#define MAX_SIZE 500
+#define MAX_SIZE 100
 //#define BM_USE_TIMES
 
 int main (int argc, char *argv[])  {
@@ -24,7 +24,7 @@ int main (int argc, char *argv[])  {
 	char*argBash = (char *) malloc(24*sizeof(char));
 	
 
-	for(i=1; i<MAX_SIZE; i+=10) {
+	for(i=1; i<MAX_SIZE; i+=1) {
 
 		snprintf(nbr, 7, "%d", i);
 

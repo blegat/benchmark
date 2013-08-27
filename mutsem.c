@@ -37,14 +37,14 @@ void * first(void* args) {
 	start_timer(t);
 	pthread_mutex_unlock(mutex->mut1);
 	pthread_mutex_lock(mutex->mut2);
-	write_record(mut_rec, i/1000, stop_timer(t)/1000);
+	write_record_n(mut_rec, i/1000, stop_timer(t), 1000);
 
 	sleep(1);
 
 	start_timer(t);
 	sem_post(mutex->sem1);
 	sem_wait(mutex->sem2);
-	write_record(sem_rec, i/1000, stop_timer(t)/1000);
+	write_record_n(sem_rec, i/1000, stop_timer(t), 1000);
 
 	return NULL;
 }
