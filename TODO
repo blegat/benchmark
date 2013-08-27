@@ -16,7 +16,7 @@ S8: Maxime
   thread vs processus
 S9: Benoît
   pipe ping pong
-  read vs right vs printf vs scanf vs SYNC
+  read vs write vs printf vs scanf vs SYNC
   putc (en moyenne !)
   ficher texte vs fichiers binaires (int, float)
    place et perf

@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <sys/times.h>
 #include <time.h>
-#include <error.h>
+//#include <error.h>
 #include <unistd.h>
 #include "benchmark.h"
 
@@ -24,7 +24,7 @@
  */
 
 struct timer {
-#if   defined(BM_USE_CLOCK_GETTIME)
+#if   defined(BM_USE_CLOCK_GETTIME) || defined(BM_USE_CLOCK_GETTIME_RT)
   struct timespec start;
 #elif defined(BM_USE_CLOCK)
   clock_t start;
@@ -60,6 +60,12 @@ void start_timer (timer *t) {
     perror("clock_gettime");
     exit(EXIT_FAILURE);
   }
+#elif defined(BM_USE_CLOCK_GETTIME)
+  if (clock_gettime(CLOCK_REALTIME, &t->start)) {
+  //if (clock_gettime(CLOCK_REALTIME, &t->start)) {
+    perror("clock_gettime");
+    exit(EXIT_FAILURE);
+  }
 #elif defined(BM_USE_CLOCK)
   t->start = clock();
   if (t->start == (clock_t) -1) {
@@ -83,7 +89,7 @@ void start_timer (timer *t) {
 
 long int stop_timer (timer *t) {
   // time_t is only a 32 bits int on 32 bits machines
-#if   defined(BM_USE_CLOCK_GETTIME)
+#if   defined(BM_USE_CLOCK_GETTIME) || defined(BM_USE_CLOCK_GETTIME_RT)
   struct timespec end;
   //if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end)) {
   if (clock_gettime(CLOCK_REALTIME, &end)) {
@@ -133,7 +139,7 @@ long int update_overhead() {
   overhead = stop_timer(t);
   timer_free(t);
   printf("overhead updated: %ld\n", overhead);
-  printf("clocks per sec: %ld\n", CLOCKS_PER_SEC);
+  printf("clocks per sec: %d\n", CLOCKS_PER_SEC);
 }
 long int get_overhead () {
   if (-1 == overhead) {
@@ -142,7 +148,7 @@ long int get_overhead () {
   return overhead;
 }
 
-typedef struct recorder recorder;
+//typedef struct recorder recorder;
 struct recorder {
   FILE *output;
   long int overhead;
