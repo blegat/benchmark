@@ -1,27 +1,40 @@
-S1: Nicolas
-  bash loop vs C loop
-S2: Maxime
-  int vs long long int vs float
-S3: Benoît
-  malloc vs calloc vs free vs stack
-  fragmentation
-S4:
-  matrice ligne par ligne ou colonne par colonne (use perf)
-S5:
-  passer tableau ou pointeur Nicolas
-  thread (Ahmdal) Maxime
-S7:
-  1 attends 2, 2 attends 3, etc...
-S8: Maxime
-  thread vs processus
-S9: Benoît
-  pipe ping pong
-  read vs right vs printf vs scanf vs SYNC
-  putc (en moyenne !)
-  ficher texte vs fichiers binaires (int, float)
-   place et perf
-S11:
-  perf, mmap
-S12:
-  shm, process vs threads (cache, forcer sur un processeur)
-  fork -> modifier la mémoire ! lecture vs écriture
+	S1: Nicolas 
+[x]		bash loop vs C loop
+	S2: Maxime
+[x]		int vs long long int vs float
+	S3: Benoît
+[x]		free vs stack
+	S3 :
+[?]		malloc vs calloc 
+[?]		fragmentation
+	S4:
+[?]		matrice ligne par ligne ou colonne par colonne (use perf)
+	S5: Nicolas
+[x]		passer tableau ou pointeur	
+	S5 : Maxime
+[x]		thread (Ahmdal)
+	S7: Nicolas
+[x]		Semaphore vs Mutex
+	S8: Maxime
+[.]		thread vs processus
+	S9: Benoît
+[x]		read vs write vs printf vs scanf vs SYNC
+[x]		putc (en moyenne !)
+	S9 :
+[?]		pipe ping pong
+[?]		ficher texte vs fichiers binaires (int, float). Montrer la couche de l'ASCII
+[?]		place, perf et pack (structure)
+	S11:
+[?]		perf, mmap
+	S12:
+[?]		fork -> modifier la mémoire ! lecture vs écriture
+		shm/process vs heap/threads (cache, forcer sur un processeur)
+
+	Other :
+[?]		html généré
+
+Nomenclature : 	[x] fait
+		[.] en cours
+		[?] à attribuer
+		[ ] à faire
+		

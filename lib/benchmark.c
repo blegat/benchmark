@@ -4,7 +4,7 @@
  * Des fonctions simples de benchmark.
  **************************************/
 
-#define BM_USE_CLOCK_GETTIME
+//#define BM_USE_CLOCK_
 //#define BM_USE_CLOCK
 //#define BM_USE_TIMES
 
@@ -24,7 +24,7 @@
  */
 
 struct timer {
-#if   defined(BM_USE_CLOCK_GETTIME)
+#if   defined(BM_USE_CLOCK_GETTIME) || defined(BM_USE_CLOCK_GETTIME_RT)
   struct timespec start;
 #elif defined(BM_USE_CLOCK)
   clock_t start;
@@ -55,7 +55,13 @@ timer *timer_alloc () {
 
 void start_timer (timer *t) {
 #if   defined(BM_USE_CLOCK_GETTIME)
-  if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &t->start)) {
+  //if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &t->start)) {
+  if (clock_gettime(CLOCK_REALTIME, &t->start)) {
+    perror("clock_gettime");
+    exit(EXIT_FAILURE);
+  }
+#elif defined(BM_USE_CLOCK_GETTIME)
+  if (clock_gettime(CLOCK_REALTIME, &t->start)) {
   //if (clock_gettime(CLOCK_REALTIME, &t->start)) {
     perror("clock_gettime");
     exit(EXIT_FAILURE);
@@ -76,22 +82,28 @@ void start_timer (timer *t) {
 #endif
 }
 
+#define BILLION 1000000000
+//               123456789
+
+#define GETTIME_TO_NSEC(time_gettime) \
+  (((long) time_gettime.tv_sec) * BILLION + time_gettime.tv_nsec)
 #define CLOCK_TO_NSEC(time_clock) \
-  ((((long) time_clock) * 1000000000) / CLOCKS_PER_SEC)
+  ((((long) time_clock) * BILLION) / CLOCKS_PER_SEC)
 #define TIMES_TO_NSEC(time_times) \
-  ((((long) time_times.tms_utime + time_times.tms_stime) * 1000000000) / t->clock_ticks)
+  ((((long) time_times.tms_utime + time_times.tms_stime) * BILLION) / t->clock_ticks)
+#define GTOD_TO_NSEC(time_gtod) \
+  (((long) time_gtod.tv_sec) * BILLION + time_gtod.tv_usec * 1000)
 
 long int stop_timer (timer *t) {
   // time_t is only a 32 bits int on 32 bits machines
-#if   defined(BM_USE_CLOCK_GETTIME)
+#if   defined(BM_USE_CLOCK_GETTIME) || defined(BM_USE_CLOCK_GETTIME_RT)
   struct timespec end;
-  if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end)) {
-  //if (clock_gettime(CLOCK_REALTIME, &end)) {
+  //if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end)) {
+  if (clock_gettime(CLOCK_REALTIME, &end)) {
     perror("clock_gettime");
     exit(EXIT_FAILURE);
   }
-  long total = ((long) end.tv_sec) * 1000000000 + end.tv_nsec -
-    ((long) t->start.tv_sec) * 1000000000 + t->start.tv_nsec;
+  long total = GETTIME_TO_NSEC(end) - GETTIME_TO_NSEC(t->start);
 #elif defined(BM_USE_CLOCK)
   clock_t end = clock();
   if (end == (clock_t) -1) {
@@ -109,8 +121,7 @@ long int stop_timer (timer *t) {
 #else
   struct timeval end;
   gettimeofday(&end, NULL);
-  long total = ((long) end.tv_sec) * 1000000 + end.tv_usec -
-    ((long) t->start.tv_sec) * 1000000 + t->start.tv_usec;
+  long total = GTOD_TO_NSEC(end) - GTOD_TO_NSEC(t->start);
 #endif
   return total;
 }

@@ -1,3 +1,5 @@
 *.png
 *.o
 *.csv
+*~
+tmp.dat

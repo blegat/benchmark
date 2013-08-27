@@ -1,0 +1,9 @@
+set title 'Benchmark between use mutex or semaphore'
+set xlabel 'number of thread'
+set ylabel 'time [ns]'
+set key right bottom
+plot 'mutsem-mut.csv' using 1:2 title 'mutex lock and unlock',\
+  'mutsem-sem.csv' using 1:2 title 'sem wait and post'
+ 
+
+  

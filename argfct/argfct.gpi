@@ -1,0 +1,8 @@
+set title 'Benchmark between use pointeur or complet variable to passing argument'
+set xlabel 'size of argument (byte)'
+set ylabel 'time [ns]'
+set key right bottom
+set logscale x
+plot 'argfct-val.csv' using 1:2 title 'valeur',\
+  'argfct-pt.csv' using 1:2 title 'pointeur'
+ 
