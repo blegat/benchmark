@@ -55,8 +55,8 @@ timer *timer_alloc () {
 
 void start_timer (timer *t) {
 #if   defined(BM_USE_CLOCK_GETTIME)
-  if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &t->start)) {
-  //if (clock_gettime(CLOCK_REALTIME, &t->start)) {
+  //if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &t->start)) {
+  if (clock_gettime(CLOCK_REALTIME, &t->start)) {
     perror("clock_gettime");
     exit(EXIT_FAILURE);
   }
@@ -98,8 +98,8 @@ long int stop_timer (timer *t) {
   // time_t is only a 32 bits int on 32 bits machines
 #if   defined(BM_USE_CLOCK_GETTIME) || defined(BM_USE_CLOCK_GETTIME_RT)
   struct timespec end;
-  if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end)) {
-  //if (clock_gettime(CLOCK_REALTIME, &end)) {
+  //if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end)) {
+  if (clock_gettime(CLOCK_REALTIME, &end)) {
     perror("clock_gettime");
     exit(EXIT_FAILURE);
   }

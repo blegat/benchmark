@@ -1,0 +1,7 @@
+set title 'Benchmark between use script and use programme'
+set xlabel 'nombre of operation'
+set ylabel 'time [us]'
+set key right bottom
+plot 'shell-bash.csv' using 1:2 title 'bash',\
+  'shell-prog.csv' using 1:2 title 'programme'
+ 
