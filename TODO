@@ -25,3 +25,5 @@ S11:
 S12:
   shm, process vs threads (cache, forcer sur un processeur)
   fork -> modifier la mémoire ! lecture vs écriture
+
+html généré
