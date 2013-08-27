@@ -11,28 +11,33 @@
 
 //#define BM_USE_TIMES
 
+/** Structure dont la taille fait 1byte */
 struct arg1   { char s[1];   };
+/** Structure dont la taille fait 2byte */
 struct arg2   { char s[2];   };
+/** Structure dont la taille fait 4byte */
 struct arg4   { char s[4];   };
+/** Structure dont la taille fait 8byte */
 struct arg8   { char s[8];   };
+/** Structure dont la taille fait 16byte */
 struct arg16  { char s[16];  };
+/** Structure dont la taille fait 32byte */
 struct arg32  { char s[32];  };
+/** Structure dont la taille fait 64byte */
 struct arg64  { char s[64];  };
+/** Structure dont la taille fait 128byte */
 struct arg128 { char s[128]; };
 
-void fctpt(void* arg) { arg++; }
+void fctpt(void* arg) {}
 
-void fctval1(struct arg1 arg) { }
-void fctval2(struct arg2 arg) {}
-void fctval4(struct arg4 arg) { }
-void fctval8(struct arg8 arg) { }
-void fctval16(struct arg16 arg) {}
-void fctval32(struct arg32 arg) {}
-void fctval64(struct arg64 arg) { }
-void fctval128(struct arg128 arg) { }
-
-void (*fctval1)(struct arg1)
-
+void fctval1  (struct arg1 arg)   {}
+void fctval2  (struct arg2 arg)   {}
+void fctval4  (struct arg4 arg)   {}
+void fctval8  (struct arg8 arg)   {}
+void fctval16 (struct arg16 arg)  {}
+void fctval32 (struct arg32 arg)  {}
+void fctval64 (struct arg64 arg)  {}
+void fctval128(struct arg128 arg) {}
 
 
 int main (int argc, char *argv[])  {
@@ -58,14 +63,9 @@ int main (int argc, char *argv[])  {
 				sizeof(struct arg32), 
 				sizeof(struct arg128)};
 
-	
-	
-
 	long long int * timeval = calloc(8, sizeof(double));
 	long long int * timept = calloc(8, sizeof(double));
 	int i,j;
-
-
 
 	for(i=0; i<MAX_SIZE; i++) {
 		// struct arg1
