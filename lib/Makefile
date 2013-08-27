@@ -1,23 +1,12 @@
-#include alloc.mk
-#include thread.mk
-#include fork.mk
-#include file.mk
-#include io.mk
-#include mmap.mk
-#include shm.mk
-#include shell.mk
-#include argfct.mk
-include mutsem.mk
-#include types.mk
-include amdahl.mk
-
 # TODO mesure function call
 # TODO memcpy taille de la zone mémoire, alignement 32 Bits (remove packed)
 # TODO matrice ligne par ligne colonne par colonne
 # TODO pipe, en fonction de la taille (père fils)
 
+DEPS   += ../lib/benchmark.h
+OBJ    += ../lib/benchmark.o
 CC      = gcc
-CFLAGS += -I. -g -lrt -lpthread
+CFLAGS += -I. -I../lib/ -g -lrt
 
 # Lorsqu'on fait `make`, c'est la première règle qui est exécutée
 # donc dans ce cas-ci, c'est sa dependance.
