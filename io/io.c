@@ -8,16 +8,16 @@
 #include <unistd.h>
 #include <error.h>
 
+/* ideas for student
+ * Play with SIZE and BUF_SIZE
+ */
+
 //#define BM_USE_CLOC
 #include "benchmark.h"
 
-#define MAX_SIZE 0x1000 // 4 KB
-#define N 200000
-#define N_SYNC 20
-//#define N_SYNC 100
-
-#define SIZE 0x10000 // 1 MB / 16
-#define LEN 0x1000 // 4 KB
+#define SIZE 0x40000 // 256 KiB
+#define LEN 0x1000 // 4 KiB
+#define BUF_SIZE 0x10000 // 64 KiB
 #define IN "tmpin.dat"
 #define OUT "tmpout.dat"
 
@@ -225,7 +225,7 @@ int main (int argc, char *argv[])  {
   }
 
   for (len = 2; len <= 0x100000; len *= 0x2) {
-    gets_puts(t, std_buf_rec, len, 1, 0x1000);
+    gets_puts(t, std_buf_rec, len, 1, BUF_SIZE);
   }
   for (len = 2; len <= 0x100000; len *= 0x2) {
     gets_puts(t, std_nobuf_rec, len, 0, 0);
