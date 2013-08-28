@@ -1,0 +1,7 @@
+set title 'Benchmark pipe'
+set xlabel 'Data size [B]'
+set ylabel 'time [us]'
+set key right bottom
+set logscale x 2
+plot 'pipe.csv' using 1:2 title 'pipe'
+
