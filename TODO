@@ -8,7 +8,7 @@
 [?]		malloc vs calloc 
 [?]		fragmentation
 	S4: Nicolas
-[.]		matrice ligne par ligne ou colonne par colonne (use perf)
+[x]		matrice ligne par ligne ou colonne par colonne (use perf)
 	S5: Nicolas
 [x]		passer tableau ou pointeur	
 	S5 : Maxime

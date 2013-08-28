@@ -1,0 +1,8 @@
+set title 'Benchmark between use ligne or colone to work on tab'
+set xlabel 'nombre of operation'
+set ylabel 'time [us]'
+set key right bottom
+set logscale x
+plot 'tab-lig.csv' using 1:2 title 'use ligne',\
+  'tab-col.csv' using 1:2 title 'use colone'
+ 
