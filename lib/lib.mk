@@ -52,4 +52,4 @@ clean:
 	$(RM) $(PROG) $(GRAPHS) $(OBJ) $(TMP)
 
 mrproper: clean
-	$(RM) *.png
+	$(RM) *.png index.html
