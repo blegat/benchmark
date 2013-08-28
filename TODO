@@ -20,8 +20,8 @@
 	S9: Benoît
 [x]		read vs write vs printf vs scanf vs SYNC
 [x]		putc (en moyenne !)
-	S9 :
-[?]		pipe ping pong
+	S9 : Maxime
+[x]		pipe ping pong
 [?]		ficher texte vs fichiers binaires (int, float). Montrer la couche de l'ASCII
 [?]		place, perf et pack (structure)
 	S11:
