@@ -6,7 +6,13 @@
 DEPS   += ../lib/benchmark.h
 OBJ    += ../lib/benchmark.o
 CC      = gcc
+
+OS := $(shell uname)
+ifeq ($(OS),Darwin)
+CFLAGS += -I. -I../lib/ -g
+else
 CFLAGS += -I. -I../lib/ -g -lrt
+endif
 
 # Lorsqu'on fait `make`, c'est la première règle qui est exécutée
 # donc dans ce cas-ci, c'est sa dependance.
