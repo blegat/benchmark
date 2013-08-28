@@ -1,8 +1,9 @@
 set title 'Benchmark of open, write, read, close'
 set xlabel 'size [B] of the file at opening or length of the string to read/write'
 set ylabel 'time [ns]'
-set key right bottom
+set key right top
 set logscale x
+set logscale y
 plot 'sys_sync.csv' using 1:2 title 'sys_sync',\
   'sys_nosync.csv' using 1:2 title 'sys_nosync',\
   'sys_direct.csv' using 1:2 title 'sys_direct',\

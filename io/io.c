@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <error.h>
 
-#define BM_USE_TIMES
+//#define BM_USE_CLOC
 #include "benchmark.h"
 
 #define MAX_SIZE 0x1000 // 4 KB
@@ -72,7 +72,7 @@ void read_write (timer *t, recorder *rec,
     exit(EXIT_FAILURE);
   }
 
-  fsync(fdin); // Clear kernel buffer cache
+  fsync(fdin); // Clear kernel buffer cache (actually, just syncing, no clear)
   fsync(fdout); // Clear kernel buffer cache
 
   //char *s = (char *) malloc(len * sizeof(char));
@@ -99,6 +99,8 @@ void read_write (timer *t, recorder *rec,
       exit(EXIT_FAILURE);
     }
   }
+  fsync(fdin); // Sync data
+  fsync(fdout); // Sync data
   write_record(rec, len, stop_timer(t));
 
   err = close(fdin);
@@ -172,6 +174,20 @@ void gets_puts (timer *t, recorder *rec,
       exit(EXIT_FAILURE);
     }
   }
+  fflush(fin); // Flush data to the kernel
+  int fdin = fileno(fin);
+  if (fdin == -1) {
+    perror("fileno");
+    exit(EXIT_FAILURE);
+  }
+  fsync(fdin); // Write data to the disk
+  fflush(fout); // Flush data to the kernel
+  int fdout = fileno(fout);
+  if (fdout == -1) {
+    perror("fileno");
+    exit(EXIT_FAILURE);
+  }
+  fsync(fdout); // Write data to the disk
   write_record(rec, len, stop_timer(t));
 
   err = fclose(fin);
@@ -195,20 +211,23 @@ int main (int argc, char *argv[])  {
   recorder *std_nobuf_rec = recorder_alloc("std_nobuf.csv");
 
   int len = 0;
-  for (len = 0x40; len <= 0x100000; len *= 0x2) {
+  // En dessous de 512, c'est très lent et le graphe est moins lisible
+  for (len = 512; len <= 0x100000; len *= 0x2) {
     read_write(t, sys_sync_rec, len, O_SYNC);
   }
-  for (len = 0x40; len <= 0x100000; len *= 0x2) {
+  for (len = 2; len <= 0x100000; len *= 0x2) {
     read_write(t, sys_nosync_rec, len, 0);
   }
-  for (len = 512; len <= 0x100000; len *= 0x10) {
+  // On doit être un multiple d'un block du file system donc il faut
+  // commencer avec 512
+  for (len = 512; len <= 0x100000; len *= 2) {
     read_write(t, sys_direct_rec, len, O_SYNC | O_DIRECT);
   }
 
-  for (len = 0x40; len <= 0x100000; len *= 0x2) {
+  for (len = 2; len <= 0x100000; len *= 0x2) {
     gets_puts(t, std_buf_rec, len, 1, 0x1000);
   }
-  for (len = 0x40; len <= 0x100000; len *= 0x2) {
+  for (len = 2; len <= 0x100000; len *= 0x2) {
     gets_puts(t, std_nobuf_rec, len, 0, 0);
   }
 
