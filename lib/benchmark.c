@@ -4,10 +4,6 @@
  * Des fonctions simples de benchmark.
  **************************************/
 
-//#define BM_USE_CLOCK_
-//#define BM_USE_CLOCK
-//#define BM_USE_TIMES
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/times.h>
@@ -23,6 +19,24 @@
  *   |_| |_|_| |_| |_|\___|_|
  */
 
+/**
+ * \brief `timer` permet de mesurer le temps écoulé entre deux moments
+ *
+ * Il implémente plusieurs manières de mesurer le temps.
+ * Par défaut, le temps est calculé à l'aide de `gettimeofday`,
+ * c'est donc le temps *réel* mais en ajoutant par exemple
+ *
+ *     CFLAGS = -DBM_USE_CLOCK
+ * dans le `Makefile`, `timer` utilisera `clock` à la place de `gettimeofday`
+ * Les méthodes disponibles sont
+ * * `BM_USE_CLOCK_GETTIME_RT` calcule le temps *réel* avec `clock_gettime`
+ * * `BM_USE_CLOCK_GETTIME` calcule le temps *user* + le temps *système* avec
+ *   `clock_gettime`
+ * * `BM_USE_CLOCK` calcule le temps *user* + le temps *système* avec
+ *   `clock`
+ * * `BM_USE_TIMES` calcule le temps *user* + le temps *système* avec
+ *   `times`
+ */
 struct timer {
 #if   defined(BM_USE_CLOCK_GETTIME) || defined(BM_USE_CLOCK_GETTIME_RT)
   struct timespec start;
@@ -36,6 +50,13 @@ struct timer {
 #endif
 };
 
+/**
+ * \brief Alloue un `timer`
+ *
+ * En cas de succès, retourne un `timer`,
+ * en cas d'erreur, affiche un message sur `stderr`
+ * et `exit`
+ */
 timer *timer_alloc () {
   timer *t = (timer *) malloc(sizeof(timer));
   if (t == NULL) {
@@ -53,16 +74,21 @@ timer *timer_alloc () {
   return t;
 }
 
+/**
+ * \brief Stoque le temps actuel comme début de la mesure dans `t`
+ *
+ * \param t Le temps dans lequel on stoque le temps de début
+ *
+ * En cas d'erreur, affiche un message sur `stderr` * et `exit`
+ */
 void start_timer (timer *t) {
 #if   defined(BM_USE_CLOCK_GETTIME)
-  //if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &t->start)) {
-  if (clock_gettime(CLOCK_REALTIME, &t->start)) {
+  if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &t->start)) {
     perror("clock_gettime");
     exit(EXIT_FAILURE);
   }
-#elif defined(BM_USE_CLOCK_GETTIME)
+#elif defined(BM_USE_CLOCK_GETTIME_RT)
   if (clock_gettime(CLOCK_REALTIME, &t->start)) {
-  //if (clock_gettime(CLOCK_REALTIME, &t->start)) {
     perror("clock_gettime");
     exit(EXIT_FAILURE);
   }
@@ -94,6 +120,13 @@ void start_timer (timer *t) {
 #define GTOD_TO_NSEC(time_gtod) \
   (((long) time_gtod.tv_sec) * BILLION + time_gtod.tv_usec * 1000)
 
+/**
+ * \brief Retourne le temps en nanosecondes depuis le début de mesure dans `t`
+ *
+ * \param t Le temps dans lequel on a stoqué le temps de début
+ *
+ * En cas d'erreur, affiche un message sur `stderr` * et `exit`
+ */
 long int stop_timer (timer *t) {
   // time_t is only a 32 bits int on 32 bits machines
 #if   defined(BM_USE_CLOCK_GETTIME) || defined(BM_USE_CLOCK_GETTIME_RT)
@@ -126,7 +159,14 @@ long int stop_timer (timer *t) {
   return total;
 }
 
-void *timer_free (timer *t) {
+/**
+ * \brief Retourne le temps en nanosecondes depuis le début de mesure dans `t`
+ *
+ * \param t Le temps dans lequel on a stoqué le temps de début
+ *
+ * En cas d'erreur, affiche un message sur `stderr` * et `exit`
+ */
+void timer_free (timer *t) {
   free(t);
 }
 
@@ -144,7 +184,6 @@ long int update_overhead() {
   overhead = stop_timer(t);
   timer_free(t);
   printf("overhead updated: %ld\n", overhead);
-  printf("clocks per sec: %d\n", CLOCKS_PER_SEC);
 }
 long int get_overhead () {
   if (-1 == overhead) {
