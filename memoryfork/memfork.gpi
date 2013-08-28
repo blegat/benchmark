@@ -1,0 +1,9 @@
+set title 'Benchmark between acces memory in fork'
+set xlabel 'number byte'
+set ylabel 'time [ns]'
+set key right bottom
+plot 'memfor-beforefork.csv' using 1:2 title 'before fork',\
+  'memfor-aftfork.csv' using 1:2 title 'after fork',\
+  'memfor-aftmodif.csv' using 1:2 title 'after fort and modif memory'
+ 
+  
