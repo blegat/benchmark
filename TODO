@@ -26,9 +26,10 @@
 [?]		place, perf et pack (structure)
 	S11:
 [?]		perf, mmap
+	S12: Nicolas
+[.]		fork -> modifier la mémoire ! lecture vs écriture
 	S12:
-[?]		fork -> modifier la mémoire ! lecture vs écriture
-		shm/process vs heap/threads (cache, forcer sur un processeur)
+[?]		shm/process vs heap/threads (cache, forcer sur un processeur)
 
 	Other :
 [?]		html généré
