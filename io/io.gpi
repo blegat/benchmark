@@ -4,8 +4,8 @@ set ylabel 'time [ns]'
 set key right top
 set logscale x
 set logscale y
-plot 'sys_sync.csv' using 1:2 title 'sys_sync',\
-  'sys_nosync.csv' using 1:2 title 'sys_nosync',\
-  'sys_direct.csv' using 1:2 title 'sys_direct',\
-  'std_buf.csv' using 1:2 title 'std_buf',\
-  'std_nobuf.csv' using 1:2 title 'std_nobuf'
+plot 'sys_sync.csv' using 1:2 title 'sys\_sync',\
+  'sys_nosync.csv' using 1:2 title 'sys\_nosync',\
+  'sys_direct.csv' using 1:2 title 'sys\_direct',\
+  'std_buf.csv' using 1:2 title 'std\_buf',\
+  'std_nobuf.csv' using 1:2 title 'std\_nobuf'

@@ -8,11 +8,6 @@
 #include <unistd.h>
 #include <error.h>
 
-/* ideas for student
- * Play with SIZE and BUF_SIZE
- */
-
-//#define BM_USE_CLOC
 #include "benchmark.h"
 
 #define SIZE 0x40000 // 256 KiB
