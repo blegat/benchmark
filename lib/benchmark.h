@@ -19,7 +19,7 @@ void start_timer (timer *t);
 
 long int stop_timer (timer *t);
 
-void *timer_free (timer *t);
+void timer_free (timer *t);
 
 /*  ____                        _
  * |  _ \ ___  ___ ___  _ __ __| | ___ _ __
