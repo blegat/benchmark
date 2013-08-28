@@ -1,10 +1,7 @@
-set title 'Benchmark of free/malloc'
-set xlabel 'size [B]'
+set title 'Benchmark of stack/heap'
+set xlabel 'size allocated [B]'
 set ylabel 'time [ns]'
 set key right bottom
 set logscale x
-plot 'free.csv' using 1:2 title 'free',\
-  'malloc.csv' using 1:2 title 'malloc',\
-  'calloc.csv' using 1:2 title 'calloc',\
-  'sbrk.csv' using 1:2 title 'sbrk',\
-  'brk.csv' using 1:2 title 'brk'
+plot 'stack.csv' using 1:2 title 'stack',\
+  'heap.csv' using 1:2 title 'heap'
