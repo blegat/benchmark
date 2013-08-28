@@ -39,7 +39,13 @@ void fctval32 (struct arg32 arg)  {}
 void fctval64 (struct arg64 arg)  {}
 void fctval128(struct arg128 arg) {}
 
+/**
+	\brief Ce programme compare le temps nécessaire pour passer un argument de N byte à une fonction et celui nécessaire pour passer le pointeur vers cet argument
 
+	Pour cela,  nous allons effectuer 
+	
+	Note : Pour ne pas polluer les tests, il a été décidé de ne pas utiliser de pointeurs de fonction.
+*/
 int main (int argc, char *argv[])  {
 	timer *t = timer_alloc();
 	recorder *val_rec = recorder_alloc("argfct-val.csv");
@@ -67,7 +73,17 @@ int main (int argc, char *argv[])  {
 	long long int * timept = calloc(8, sizeof(double));
 	int i,j;
 
-	for(i=0; i<MAX_SIZE; i++) {
+	//for(i=0; i<MAX_SIZE; i++) {
+
+		//Preparation
+		for(j=0; j<TURN; j++)
+			fctpt((void*)&a1);
+		for(j=0; j<TURN; j++)
+			fctval1(a1);
+		for(j=0; j<TURN; j++)
+			fctpt((void*)&a4);
+
+
 		// struct arg1
 		start_timer(t);
 		for(j=0; j<TURN; j++)
@@ -147,11 +163,11 @@ int main (int argc, char *argv[])  {
 		for(j=0; j<TURN; j++)
 			fctval128(a128);
 		timeval[7] += (stop_timer(t)*1000/TURN);
-	}
+	//}
 
 	for(i=0; i<8; i++) {
-		write_record(pt_rec, corres[i], (long int) (timept[i]/MAX_SIZE));
-		write_record(val_rec, corres[i], (long int) (timeval[i]/MAX_SIZE));
+		write_record(pt_rec, corres[i], (long int) (timept[i]));//(MAX_SIZE)));
+		write_record(val_rec, corres[i], (long int) (timeval[i]));//(MAX_SIZE)));
 	}
 
 	recorder_free(val_rec);
