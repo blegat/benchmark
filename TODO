@@ -8,7 +8,7 @@
 [?]		malloc vs calloc 
 [?]		fragmentation
 	S4: Nicolas
-[.]		matrice ligne par ligne ou colonne par colonne (use perf)
+[x]		matrice ligne par ligne ou colonne par colonne (use perf)
 	S5: Nicolas
 [x]		passer tableau ou pointeur	
 	S5 : Maxime
@@ -26,9 +26,10 @@
 [?]		place, perf et pack (structure)
 	S11:
 [?]		perf, mmap
+	S12: Nicolas
+[.]		fork -> modifier la mémoire ! lecture vs écriture
 	S12:
-[?]		fork -> modifier la mémoire ! lecture vs écriture
-		shm/process vs heap/threads (cache, forcer sur un processeur)
+[?]		shm/process vs heap/threads (cache, forcer sur un processeur)
 
 	Other :
 [?]		html généré
