@@ -1,7 +1,7 @@
 set title 'Benchmark between open/close and mmap, munmap'
 set xlabel 'size of the file'
-set ylabel 'time [us]'
-set key right bottom
+set ylabel 'time [ns]'
+set key left top
 set logscale x
 plot 'open.csv' using 1:2 title 'open',\
   'close.csv' using 1:2 title 'close',\

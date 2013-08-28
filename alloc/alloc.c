@@ -2,11 +2,26 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+//#define BM_USE_CLOCK_GETTIME_RT
 #include "benchmark.h"
 
 #define MAX_SIZE 0x100000 // 1 MB
 #define MAX_ALLOCS 100 // largement assez
-#define N 1000000
+#define N 100000
+#define ALLOC_SIZE 1000000
+#define N_HOLE 10000
+#define SIZE_HOLE 0x1000
+
+void stack () {
+  char s[ALLOC_SIZE];
+  s[ALLOC_SIZE / 2] = 0;
+}
+
+void heap () {
+  char *s = (char *) malloc(sizeof(char) * ALLOC_SIZE);
+  s[ALLOC_SIZE / 2] = 0;
+  free(s);
+}
 
 int main (int argc, char *argv[]) {
   int i;
@@ -14,11 +29,24 @@ int main (int argc, char *argv[]) {
   void *p;
   timer *t = timer_alloc();
 
-
   // brk/sbrk
   //update_overhead(); // needs to be done, remove it to see why
+  recorder *stack_rec = recorder_alloc("stack.csv");
+  recorder *heap_rec = recorder_alloc("heap.csv");
 
-  recorder *malloc_rec = recorder_alloc("malloc.csv");
+  start_timer(t);
+  for (i = 0; i < N; i++) {
+    stack();
+  }
+  write_record_n(stack_rec, ALLOC_SIZE, stop_timer(t), N);
+
+  start_timer(t);
+  for (i = 0; i < N; i++) {
+    heap();
+  }
+  write_record_n(heap_rec, ALLOC_SIZE, stop_timer(t), N);
+
+  /*recorder *malloc_rec = recorder_alloc("malloc.csv");
   recorder *calloc_rec = recorder_alloc("calloc.csv");
   recorder *free_rec = recorder_alloc("free.csv");
   for (size = 1; size <= MAX_SIZE; size *= 2) {
@@ -27,7 +55,7 @@ int main (int argc, char *argv[]) {
       p = malloc(size);
       free(p);
     }
-    write_record_n(malloc_rec, size, stop_timer(t), N);
+    write_record_n(malloc_rec, size, stop_timer(t), N);*/
     /*if (p == NULL) {
       perror("malloc");
       return -1;
@@ -52,7 +80,7 @@ int main (int argc, char *argv[]) {
     free(p);
     write_record(free_rec, size, stop_timer(t));*/
     //printf("free\t%p\t%p\n", p, sbrk(0));
-  }
+  /*}
   recorder_free(malloc_rec);
   recorder_free(calloc_rec);
   recorder_free(free_rec);
@@ -66,7 +94,7 @@ int main (int argc, char *argv[]) {
       p = sbrk(size); // alloc
       brk(p); // free
     }
-    write_record_n(sbrk_rec, size, stop_timer(t), N);
+    write_record_n(sbrk_rec, size, stop_timer(t), N);*/
     /*if (p == NULL) {
       perror("sbrk");
     }
@@ -77,9 +105,9 @@ int main (int argc, char *argv[]) {
       perror("brk");
     }*/
     // END
-  }
+  /*}
   recorder_free(sbrk_rec);
-  recorder_free(brk_rec);
+  recorder_free(brk_rec);*/
 
 
   printf("%p\n", sbrk(0));

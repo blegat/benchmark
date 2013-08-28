@@ -14,8 +14,6 @@ int main (int argc, char *argv[])  {
   recorder *read_rec = recorder_alloc("read.csv");
   recorder *close_rec = recorder_alloc("close.csv");
 
-  // TODO compare O_SYNC
-  // TODO compare printf scanf, putc, ...
   int err, size;
   ssize_t len;
   start_timer(t);

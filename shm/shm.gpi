@@ -1,6 +1,6 @@
 set title 'Benchmark of shmget, shmat and shmdt'
 set xlabel 'size of the shared memory [B]'
-set ylabel 'time [us]'
+set ylabel 'time [ns]'
 set key right bottom
 set logscale x
 plot 'shmget.csv' using 1:2 title 'shmget',\
