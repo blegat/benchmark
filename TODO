@@ -27,15 +27,16 @@
 	S11:
 [?]		perf, mmap
 	S12: Nicolas
-[.]		fork -> modifier la mémoire ! lecture vs écriture
+[%]		fork -> modifier la mémoire ! lecture vs écriture
 	S12:
 [?]		shm/process vs heap/threads (cache, forcer sur un processeur)
 
 	Other : Benoît
 [x]		html généré
 
-Nomenclature : 	[x] fait
+Nomenclature : 	[x] fait avec de bon graphique
 		[.] en cours
 		[?] à attribuer
 		[ ] à faire
+		[%] fait avec de mauvais graphique
 		
