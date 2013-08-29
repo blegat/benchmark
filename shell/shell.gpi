@@ -5,4 +5,3 @@ set key left top
 set logscale x
 plot 'shell-bash.csv' using 1:2 title 'bash',\
   'shell-prog.csv' using 1:2 title 'programme'
- 

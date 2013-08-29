@@ -20,6 +20,7 @@
 DEPS   += ../lib/benchmark.h
 OBJ    += ../lib/benchmark.o
 CC      = gcc
+PROGS  += $(PROG)
 
 OS := $(shell uname)
 CFLAGS += -I. -I../lib/ -g -Wall
@@ -46,7 +47,7 @@ $(PROG): $(OBJ)
 valgrind: $(PROG)
 	valgrind --leak-check=full ./$(PROG)
 
-$(GRAPHS): $(PROG)
+$(GRAPHS): $(PROGS)
 	./$(PROG)
 
 show-graph: $(GRAPHS)
