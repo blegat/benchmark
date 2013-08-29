@@ -29,6 +29,8 @@ char* ipsum (int size) {
 	if (ipsum == NULL) err(1, "erreur de malloc dans ipsum");
 	memset(ipsum,'a',size);
 	
+	ipsum[size-1] = '\0';
+	
 	return ipsum;
 	
 }
@@ -56,7 +58,7 @@ int send (int size, int* fd) {
 	
 	free(message);
 	
-	if (size == SIZE_MAX) close(fd[1]);
+	//if (size == SIZE_MAX) close(fd[1]);
 	
 	return 0;
 }
@@ -85,13 +87,15 @@ int respond (int size, int* fdin, int* fdout) {
 	int received = read(fdin[0], buffer, size);
 	if (received != size ) err(1,"erreur de read dans respond");
 	
+	//puts(buffer);
+	
 	int sent = write(fdout[1], buffer, size);
 	if (sent != size ) err(1,"erreur de write dans respond");
 	
 	free(buffer);
 	
-	if (size == SIZE_MAX) close(fdout[1]);
-	if (size == SIZE_MAX) close(fdin[0]);
+	//if (size == SIZE_MAX) close(fdout[1]);
+	//if (size == SIZE_MAX) close(fdin[0]);
 	
 	return 0;
 }
@@ -115,11 +119,13 @@ int receive (int size, int* fd) {
 	if (buffer == NULL) err(1, "erreur de malloc dans receive");
 	
 	int received = read(fd[0], buffer, size);
-	//if (received != size ) err(1,"erreur de read dans receive");
+	if (received != size ) err(1,"erreur de read dans receive");
+	
+	//puts(buffer);
 	
 	free(buffer);
 	
-	if (size == SIZE_MAX) close(fd[0]);
+	//if (size == SIZE_MAX) close(fd[0]);
 	
 	return 0;
 }
@@ -140,14 +146,18 @@ int main (int argc, char* argv[]) {
 	
 	timer *t = timer_alloc();
 	recorder *pipe_rec = recorder_alloc("pipe.csv");
-	start_timer(t);
+	//start_timer(t);
 	pid_t pid = fork();
 	
 	if (pid == 0) {
 		int i;
 		for (i=1; i<=SIZE_MAX; i*=2) {
-			send(i,fdin);
-			receive(i,fdout);
+			start_timer(t);
+			int j;
+			for (j=0;j<10000;j++) {
+				send(i,fdin);
+				receive(i,fdout);
+			}
 			write_record_n(pipe_rec,i,stop_timer(t),SIZE_MAX);
 		}
 		exit(0);
@@ -157,8 +167,11 @@ int main (int argc, char* argv[]) {
 		int i;
 		for (i=1; i<=SIZE_MAX; i*=2) {
 			//start_timer(t);
-			respond(i,fdin,fdout);
-			//write_record_n(pipe_rec,i,stop_timer,SIZE_MAX);
+			int j;
+			for (j=0;j<10000;j++) {
+				respond(i,fdin,fdout);
+			}
+			//write_record_n(pipe_rec,i,stop_timer(t),SIZE_MAX);
 		}
 	}
 	

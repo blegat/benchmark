@@ -1,5 +1,5 @@
 set title 'Benchmark of the parallelization benefit'
-set xlabel 'Thread used'
+set xlabel 'Threads/processes used'
 set ylabel 'time [ns]'
 set key right top
 #set logscale x 2
