@@ -28,7 +28,7 @@ void timer_free (timer *t);
  * |_| \_\___|\___\___/|_|  \__,_|\___|_|
  */
 
-long int update_overhead ();
+void update_overhead ();
 long int get_overhead ();
 
 typedef struct recorder recorder;
