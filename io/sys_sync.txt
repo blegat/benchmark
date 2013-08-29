@@ -1,0 +1,19 @@
+# started on Thu Aug 29 12:03:17 2013
+
+
+ Performance counter stats for './io --sys_sync':
+
+         13.689102 task-clock                #    0.008 CPUs utilized          
+             1,038 context-switches          #    0.076 M/sec                  
+               512 cpu-migrations            #    0.037 M/sec                  
+               158 page-faults               #    0.012 M/sec                  
+        39,955,407 cycles                    #    2.919 GHz                    
+        29,764,944 stalled-cycles-frontend   #   74.50% frontend cycles idle   
+        23,607,842 stalled-cycles-backend    #   59.09% backend  cycles idle   
+        19,363,797 instructions              #    0.48  insns per cycle        
+                                             #    1.54  stalled cycles per insn
+         3,526,077 branches                  #  257.583 M/sec                  
+           202,651 branch-misses             #    5.75% of all branches        
+
+       1.803442232 seconds time elapsed
+

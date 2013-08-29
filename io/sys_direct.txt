@@ -1,0 +1,19 @@
+# started on Thu Aug 29 12:03:18 2013
+
+
+ Performance counter stats for './io --sys_direct':
+
+         18.597562 task-clock                #    0.010 CPUs utilized          
+             1,544 context-switches          #    0.083 M/sec                  
+               511 cpu-migrations            #    0.027 M/sec                  
+               160 page-faults               #    0.009 M/sec                  
+        53,966,521 cycles                    #    2.902 GHz                    
+        40,473,832 stalled-cycles-frontend   #   75.00% frontend cycles idle   
+        32,268,504 stalled-cycles-backend    #   59.79% backend  cycles idle   
+        25,308,352 instructions              #    0.47  insns per cycle        
+                                             #    1.60  stalled cycles per insn
+         4,596,540 branches                  #  247.158 M/sec                  
+           289,821 branch-misses             #    6.31% of all branches        
+
+       1.889556705 seconds time elapsed
+

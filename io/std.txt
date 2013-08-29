@@ -1,0 +1,19 @@
+# started on Thu Aug 29 11:57:59 2013
+
+
+ Performance counter stats for './io --std_nobuf':
+
+          0.196040 task-clock                #    0.648 CPUs utilized          
+                 0 context-switches          #    0.000 K/sec                  
+                 0 cpu-migrations            #    0.000 K/sec                  
+               125 page-faults               #    0.638 M/sec                  
+           637,228 cycles                    #    3.250 GHz                    
+           423,510 stalled-cycles-frontend   #   66.46% frontend cycles idle   
+           333,668 stalled-cycles-backend    #   52.36% backend  cycles idle   
+           406,537 instructions              #    0.64  insns per cycle        
+                                             #    1.04  stalled cycles per insn
+            77,429 branches                  #  394.965 M/sec                  
+             2,950 branch-misses             #    3.81% of all branches        
+
+       0.000302669 seconds time elapsed
+

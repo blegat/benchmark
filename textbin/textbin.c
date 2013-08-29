@@ -180,13 +180,19 @@ int main (int argc, char *argv[])  {
   recorder *bin_write_rec = recorder_alloc("bin_write.csv");
 
   bin(t, bin_write_rec, bin_read_rec, sizeof(short));
-  text(t, text_write_rec, text_read_rec, sizeof(short), "%d ");
+  text(t, text_write_rec, text_read_rec, sizeof(short), "%hd ");
   bin(t, bin_write_rec, bin_read_rec, sizeof(int));
   text(t, text_write_rec, text_read_rec, sizeof(int), "%d ");
   bin(t, bin_write_rec, bin_read_rec, sizeof(long int));
   text(t, text_write_rec, text_read_rec, sizeof(long int), "%ld ");
   bin(t, bin_write_rec, bin_read_rec, sizeof(long long int));
   text(t, text_write_rec, text_read_rec, sizeof(long long int), "%lld ");
+  bin(t, bin_write_rec, bin_read_rec, sizeof(float));
+  text(t, text_write_rec, text_read_rec, sizeof(float), "%f ");
+  bin(t, bin_write_rec, bin_read_rec, sizeof(double));
+  text(t, text_write_rec, text_read_rec, sizeof(double), "%lf ");
+  bin(t, bin_write_rec, bin_read_rec, sizeof(long double));
+  text(t, text_write_rec, text_read_rec, sizeof(long double), "%Lf ");
 
 
   timer_free(t);
