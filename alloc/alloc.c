@@ -4,49 +4,55 @@
 
 #include "benchmark.h"
 
-#define N 100000
+#define N 100
 #define SIZE_1 0x1000   //  4 KiB
 #define SIZE_2 0x10000  // 64 KiB
 #define SIZE_3 0x100000 //  1 MiB
 
-void stack_1 () {
+char stack_1 () {
   char s[SIZE_1];
   s[SIZE_1 / 2] = 0;
+  return s[0];
 }
 
-void stack_2 () {
+char stack_2 () {
   char s[SIZE_2];
   s[SIZE_2 / 2] = 0;
+  return s[0];
 }
 
-void stack_3 () {
+char stack_3 () {
   char s[SIZE_3];
   s[SIZE_3 / 2] = 0;
+  return s[0];
 }
 
-void heap_1 () {
+char heap_1 () {
   char *s = (char *) malloc(sizeof(char) * SIZE_1);
   s[SIZE_1 / 2] = 0;
-  free(s);
+  return s[0];
+  //free(s);
 }
 
-void heap_2 () {
+char heap_2 () {
   char *s = (char *) malloc(sizeof(char) * SIZE_2);
   s[SIZE_2 / 2] = 0;
-  free(s);
+  return s[0];
+  //free(s);
 }
 
-void heap_3 () {
+char heap_3 () {
   char *s = (char *) malloc(sizeof(char) * SIZE_3);
   s[SIZE_3 / 2] = 0;
-  free(s);
+  return s[0];
+  //free(s);
 }
 
-void benchmark_fun (timer *t, void (*fun) (), recorder *rec, int x) {
+void benchmark_fun (timer *t, char (*fun) (), recorder *rec, int x) {
   int i;
   start_timer(t);
   for (i = 0; i < N; i++) {
-    fun();
+    char c = fun();
   }
   write_record_n(rec, x, stop_timer(t), N);
 }

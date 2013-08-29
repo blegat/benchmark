@@ -3,7 +3,7 @@
 #include <sys/mman.h>
 #include <fcntl.h>
 #include <string.h>
-#include <semaphore.h>	
+#include <semaphore.h>
 #include <pthread.h>
 
 #include "benchmark.h"
@@ -22,7 +22,7 @@ int main (int argc, char *argv[])  {
 	recorder* bftf_rec = recorder_alloc("memfor-beforefork.csv");
  	recorder* aftf_rec = recorder_alloc("memfor-aftfork.csv");
 	recorder* aftm_rec = recorder_alloc("memfor-aftmodif.csv");
-	
+
 	pid_t pid;
 	int status, i,j,k,res;
 	for (i = MULTIPLICATEUR; i < N; i+=MULTIPLICATEUR) {
@@ -31,18 +31,19 @@ int main (int argc, char *argv[])  {
 			i = N;
 
 		char ** tab = malloc(i*sizeof(char*));
-		for(j=0; j<i; j++) 
+		for(j=0; j<i; j++)
 			tab[j] = malloc(i*sizeof(char));
 
 		if( ! (perfbef || perfaft)){
 			start_timer(t);
-			for(j=0; i<i; j++) 
+			for(j=0; j<i; j++) 
 				for(k=0; k<i; k++) {
 					res +=tab[j][k];
 					tab[j][k]=j+k;
 			}
 			write_record(bftf_rec, i/MULTIPLICATEUR, stop_timer(t));	
 		}
+
 
 		pid = fork();
 
@@ -62,7 +63,7 @@ int main (int argc, char *argv[])  {
 
 			if(!perfaft) {
 			      	start_timer(t);
-				for(j=0; i<i; j++) 
+				for(j=0; j<i; j++) 
 					for(k=0; k<i; k++) {
 						res +=tab[j][k];
 						tab[j][k]=j+k;
@@ -74,7 +75,7 @@ int main (int argc, char *argv[])  {
 			
 			if(! perfbef) {
 				start_timer(t);
-				for(j=0; i<i; j++) 
+				for(j=0; j<i; j++) 
 					for(k=0; k<i; k++) {
 						res +=tab[j][k];
 						tab[j][k]=j+k;
@@ -84,7 +85,7 @@ int main (int argc, char *argv[])  {
 
 		      	recorder_free(bftf_rec);
 		  	recorder_free(aftf_rec);
-			recorder_free(aftm_rec);	
+			recorder_free(aftm_rec);
 			timer_free(t);
 		      	return EXIT_SUCCESS;
 		}
@@ -98,7 +99,7 @@ int main (int argc, char *argv[])  {
 		}
 	    	// END
 	}
-	
+
 	recorder_free(bftf_rec);
   	recorder_free(aftf_rec);
 	recorder_free(aftm_rec);
