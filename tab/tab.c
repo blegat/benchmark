@@ -17,7 +17,7 @@ recorder * col_rec;
 	
 
 /**
-	On parcourt le double tableau par ligne, en écrivant les performances dans le record
+	On parcourt le double tableau par ligne, en retournant le temps nécessaire au parcours du tableau
 */
 long int ligne(int i, timer *t, int ** tab) {
 	int m,n,res=0;
@@ -30,7 +30,7 @@ long int ligne(int i, timer *t, int ** tab) {
 }
 
 /**
-	On parcourt le double tableau par colonne, en écrivant les performances dans le record
+	On parcourt le double tableau par colonne, en retournant le temps nécessaire au parcours du tableau
 */
 long int colonne(int i, timer *t, int ** tab) {
 	int m,n,res=0;
@@ -49,10 +49,12 @@ long int colonne(int i, timer *t, int ** tab) {
 		* Soit par colonne
 		* Soit par ligne
 
+	Lorsque l'on spécifie un argument pour effectuer les perfs, sur les lignes ou les colonnes, on n'écrit pas dans les records et on ne n'exécute soit les lignes soit les colonnes selon l'arguments reçu.
+
 	Note : Le plus rapide profite de la localité spatiale
 */
 int main (int argc, char *argv[])  {
-
+	// Verification des arguments
   	int perfligne = argc>1 && strncmp(argv[1], "--ligne", 8);
 	int perfcolonne = argc>1 &&strncmp(argv[1], "--colonne", 10);
 
@@ -105,5 +107,3 @@ int main (int argc, char *argv[])  {
 
 	return EXIT_SUCCESS;
 }
-
-
