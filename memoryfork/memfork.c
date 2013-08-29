@@ -23,13 +23,13 @@ long int parcoursTab(timer* t, int i, char** tab) {
 
 	int j, k, res;
 	start_timer(t);
-	for(j=0; j<i; j++) 
+	for(j=0; j<i; j++)
 		for(k=0; k<i; k++) {
 			res +=tab[j][k];
 			tab[j][k]=j+k;
 		}
 	return stop_timer(t);
-}	
+}
 
 /**
 	\brief Ce programme compare le temps nécessaire pour effectuer le "copy-on-write"
@@ -66,13 +66,13 @@ int main (int argc, char *argv[])  {
 			perror("malloc fail");
 			exit(EXIT_FAILURE);
 		}
-		for(j=0; j<i; j++) 
+		for(j=0; j<i; j++)
 			tab[j] = malloc(i*sizeof(char));
-	
+
 
 		// On le parcours une fois avant le fork pour avoir une mesure de référence
 		if( !perfbft && !perfaft)
-			write_record(bftfork_rec, i/MULTIPLICATEUR, parcoursTab(t, i, tab));	
+			write_record(bftfork_rec, i/MULTIPLICATEUR, parcoursTab(t, i, tab));
 
 
 		pid = fork();
@@ -87,21 +87,21 @@ int main (int argc, char *argv[])  {
 			sleep(1);
 
 			// On le parcours lors du copy-on-write
-			if(!perfaft) 
+			if(!perfaft)
 				resultbft = parcoursTab(t, i, tab);
-			
+
 			sleep(1);
-			
+
 			// On le parcours apres le copy-on-write
-			if(! perfbft) 
-				resultaft = parcoursTab(t, i, tab);	
-			
+			if(! perfbft)
+				resultaft = parcoursTab(t, i, tab);
+
 
 			if(!perfbft && !perfaft) {
 				write_record(aftfork_rec, i/MULTIPLICATEUR, resultbft);
 				write_record(aftmodif_rec, i/MULTIPLICATEUR, resultaft);
 			}
-			
+
 			// Libération du tableau et des records si ils sont alloués
 			if(!perfbft && !perfaft) {
 			      	recorder_free(bftfork_rec);
@@ -109,7 +109,7 @@ int main (int argc, char *argv[])  {
 				recorder_free(aftmodif_rec);
 				timer_free(t);
 			}
-	
+
 			free(tab);
 			tab=NULL;
 			for(j=0; j<i; j++) {
