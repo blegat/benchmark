@@ -17,7 +17,7 @@
 	S7: Nicolas
 [x]		Semaphore vs Mutex
 	S8: Maxime
-[.]		thread vs processus
+[x]		thread vs processus
 	S9: Benoît
 [x]		read vs write vs printf vs scanf vs SYNC
 [x]		putc (en moyenne !)
