@@ -52,7 +52,6 @@ int main (int argc, char *argv[])  {
 
 	
 	for(i=1; i<MAX_SIZE; i+=1) {
-
 		// Convertit "i" en char* et le place dans nbr
 		snprintf(nbr, 7, "%d", i);
 
@@ -70,7 +69,6 @@ int main (int argc, char *argv[])  {
 		start_timer(t);
 		system(argBash);
 		write_record(bash_rec, i, stop_timer(t));
-
 	}
 
 	// Libère la mémoire
