@@ -1,5 +1,5 @@
-set title 'Benchmark of open, write, read, close'
-set xlabel 'size [B] of the file at opening or length of the string to read/write'
+set title 'Benchmark of read/write vs fgets/fputs'
+set xlabel 'size [B] of the block that are read/written at once'
 set ylabel 'time [ns]'
 set key right top
 set logscale x

@@ -56,8 +56,8 @@ $(PROG).png: $(GRAPHS) $(PROG).gpi
 	gnuplot -p -e "set terminal png size 800,600 enhanced font 'Helvetica,12';\
 	  set output '$(PROG).png'" $(PROG).gpi
 
-index.html: $(PROG).png ../lib/gen_html.sh README.html
-	../lib/gen_html.sh $(PROG) > index.html
+index.html: $(PROG).png ../lib/gen_html.sh README.html $(PERFS)
+	../lib/gen_html.sh $(PROG) $(PERFS) > index.html
 
 show-html: index.html
 	$(OPEN) index.html &

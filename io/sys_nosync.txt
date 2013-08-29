@@ -1,0 +1,19 @@
+# started on Thu Aug 29 12:03:18 2013
+
+
+ Performance counter stats for './io --sys_nosync':
+
+          1.723245 task-clock                #    0.096 CPUs utilized          
+                 8 context-switches          #    0.005 M/sec                  
+                 3 cpu-migrations            #    0.002 M/sec                  
+               159 page-faults               #    0.092 M/sec                  
+         5,625,126 cycles                    #    3.264 GHz                    
+         3,584,321 stalled-cycles-frontend   #   63.72% frontend cycles idle   
+         2,563,843 stalled-cycles-backend    #   45.58% backend  cycles idle   
+         4,234,771 instructions              #    0.75  insns per cycle        
+                                             #    0.85  stalled cycles per insn
+           754,669 branches                  #  437.935 M/sec                  
+            14,667 branch-misses             #    1.94% of all branches        
+
+       0.017973036 seconds time elapsed
+
