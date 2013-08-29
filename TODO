@@ -6,41 +6,40 @@
 [x]		free vs stack
 	S3: Nicolas
 [.]		malloc vs calloc
-	S3 :
-[?]		fragmentation
 	S4: Nicolas
-[x]		matrice ligne par ligne ou colonne par colonne (use perf)
+[x]		matrice ligne par ligne ou colonne par colonne
+[?]     PERF cache miss
 	S5: Nicolas
 [x]		passer tableau ou pointeur
 	S5: Maxime
-[x]		thread (Ahmdal)
+[x]		thread (Ahmdal) FUSION avec "thread vs processus"
 	S7: Nicolas
 [x]		Semaphore vs Mutex
 	S8: Maxime
-[.]		thread vs processus
+[x]		Amdahl thread vs processus
+[?]     PERF changement de contexte + migration processus
 	S9: Benoît
 [x]		read vs write vs printf vs scanf vs SYNC
-[x]		putc (en moyenne !)
 	S9: Maxime
 [x]		pipe ping pong
     S9: Benoît
 [x]		ficher texte vs fichiers binaires (int, float).
         	Montrer la couche de l'ASCII
-    S9:
-[?]		place, perf et pack (structure)
-	S11:
-[?]		perf, mmap
+	S11: Benoît
+[.]		performance, mmap
+        lis du début à la fin par block avec read ou mmap
 	S12: Nicolas
-[%]		fork -> modifier la mémoire ! lecture vs écriture
+[x]		fork -> modifier la mémoire ! lecture vs écriture
+[?]     PERF tlb miss
 	S12:
 [?]		shm/process vs heap/threads (cache, forcer sur un processeur)
 
 	Other: Benoît
 [x]		html généré
 
+
 Nomenclature : 	[x] fait avec de bon graphique
 		[.] en cours
 		[?] à attribuer
 		[ ] à faire
 		[%] fait avec de mauvais graphique
-
