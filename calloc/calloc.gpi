@@ -1,0 +1,10 @@
+set title 'Benchmark between use calloc or malloc'
+set xlabel 'size [byte]'
+set ylabel 'time [ns]'
+set key left top
+set logscale x
+plot 'malloc.csv' using 1:2 title 'malloc',\
+  'calloc.csv' using 1:2 title 'calloc'
+ 
+
+  

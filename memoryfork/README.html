@@ -1,0 +1,26 @@
+<p>
+Comparaison entre les appels systèmes <code>write</code>/<code>read</code> et
+les fonctions de <code>stdio</code> <code>fputs</code>/<code>fgets</code>.
+La comparaison se fait avec la copie d'un fichier
+(équivalent de la fonction <code>cp</code>)
+L'utilisation des appels systèmes est indiqué par <code>sys</code> dans
+le nom de la courbe et celui des fonctions de <code>stdio</code>
+est indiqué par <code>std</code>.
+</p>
+<ul>
+  <li><code>sys_sync</code> donne l'argument <code>O_SYNC</code> à
+  <code>open</code>;</li>
+  <li><code>sys_nosync</code> ne le donne pas;</li>
+  <li><code>sys_direct</code> donne l'argument <code>O_SYNC</code> et
+  <code>O_DIRECT</code> à <code>open</code>;</li>
+  <li><code>std_buf</code> donne un buffer à <code>stdio</code>
+  (bien qu'il en a déjà un par défaut, ainsi on peut controller sa taille);
+  </li>
+  <li><code>std_buf</code> demande à <code>stdio</code> de ne pas en utiliser.
+  </li>
+</ul>
+<h3>Conseils</h3>
+<p>
+Essayez de changer les constantes <code>SIZE</code> et <code>BUF_SIZE</code>
+et observez leur effet.
+</p>

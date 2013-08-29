@@ -148,7 +148,7 @@ int main (int argc, char* argv[]) {
 		for (i=1; i<=SIZE_MAX; i*=2) {
 			send(i,fdin);
 			receive(i,fdout);
-			write_record_n(pipe_rec,i,stop_timer,SIZE_MAX);
+			write_record_n(pipe_rec,i,stop_timer(t),SIZE_MAX);
 		}
 		exit(0);
 	} else if (pid < 0 ) {
