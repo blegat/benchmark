@@ -13,8 +13,8 @@
 
 #include "benchmark.h"
 
-#define NTHREAD 16 //!< Nombre max de threads/processus à utiliser
-#define NLENGTH 32000 //!< Taille du tableau à tester
+#define NTHREAD 32 //!< Nombre max de threads/processus à utiliser
+#define NLENGTH 64000 //!< Taille du tableau à tester
 
 /*
  *   _____ _                   _
@@ -224,18 +224,7 @@ int main (int argc, char* argv[]) {
 		}
 		
 		printf("%d\n",index);
-		/*
-		 * Partie tricky: vu qu'on se base sur le nombre de cycle CPU pour le
-		 * calcul du temps, le temps calculé par timer augmente avec le nombre 
-		 * de threads. Pour avoir le temps réel il faut diviser le temps par le 
-		 * nombre de threads utiliser, avec au max le nombre de threads que notre
-		 * machine peux utiliser simultanément
-		 */
-		
-		int it = i;
-		int numCPU = sysconf( _SC_NPROCESSORS_ONLN ); // nombre de coeurs de notre machine
-		if (it > numCPU ) it = numCPU; // On peut pas utiliser parallelement plus que `numCPU` threads
-		write_record_n(thread_rec,i,stop_timer(t)/it,NTHREAD);
+		write_record_n(thread_rec,i,stop_timer(t),NTHREAD);
 		//sauvegarde du temps
 		
 		free(threads);
