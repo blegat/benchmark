@@ -6,7 +6,7 @@ PERFS  = sys_sync.txt sys_nosync.txt sys_direct.txt std_buf.txt std_nobuf.txt
 
 include ../lib/lib.mk
 
-$(PERFS): $(PROG)
+$(PERFS): $(PROGS)
 	perf stat -o sys_sync.txt ./$(PROG) --sys_sync
 	perf stat -o sys_nosync.txt ./$(PROG) --sys_nosync
 	perf stat -o sys_direct.txt ./$(PROG) --sys_direct
