@@ -11,37 +11,44 @@
 #define N 10000
 #define MULTIPLICATEUR 1024
 
+timer *t;
+recorder* bftfork_rec;
+recorder* aftfork_rec;
+recorder* aftmodif_rec;
 
 int main (int argc, char *argv[])  {
-	int perfbef = argc>1 && strncmp(argv[1], "--before", 9);
+	int perfbft = argc>1 && strncmp(argv[1], "--before", 9);
 	int perfaft = argc>1 &&strncmp(argv[1], "--after", 8);
 
 
-	// Déclare un timer, ainsi que deux recorder qui vont contenir les résultats de l'exécution du programme
-	timer *t = timer_alloc();
-	recorder* bftf_rec = recorder_alloc("memfor-beforefork.csv");
- 	recorder* aftf_rec = recorder_alloc("memfor-aftfork.csv");
-	recorder* aftm_rec = recorder_alloc("memfor-aftmodif.csv");
+	if((!perfbft) && !perfaft) {
+		// Déclare un timer, ainsi que deux recorder qui vont contenir les résultats de l'exécution du programme
+		t = timer_alloc();
+		bftfork_rec = recorder_alloc("memfor-beforefork.csv");
+	 	aftfork_rec = recorder_alloc("memfor-aftfork.csv");
+		aftmodif_rec = recorder_alloc("memfor-aftmodif.csv");
+	}
 
 	pid_t pid;
 	int status, i,j,k,res;
+	long int resultbft, resultaft;
 	for (i = MULTIPLICATEUR; i < N; i+=MULTIPLICATEUR) {
 
-		if(perfligne || perfcolonne)
+		if(perfaft || perfbft)
 			i = N;
 
 		char ** tab = malloc(i*sizeof(char*));
 		for(j=0; j<i; j++)
 			tab[j] = malloc(i*sizeof(char));
 
-		if( ! (perfbef || perfaft)){
+		if( !perfbft && !perfaft){
 			start_timer(t);
 			for(j=0; j<i; j++) 
 				for(k=0; k<i; k++) {
 					res +=tab[j][k];
 					tab[j][k]=j+k;
 			}
-			write_record(bftf_rec, i/MULTIPLICATEUR, stop_timer(t));	
+			write_record(bftfork_rec, i/MULTIPLICATEUR, stop_timer(t));	
 		}
 
 
@@ -67,26 +74,33 @@ int main (int argc, char *argv[])  {
 					for(k=0; k<i; k++) {
 						res +=tab[j][k];
 						tab[j][k]=j+k;
-					}	
-				write_record(aftf_rec, i/MULTIPLICATEUR, stop_timer(t));	
+					}
+				resultbft = stop_timer(t);
 			}
 
 			sleep(1);
 			
-			if(! perfbef) {
+			if(! perfbft) {
 				start_timer(t);
 				for(j=0; j<i; j++) 
 					for(k=0; k<i; k++) {
 						res +=tab[j][k];
 						tab[j][k]=j+k;
 				}
-				write_record(aftm_rec, i/MULTIPLICATEUR, stop_timer(t));	
+				resultaft = stop_timer(t);	
 			}
 
-		      	recorder_free(bftf_rec);
-		  	recorder_free(aftf_rec);
-			recorder_free(aftm_rec);
-			timer_free(t);
+			if(!perfbft && !perfaft) {
+				write_record(aftfork_rec, i/MULTIPLICATEUR, resultbft);
+				write_record(aftmodif_rec, i/MULTIPLICATEUR, resultaft);
+			}
+			
+			if(!perfbft && !perfaft) {
+			      	recorder_free(bftfork_rec);
+			  	recorder_free(aftfork_rec);
+				recorder_free(aftmodif_rec);
+				timer_free(t);
+			}
 		      	return EXIT_SUCCESS;
 		}
 		else {
@@ -99,11 +113,12 @@ int main (int argc, char *argv[])  {
 		}
 	    	// END
 	}
-
-	recorder_free(bftf_rec);
-  	recorder_free(aftf_rec);
-	recorder_free(aftm_rec);
-	timer_free(t);
+	if(!perfbft && !perfaft) {
+		recorder_free(bftfork_rec);
+	  	recorder_free(aftfork_rec);
+		recorder_free(aftmodif_rec);
+		timer_free(t);
+	}
 
   return EXIT_SUCCESS;
 }

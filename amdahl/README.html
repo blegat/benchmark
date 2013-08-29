@@ -1,0 +1,24 @@
+<table class="image" align="right" style="margin-left: 0.5em">
+<caption align="bottom">Loi de Amdahl (source <A HREF="http://en.wikipedia.org/wiki/Amdahl's_law">Wikipedia</A>)</caption>
+<tr><td><img src=http://sinf1252.info.ucl.ac.be/static/_images/500px-AmdahlsLaw.png alt='missing' height="300"></td></tr>
+</table>
+
+<p>
+La loi d'Amdahl stipule qu'une augmentation dans le nombre de threads utilisés pour une tâche augmente la vitesse d'exécution de celle de façon proportionnelle au segment de code parallélisable de cette tâche et au nombre de threads.
+
+
+<p>
+Cela veut dire que plus un programme est parrallélisable, plus le bénéfice lié à l'utilisation des threads sera important. Malheuresement, chaque ajout de thread est à rendement décroissant, ce qui veut dire que plus il y en a, moindre sera l'accélération apportée par un nouveau thread.
+
+
+<p>
+La tâche à réaliser dans ce benchmark est la recherche des facteurs premiers de nombres aléatoires dans un grand tableau. Le découpage en threads est immédiat: un segment du tableau pour chaque thread. La partie parrallélisable du code est beaucoup plus grande que la partie séquentielle, cette tâche se qualifie dans la catégorie 90% de code parallèle.
+
+<p>
+On s'attend à avoir le temps de calcul divisé par 2 avec 2 threads, quasiment divisé par 4 avec 4 threads et plus que 5 fois plus rapide avec 8.
+
+<p>
+Les résultats expérimentals observés avec notre benchmark suivent bien l'évolution théorique prévue par la loi d'Amdahl. On voit bien que 2 threads sont 2 fois plus rapides qu'un simple thread, et que avec 4 threads on est 3 fois plus rapide.
+
+<p>
+Le benchmark compare aussi les résultats obtenus avec des threads à ceux des processus. Les 2 résultats sont très semblables, avec un léger avantage pour les threads, ce qui est logique car la mise en place d'un processus est plus gourmande en ressources que celle d'un thread.
