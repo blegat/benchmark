@@ -6,3 +6,5 @@ tmp.dat
 doc
 # généré par lib/gen_html.sh
 index.html
+# générés par perf
+*.txt

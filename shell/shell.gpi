@@ -1,8 +1,7 @@
 set title 'Benchmark between use script and use programme'
 set xlabel 'nombre of operation'
 set ylabel 'time [ns]'
-set key right bottom
+set key left top
 set logscale x
 plot 'shell-bash.csv' using 1:2 title 'bash',\
   'shell-prog.csv' using 1:2 title 'programme'
- 

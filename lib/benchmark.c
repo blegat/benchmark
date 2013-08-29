@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
 #include <sys/times.h>
 #include <time.h>
 //#include <error.h>
@@ -178,7 +179,7 @@ void timer_free (timer *t) {
  */
 
 volatile long int overhead = -1;
-long int update_overhead() {
+void update_overhead() {
   timer *t = timer_alloc();
   start_timer(t);
   overhead = stop_timer(t);

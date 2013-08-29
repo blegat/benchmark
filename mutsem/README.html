@@ -1,0 +1,45 @@
+<p>
+Comparaison entre le temps nécessaire pour lock/unlock avec un mutex et celui pour wait/post avec une sémaphore
+</p>
+
+<p>
+Pour cela, nous allons créer une chaîne de thread ayant chacun un mutex et une sémaphore "personnelle". 
+Pour un nombre "N" donné, nous allons lancer "N" thread où chaque thread bloquera son mutex et sa sémaphore. Chaque thread attendra ensuite que le thread précédent ait débloqué son mutex/sémaphore, pour à son tour débloqué le sien. 
+</p>
+<p>
+Parmis ces threads, il y a un thread spécial : le first.  Celui ci est chargé de débloqué en premier son mutex/sémaphore et de calculé le temps que cela prend pour lui revenir.
+
+</p>
+
+<h3> En schéma </h3>
+
+<pre>
+	+-------+	+-------+			+-------+	+-------+
+	| first	|	| oth 1	|	  ...		| oth 2	| 	| oth N	| 
+	+-------+	+-------+			+-------+	+-------+
+	  |   ^___________|  ^____________|  ^____________|  ^____________|   ^
+	  |	   (1)		   (2)		   	  (3)		      |
+	  |						      		      |
+	  |___________________________________________________________________|
+				   (1)         			
+
+
+	(1) : first unlock son mut1, ce qui permet à oth N de lock son mut2 (puisqu'ils pointent vers le même mutex)
+	(2) : Puisque oth 1 a pu locker son mut2, il unlock son mut1
+	(3) : La chaîne continue
+	(4) : Lorsque first peut enfin faire un lock sur son mut2, il arrete le timer et écrit dans le record
+</pre>
+
+<p>
+Note : Un tel shéma implique un remplissage des N arguments, compris entre 1 et N, comme ceci.
+Pour un argument A tel que : 
+</p>
+
+<ul>
+  <li> 1< A< N-1: mut1 de A = mut2 de A-1 et mut2 de A = mut1 de A+1 </li>
+  <li> A = 1 : mut1 de A = mut2 de N et mut2 de A = mut1 de A+1 </li>
+  <li> A = N : mut1 de A = mut2 de A-1 et mut2 de A = mut1 de 1</li>
+</ul>
+ <p>
+Il en va de même pour les sémaphores
+</p>

@@ -1,3 +1,11 @@
+/**
+ * \file io.c
+ *
+ * Compare les performances ce read/write avec fgets/fputs
+ *
+ * C'est inspiré du chapitre 13 du livre "The Linux programming interface"
+ * par Michael Kerrisk
+ */
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,6 +21,9 @@
 #define SIZE 0x40000 // 256 KiB
 #define LEN 0x1000 // 4 KiB
 #define BUF_SIZE 0x10000 // 64 KiB
+#define MAX_LEN 0X100000 // 1 MiB
+#define PERF_LEN 512
+
 #define IN "tmpin.dat"
 #define OUT "tmpout.dat"
 
@@ -80,7 +91,9 @@ void read_write (timer *t, recorder *rec,
   }
 
   int len_read = 0, len_written = 0;
-  start_timer(t);
+  if (rec != NULL) {
+    start_timer(t);
+  }
   int i = 0;
   for (i = 0; i < SIZE; i += len_read) {
     len_read = read(fdin, (void *) s, len);
@@ -96,7 +109,9 @@ void read_write (timer *t, recorder *rec,
   }
   fsync(fdin); // Sync data
   fsync(fdout); // Sync data
-  write_record(rec, len, stop_timer(t));
+  if (rec != NULL) {
+    write_record(rec, len, stop_timer(t));
+  }
 
   err = close(fdin);
   if (err == -1){
@@ -135,7 +150,6 @@ void gets_puts (timer *t, recorder *rec,
     exit(EXIT_FAILURE);
   }
 
-  fflush(fin); // Clear stdio buffer cache
   fflush(fout); // Clear stdio buffer cache
 
   char *in_buf = NULL;
@@ -155,7 +169,9 @@ void gets_puts (timer *t, recorder *rec,
     exit(EXIT_FAILURE);
   }
 
-  start_timer(t);
+  if (rec != NULL) {
+    start_timer(t);
+  }
   int i = 0;
   for (i = 0; i < SIZE; i += len) {
     s = fgets((void *) s, len, fin);
@@ -169,7 +185,6 @@ void gets_puts (timer *t, recorder *rec,
       exit(EXIT_FAILURE);
     }
   }
-  fflush(fin); // Flush data to the kernel
   int fdin = fileno(fin);
   if (fdin == -1) {
     perror("fileno");
@@ -183,7 +198,9 @@ void gets_puts (timer *t, recorder *rec,
     exit(EXIT_FAILURE);
   }
   fsync(fdout); // Write data to the disk
-  write_record(rec, len, stop_timer(t));
+  if (rec != NULL) {
+    write_record(rec, len, stop_timer(t));
+  }
 
   err = fclose(fin);
   if (err == EOF){
@@ -198,35 +215,61 @@ void gets_puts (timer *t, recorder *rec,
 }
 
 int main (int argc, char *argv[])  {
-  timer *t = timer_alloc();
-  recorder *sys_sync_rec = recorder_alloc("sys_sync.csv");
-  recorder *sys_nosync_rec = recorder_alloc("sys_nosync.csv");
-  recorder *sys_direct_rec = recorder_alloc("sys_direct.csv");
-  recorder *std_buf_rec = recorder_alloc("std_buf.csv");
-  recorder *std_nobuf_rec = recorder_alloc("std_nobuf.csv");
+  /**
+   * Si il y a des arguments, --sys ne fait que les appels systèmes
+   * et --std ne fait que std et les autres options font que le programme
+   * ne fait rien
+   */
+  if (argc > 1) {
+    // perf
+    if (strncmp(argv[1], "--sys_sync", 11) == 0) {
+      read_write(NULL, NULL, PERF_LEN, O_SYNC);
+    } else if (strncmp(argv[1], "--sys_nosync", 13) == 0) {
+      read_write(NULL, NULL, PERF_LEN, 0);
+    } else if (strncmp(argv[1], "--sys_direct", 13) == 0) {
+      read_write(NULL, NULL, PERF_LEN, O_SYNC | O_DIRECT);
+    } else if (strncmp(argv[1], "--std_buf", 10) == 0) {
+      gets_puts(NULL, NULL, PERF_LEN, 1, BUF_SIZE);
+    } else if (strncmp(argv[1], "--std_nobuf", 12) == 0) {
+      gets_puts(NULL, NULL, PERF_LEN, 0, 0);
+    }
+  } else {
+    // benchmark
+    timer *t = timer_alloc();
+    int len = 0;
 
-  int len = 0;
-  // En dessous de 512, c'est très lent et le graphe est moins lisible
-  for (len = 512; len <= 0x100000; len *= 0x2) {
-    read_write(t, sys_sync_rec, len, O_SYNC);
-  }
-  for (len = 2; len <= 0x100000; len *= 0x2) {
-    read_write(t, sys_nosync_rec, len, 0);
-  }
-  // On doit être un multiple d'un block du file system donc il faut
-  // commencer avec 512
-  for (len = 512; len <= 0x100000; len *= 2) {
-    read_write(t, sys_direct_rec, len, O_SYNC | O_DIRECT);
-  }
+    recorder *sys_sync_rec = recorder_alloc("sys_sync.csv");
+    recorder *sys_nosync_rec = recorder_alloc("sys_nosync.csv");
+    recorder *sys_direct_rec = recorder_alloc("sys_direct.csv");
+    // En dessous de 512, c'est très lent et le graphe est moins lisible
+    for (len = 512; len <= MAX_LEN; len *= 0x2) {
+      read_write(t, sys_sync_rec, len, O_SYNC);
+    }
+    for (len = 2; len <= MAX_LEN; len *= 0x2) {
+      read_write(t, sys_nosync_rec, len, 0);
+    }
+    // On doit être un multiple d'un block du file system donc il faut
+    // commencer avec 512
+    for (len = 512; len <= MAX_LEN; len *= 2) {
+      read_write(t, sys_direct_rec, len, O_SYNC | O_DIRECT);
+    }
+    recorder_free(sys_sync_rec);
+    recorder_free(sys_nosync_rec);
+    recorder_free(sys_direct_rec);
 
-  for (len = 2; len <= 0x100000; len *= 0x2) {
-    gets_puts(t, std_buf_rec, len, 1, BUF_SIZE);
-  }
-  for (len = 2; len <= 0x100000; len *= 0x2) {
-    gets_puts(t, std_nobuf_rec, len, 0, 0);
-  }
+    recorder *std_buf_rec = recorder_alloc("std_buf.csv");
+    recorder *std_nobuf_rec = recorder_alloc("std_nobuf.csv");
+    for (len = 2; len <= MAX_LEN; len *= 0x2) {
+      gets_puts(t, std_buf_rec, len, 1, BUF_SIZE);
+    }
+    for (len = 2; len <= MAX_LEN; len *= 0x2) {
+      gets_puts(t, std_nobuf_rec, len, 0, 0);
+    }
+    recorder_free(std_buf_rec);
+    recorder_free(std_nobuf_rec);
 
-  timer_free(t);
+    timer_free(t);
+  }
 
   return EXIT_SUCCESS;
 }

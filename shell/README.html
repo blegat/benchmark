@@ -1,0 +1,24 @@
+<p>
+Ce programme compare le temps d'exécution d'un script et d'un programme C qui effectue un nombre "N" d'instruction.
+</p>
+<p>	
+Ce programme utilise deux programmes annexes : 
+<ul>
+<li> shell-program : C'est un programme C qui effectue le nombre d'instruction donné en paramètre.</li>
+<li> shell-bash.sh : C'est un script qui effectue le nombre d'instruction donné en paramètre. </li>
+</ul>
+</p>
+
+<p>
+Pour exécuter chaque programme, l'appel systeme "system" est utilisé. Celui-ci exécute la commande passé en paramètre.
+Typiquement, il recevra :
+<ul>
+<li> "./shell-program 500" : Pour exécuter 500 instructions avec le programme C </li>
+<li>	* "./shell-bash.sh 250" : Pour exécuter 250 instructions avec le script </li>
+</ul>
+</p>
+<p>
+Le paramètre passé à "system" contient donc deux parties. D'une part ce qu'il faut exécuter, d'autre part le nombre d'instruction.
+</p>
+
+

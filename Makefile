@@ -1,5 +1,13 @@
+OS := $(shell uname)
+ifeq ($(OS), Darwin)
+  OPEN = open
+else
+  OPEN = xdg-open
+endif
+
 show-html-doc: doc
-        xdg-open doc/html/index.html &
+	$(OPEN) doc/html/index.html &
+
 doc:
 	doxygen Doxyfile
 

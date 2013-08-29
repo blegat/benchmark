@@ -42,7 +42,6 @@ void fctval128(struct arg128 arg) {}
 /**
 	\brief Ce programme compare le temps nécessaire pour passer un argument de N byte à une fonction et celui nécessaire pour passer le pointeur vers cet argument
 
-	Pour cela,  nous allons effectuer 
 	
 	Note : Pour ne pas polluer les tests, il a été décidé de ne pas utiliser de pointeurs de fonction.
 */
