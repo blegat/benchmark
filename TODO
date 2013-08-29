@@ -4,8 +4,9 @@
 [x]		int vs long long int vs float
 	S3: Benoît
 [x]		free vs stack
-	S3:
-[?]		malloc vs calloc 
+	S3: Nicolas
+[.]		malloc vs calloc 
+	S3 :
 [?]		fragmentation
 	S4: Nicolas
 [x]		matrice ligne par ligne ou colonne par colonne (use perf)
@@ -24,7 +25,7 @@
 [x]		pipe ping pong
     S9: Benoît
 [x]		ficher texte vs fichiers binaires (int, float).
-        Montrer la couche de l'ASCII
+        	Montrer la couche de l'ASCII
     S9:
 [?]		place, perf et pack (structure)
 	S11:
