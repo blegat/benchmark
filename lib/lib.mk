@@ -3,53 +3,16 @@
 #//!
 #//! À inclure depuis le `Makefile` d'un benchmark en spécifiant les constantes
 #//! suivantes
-#//! * `CFLAGS`, les `options` supplémentaires qu'il faut donner
-#//!             à `gcc`;
-#//! * `OBJ`, les objects à générer en plus de `benchmark.o`;
-#//! * `DEPS`, les `.h` nécessaires en plus de `benchmark.h`;
 #//! * `GRAPHS`, les `.csv` générés;
 #//! * `PROG`, le nom du programme;
-#//! * `PROGS`, le nom des programmes nécessaires pour exécuter `$(PROG)`
+#//! * `bin_PROGRAMS`, le nom des programmes nécessaires pour exécuter `$(PROG)`
 #//!            (en plus de `$(PROG)`);
 #//! * `TMP`, les fichiers temporaires générés par le programme
 #//!          qu'il faut supprimer avec `make clean`.
 
-# TODO mesure function call
-# TODO memcpy taille de la zone mémoire, alignement 32 Bits (remove packed)
-# TODO matrice ligne par ligne colonne par colonne
-# TODO pipe, en fonction de la taille (père fils)
+OPEN=xdg-open
 
-DEPS   += ../lib/benchmark.h
-OBJ    += ../lib/benchmark.o
-CC      = gcc
-PROGS  += $(PROG)
-
-OS := $(shell uname)
-CFLAGS += -I. -I../lib/ -g -Wall
-ifeq ($(OS), Darwin)
-  OPEN = open
-else
-  OPEN = xdg-open
-  CFLAGS += -lrt
-endif
-
-# Lorsqu'on fait `make`, c'est la première règle qui est exécutée
-# donc dans ce cas-ci, c'est sa dependance.
-default: show-html
-
-# $@ c'est la règle, ici le nom de l'objet comme `benchmark.o`
-# $< c'est $< c'est le premier élément de la liste des dépendances, ici
-#    c'est la source comme `benchmark.c`
-%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
-
-$(PROG): $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
-
-valgrind: $(PROG)
-	valgrind --leak-check=full ./$(PROG)
-
-$(GRAPHS): $(PROGS)
+$(GRAPHS): $(bin_PROGRAMS)
 	./$(PROG)
 
 show-graph: $(GRAPHS)
@@ -65,10 +28,7 @@ index.html: $(PROG).png ../lib/gen_html.sh README.html $(PERFS)
 show-html: index.html
 	$(OPEN) index.html &
 
-.PHONY: run show clean default mrproper valgrind
-
-clean:
-	$(RM) $(PROG) $(GRAPHS) $(OBJ) $(TMP)
-
 mrproper: clean
-	$(RM) *.png index.html
+	$(RM) $(GRAPHS) $(PERFS) $(PROG).png index.html $(TMP)
+
+.PHONY: mrproper valgrind
