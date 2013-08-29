@@ -135,7 +135,6 @@ void gets_puts (timer *t, recorder *rec,
     exit(EXIT_FAILURE);
   }
 
-  fflush(fin); // Clear stdio buffer cache
   fflush(fout); // Clear stdio buffer cache
 
   char *in_buf = NULL;
@@ -169,7 +168,6 @@ void gets_puts (timer *t, recorder *rec,
       exit(EXIT_FAILURE);
     }
   }
-  fflush(fin); // Flush data to the kernel
   int fdin = fileno(fin);
   if (fdin == -1) {
     perror("fileno");
