@@ -2,6 +2,10 @@ OBJ    = tab.o
 GRAPHS = tab-lig.csv tab-col.csv
 PROG   = tab
 TMP    = tmp.dat
-CFLAGS = 
+PERFS  = colonne.txt ligne.txt
 
 include ../lib/lib.mk
+
+$(PERFS): $(PROGS)
+	perf stat -o colone.txt ./$(PROG) --colonne
+	perf stat -o ligne.txt ./$(PROG) --ligne

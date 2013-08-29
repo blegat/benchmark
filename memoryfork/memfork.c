@@ -13,6 +13,10 @@
 
 
 int main (int argc, char *argv[])  {
+	int perfbef = argc>1 && strncmp(argv[1], "--before", 9);
+	int perfaft = argc>1 &&strncmp(argv[1], "--after", 8);
+
+
 	// Déclare un timer, ainsi que deux recorder qui vont contenir les résultats de l'exécution du programme
 	timer *t = timer_alloc();
 	recorder* bftf_rec = recorder_alloc("memfor-beforefork.csv");
@@ -23,18 +27,22 @@ int main (int argc, char *argv[])  {
 	int status, i,j,k,res;
 	for (i = MULTIPLICATEUR; i < N; i+=MULTIPLICATEUR) {
 
+		if(perfligne || perfcolonne)
+			i = N;
+
 		char ** tab = malloc(i*sizeof(char*));
 		for(j=0; j<i; j++) 
 			tab[j] = malloc(i*sizeof(char));
 
-		start_timer(t);
-		for(j=0; i<i; j++) 
-			for(k=0; k<i; k++) {
-				res +=tab[j][k];
-				tab[j][k]=j+k;
+		if( ! (perfbef || perfaft)){
+			start_timer(t);
+			for(j=0; i<i; j++) 
+				for(k=0; k<i; k++) {
+					res +=tab[j][k];
+					tab[j][k]=j+k;
+			}
+			write_record(bftf_rec, i/MULTIPLICATEUR, stop_timer(t));	
 		}
-		write_record(bftf_rec, i/MULTIPLICATEUR, stop_timer(t));	
-
 
 		pid = fork();
 
@@ -52,24 +60,27 @@ int main (int argc, char *argv[])  {
 			k=1;
 			j=1;
 
-		      	start_timer(t);
-			for(j=0; i<i; j++) 
-				for(k=0; k<i; k++) {
-					res +=tab[j][k];
-					tab[j][k]=j+k;
-				}	
-			write_record(aftf_rec, i/MULTIPLICATEUR, stop_timer(t));	
+			if(!perfaft) {
+			      	start_timer(t);
+				for(j=0; i<i; j++) 
+					for(k=0; k<i; k++) {
+						res +=tab[j][k];
+						tab[j][k]=j+k;
+					}	
+				write_record(aftf_rec, i/MULTIPLICATEUR, stop_timer(t));	
+			}
 
 			sleep(1);
 			
-			start_timer(t);
-			for(j=0; i<i; j++) 
-				for(k=0; k<i; k++) {
-					res +=tab[j][k];
-					tab[j][k]=j+k;
+			if(! perfbef) {
+				start_timer(t);
+				for(j=0; i<i; j++) 
+					for(k=0; k<i; k++) {
+						res +=tab[j][k];
+						tab[j][k]=j+k;
+				}
+				write_record(aftm_rec, i/MULTIPLICATEUR, stop_timer(t));	
 			}
-			write_record(aftm_rec, i/MULTIPLICATEUR, stop_timer(t));	
-			
 
 		      	recorder_free(bftf_rec);
 		  	recorder_free(aftf_rec);
