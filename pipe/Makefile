@@ -1,6 +1,6 @@
-OBJ    = amdahl.o
-GRAPHS = thread.csv proc.csv
-PROG   = amdahl
+OBJ    = pipe.o
+GRAPHS = pipe.csv
+PROG   = pipe
 CFLAGS = -lpthread
 
 include ../lib/lib.mk

@@ -8,10 +8,10 @@ OBJ    += ../lib/benchmark.o
 CC      = gcc
 
 OS := $(shell uname)
-ifeq ($(OS),Darwin)
-CFLAGS += -I. -I../lib/ -g
+CFLAGS += -I. -I../lib/ -g -Wall
+ifeq ($(OS), Darwin)
 else
-CFLAGS += -I. -I../lib/ -g -lrt
+CFLAGS += -lrt
 endif
 
 # Lorsqu'on fait `make`, c'est la première règle qui est exécutée
@@ -52,4 +52,4 @@ clean:
 	$(RM) $(PROG) $(GRAPHS) $(OBJ) $(TMP)
 
 mrproper: clean
-	$(RM) *.png
+	$(RM) *.png index.html

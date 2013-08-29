@@ -1,0 +1,8 @@
+set title 'Benchmark of open, write, read, close'
+set xlabel 'size [B] of the file at opening or length of the string to read/write'
+set ylabel 'time [ns]'
+set key right top
+plot 'text_read.csv' using 1:2 title 'text\_read',\
+  'text_write.csv' using 1:2 title 'text\_write',\
+  'bin_read.csv' using 1:2 title 'bin\_read',\
+  'bin_write.csv' using 1:2 title 'bin\_write'
