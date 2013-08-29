@@ -1,3 +1,11 @@
+/**
+ * \file io.c
+ *
+ * Compare les performances ce read/write avec fgets/fputs
+ *
+ * C'est inspiré du chapitre 13 du livre "The Linux programming interface"
+ * par Michael Kerrisk
+ */
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
