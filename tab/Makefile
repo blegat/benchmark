@@ -7,5 +7,5 @@ PERFS  = colonne.txt ligne.txt
 include ../lib/lib.mk
 
 $(PERFS): $(PROGS)
-	perf stat -o colone.txt ./$(PROG) --colonne
+	perf stat -o colonne.txt ./$(PROG) --colonne
 	perf stat -o ligne.txt ./$(PROG) --ligne
