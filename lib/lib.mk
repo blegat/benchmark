@@ -8,8 +8,10 @@
 #//! * `OBJ`, les objects à générer en plus de `benchmark.o`;
 #//! * `DEPS`, les `.h` nécessaires en plus de `benchmark.h`;
 #//! * `GRAPHS`, les `.csv` générés;
-#//! * `prog`, le nom du programme;
-#//! * `tmp`, les fichiers temporaires générés par le programme
+#//! * `PROG`, le nom du programme;
+#//! * `PROGS`, le nom des programmes nécessaires pour exécuter `$(PROG)`
+#//!            (en plus de `$(PROG)`);
+#//! * `TMP`, les fichiers temporaires générés par le programme
 #//!          qu'il faut supprimer avec `make clean`.
 
 # TODO mesure function call
@@ -20,6 +22,7 @@
 DEPS   += ../lib/benchmark.h
 OBJ    += ../lib/benchmark.o
 CC      = gcc
+PROGS  += $(PROG)
 
 OS := $(shell uname)
 CFLAGS += -I. -I../lib/ -g -Wall
@@ -46,7 +49,7 @@ $(PROG): $(OBJ)
 valgrind: $(PROG)
 	valgrind --leak-check=full ./$(PROG)
 
-$(GRAPHS): $(PROG)
+$(GRAPHS): $(PROGS)
 	./$(PROG)
 
 show-graph: $(GRAPHS)
