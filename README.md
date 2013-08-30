@@ -1,41 +1,52 @@
-Benchmark
-=========
+# Benchmark
 
-`benchmark.c` et `benchmark.h` contiennent les outils de benchmark
-Chacun des exercice est dans `<prog>.c`.
-Pour compiler, il y a un `Makefile` générique qui inclu
-`<prog>.mk` qui définit des constantes propres à `<prog>`.
-Il y a un `<prog>.gpi` qui fournit le code pour plotter les `.csv`
-produit par `<prog>`.
-Dans le `Makefile`,
-il y a les règles pour compiler en `.o`,
-créer `<prog>`,
-créer les `.csv`, les afficher,
-sauver la figure en `.png` et `clean`.
-Pour compiler un certain exercice,
-il suffit de décommenter l'`include` correspondant dans le Makefile.
+## Introduction
+Ce projet contient des benchmarks des appels systèmes Unix qui sont
+intéressants d'un point de vue didactique.
+Ils sont utilisés par le cours [SINF1252](http://sinf1252.info.ucl.ac.be/)
+donné à l'UCL par le professeur Olivier Bonaventure.
 
-J'ai essayé d'avoir une structure qui rend le Makefile
-assez utile tout en restant simple.
-Pour présenter cela en exercice,
-il faudrait retirer une partie de `<prog>.c` pour laisser aux étudiants trouver,
-j'ai noté dans chacun une idée avec le début de la partie à
-retirer à `// BEGIN` et la fin à `// END`.
-Après, j'hésite entre donner le Makefile en effectuant déjà l'include et
-donner un Makefile différent à chaque fois et donc
-avoir plein de fichiers séparés à télécharger
-ou garder exactement la structure que j'ai et leur demander de télécharger
-tout une fois en `tar` et de toujours travailler dans ce dossier comme je fais.
-Je pencherai vers la deuxième solution car ça éviterait que les étudiants
-perde du temps à retélécharger quelque chose,
-devoir tout copier/décompresser à un endroit,
-comprendre ce que chaque fichier fait, etc... à chaque fois.
-En plus, on pourra leur proposer d'utiliser Git car ils reviendront sur
-ce dossier semaine après semaine et ils verront comment Git rend ça clair.
-On pourra leur dire la première semaine, téléchargez tout,
-puis faire `git init` puis à la fin de l'énoncé on dit,
-faite `git commit -a -m "Fin de l'exercice 3.0"`, etc...
-On peut même imaginer que le code soit sur un repo de l'UCL comme
-pour les projet ainsi il devrait faire un `git clone` et si on désire
-changer quelque chose à `benchmark.c` ou quoi, on leur dira de faire
-`git fetch`, `git merge` et ils verront à quel point c'est pratique.
+Ils ont été écrits par Maxime De Mol, Nicolas Houtain et Benoît Legat
+avec l'aide d'Oliver Bonaventure.
+
+Ils utilisent l'outil
+[perf](https://perf.wiki.kernel.org/index.php/Main_Page)
+pour analyser différents conteurs ainsi que
+[gnuplot](http://www.gnuplot.info/)
+pour afficher les benchmarks.
+
+Le projet est constitué
+* d'un dossier `lib` contenant des petites librairies
+  statiques développées pour le projet ainsi que divers scripts;
+* ainsi qu'un dossier par benchmark.
+  Le résultat du benchmark est affiché dans une page `html`
+  qu'on peut obtenir en lançant `make show-html` dans le dossier correspondant.
+
+## Documentation
+La documentation se trouve
+[ici](http://blegat.github.io/benchmark/index.html)
+mais elle peut être générée à l'aide de
+[Doxygen](http://www.stack.nl/~dimitri/doxygen/)
+ainsi
+
+    $ doxygen Doxyfile
+Il suffit alors d'ouvrir `doc/html/index.html` pour voir la documentation.
+
+## Compilation
+Pour générer les `Makefile` nécessaires à la compilation à partir
+des `Makefile.am`, exécutez
+
+    $ ./bootstrap.sh
+
+Ça va non seulement générer un `Makefile` à la racine qui compile
+les librairies et tous les benchmarks mais aussi un `Makefile` dans
+le dossier `lib` qui compile les librairies et un dossier dans
+chaque dossier de benchmark qui peut compiler le benchmark mais aussi
+l'exécuter et générer et afficher une page `html` à l'aide `make show-html`.
+
+Par exemple, pour essayer le benchmark `io`, faite suivre ce `./bootstrap.sh`
+par
+
+    $ make
+    $ cd io
+    $ make show-html
