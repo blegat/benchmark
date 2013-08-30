@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -64,7 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -78,10 +77,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Benchmark Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="textblock"><p><code>benchmark.c</code> et <code><a class="el" href="benchmark_8h.html">benchmark.h</a></code> contiennent les outils de benchmark Chacun des exercice est dans <code>&lt;prog&gt;.c</code>. Pour compiler, il y a un <code>Makefile</code> générique qui inclu <code>&lt;prog&gt;.mk</code> qui définit des constantes propres à <code>&lt;prog&gt;</code>. Il y a un <code>&lt;prog&gt;.gpi</code> qui fournit le code pour plotter les <code>.csv</code> produit par <code>&lt;prog&gt;</code>. Dans le <code>Makefile</code>, il y a les règles pour compiler en <code>.o</code>, créer <code>&lt;prog&gt;</code>, créer les <code>.csv</code>, les afficher, sauver la figure en <code>.png</code> et <code>clean</code>. Pour compiler un certain exercice, il suffit de décommenter l'<code>include</code> correspondant dans le Makefile.</p>
+<p>J'ai essayé d'avoir une structure qui rend le Makefile assez utile tout en restant simple. Pour présenter cela en exercice, il faudrait retirer une partie de <code>&lt;prog&gt;.c</code> pour laisser aux étudiants trouver, j'ai noté dans chacun une idée avec le début de la partie à retirer à <code>// BEGIN</code> et la fin à <code>// END</code>. Après, j'hésite entre donner le Makefile en effectuant déjà l'include et donner un Makefile différent à chaque fois et donc avoir plein de fichiers séparés à télécharger ou garder exactement la structure que j'ai et leur demander de télécharger tout une fois en <code>tar</code> et de toujours travailler dans ce dossier comme je fais. Je pencherai vers la deuxième solution car ça éviterait que les étudiants perde du temps à retélécharger quelque chose, devoir tout copier/décompresser à un endroit, comprendre ce que chaque fichier fait, etc... à chaque fois. En plus, on pourra leur proposer d'utiliser Git car ils reviendront sur ce dossier semaine après semaine et ils verront comment Git rend ça clair. On pourra leur dire la première semaine, téléchargez tout, puis faire <code>git init</code> puis à la fin de l'énoncé on dit, faite <code>git commit -a -m "Fin de l'exercice 3.0"</code>, etc... On peut même imaginer que le code soit sur un repo de l'UCL comme pour les projet ainsi il devrait faire un <code>git clone</code> et si on désire changer quelque chose à <code>benchmark.c</code> ou quoi, on leur dira de faire <code>git fetch</code>, <code>git merge</code> et ils verront à quel point c'est pratique. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 30 2013 10:48:33 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 30 2013 11:37:28 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

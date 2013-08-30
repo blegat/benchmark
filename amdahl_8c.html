@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -69,7 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -130,7 +129,7 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a388b1fa88f271afd58b4c2187b250240"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="amdahl_8c.html#a388b1fa88f271afd58b4c2187b250240">primeFactors</a> (<a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a> n)</td></tr>
+<tr class="memitem:a388b1fa88f271afd58b4c2187b250240"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="amdahl_8c.html#a388b1fa88f271afd58b4c2187b250240">primeFactors</a> (<a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a> <a class="el" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>)</td></tr>
 <tr class="memdesc:a388b1fa88f271afd58b4c2187b250240"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcul les facteurs premiers de <code>n</code>  <a href="#a388b1fa88f271afd58b4c2187b250240">More...</a><br/></td></tr>
 <tr class="separator:a388b1fa88f271afd58b4c2187b250240"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a921a8066595f8666ebf73ec384a18573"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="amdahl_8c.html#a921a8066595f8666ebf73ec384a18573">scan</a> (void *param)</td></tr>
@@ -360,7 +359,7 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                <span class="comment">// envoie de la réponse par pipe</span></div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                close(fd[j][1]);</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                </div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                exit(0);</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                <a class="code" href="Makefile.html#a6733eb5f605d09eaede9845835d71c4e">exit</a>(0);</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pid[j] &lt; 0) {</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                err(-1,<span class="stringliteral">&quot;erreur de fork&quot;</span>);</div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            }</div>
@@ -426,14 +425,14 @@ Functions</h2></td></tr>
 <p>Calcul les facteurs premiers de <code>n</code> par la methode de brute force </p>
 <div class="fragment"><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        {</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>,count=0;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">for</span>(i=2;i&lt;=n;i++)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">for</span>(i=2;i&lt;=<a class="code" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>;i++)</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">if</span>(n%i==0)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>%i==0)</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        {</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            count++;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            n=n/<a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <a class="code" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>=<a class="code" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>/<a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            i--;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">if</span>(n==1)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">if</span>(<a class="code" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>==1)</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        } </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    } </div>
@@ -488,7 +487,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 30 2013 10:48:33 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 30 2013 11:37:28 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>
