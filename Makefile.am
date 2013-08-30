@@ -1,10 +1,11 @@
 ACLOCAL_AMFLAGS = -I m4
 
 # the subdirectories of the project to go into
+# lib needs to be the first one because it is needed by others
 SUBDIRS =   \
+			lib \
 			alloc \
 			io \
-			lib \
 			shell \
 			textbin \
 			argfct \
