@@ -1,15 +1,17 @@
-/**************************************
- * benchmark.c
+/**
+ * \file benchmark.c
+ * \brief fonctions utiles pour écrire les `.csv` et mesurer le temps
  *
- * Des fonctions simples de benchmark.
- **************************************/
+ * Cette libraire contient `timer` pour mesurer le temps et `recorder`
+ * pour écrire les temps dans un fichier au format `.csv` qu'on peut
+ * plotter facilement avec `gnuplot`.
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
 #include <sys/times.h>
 #include <time.h>
-//#include <error.h>
 #include <unistd.h>
 #include "benchmark.h"
 
@@ -80,7 +82,7 @@ timer *timer_alloc () {
  *
  * \param t Le temps dans lequel on stoque le temps de début
  *
- * En cas d'erreur, affiche un message sur `stderr` * et `exit`
+ * En cas d'erreur, affiche un message sur `stderr` et `exit`
  */
 void start_timer (timer *t) {
 #if   defined(BM_USE_CLOCK_GETTIME)
@@ -126,7 +128,7 @@ void start_timer (timer *t) {
  *
  * \param t Le temps dans lequel on a stoqué le temps de début
  *
- * En cas d'erreur, affiche un message sur `stderr` * et `exit`
+ * En cas d'erreur, affiche un message sur `stderr` et `exit`
  */
 long int stop_timer (timer *t) {
   // time_t is only a 32 bits int on 32 bits machines
@@ -165,7 +167,7 @@ long int stop_timer (timer *t) {
  *
  * \param t Le temps dans lequel on a stoqué le temps de début
  *
- * En cas d'erreur, affiche un message sur `stderr` * et `exit`
+ * En cas d'erreur, affiche un message sur `stderr` et `exit`
  */
 void timer_free (timer *t) {
   free(t);
@@ -178,7 +180,14 @@ void timer_free (timer *t) {
  * |_| \_\___|\___\___/|_|  \__,_|\___|_|
  */
 
+/**
+ * \brief Temps nécessaire pour effectuer `start_timer` et `stop_timer`
+ *        sans rien faire entre
+ */
 volatile long int overhead = -1;
+/**
+ * \brief Mets à jours l'`overhead`
+ */
 void update_overhead() {
   timer *t = timer_alloc();
   start_timer(t);
@@ -193,37 +202,64 @@ long int get_overhead () {
   return overhead;
 }
 
-//typedef struct recorder recorder;
+/**
+ * \brief `recorder` écrit les temps dans un fichier `.csv`
+ */
 struct recorder {
   FILE *output;
   long int overhead;
 };
 
+/**
+ * \brief Alloue un `recorder`
+ *
+ * Les données seront écrites dans le fichier `filename`.
+ * En cas d'erreur, il `exit` avec `EXIT_FAILURE`.
+ */
 recorder *recorder_alloc (char *filename) {
   recorder *rec = (recorder *) malloc(sizeof(recorder));
   if (rec == NULL) {
     perror("malloc");
-    return NULL;
+    exit(EXIT_FAILURE);
   }
   rec->output = fopen(filename, "w");
   if (rec->output == NULL) {
     perror("fopen");
     free(rec);
-    return NULL;
+    exit(EXIT_FAILURE);
   }
   rec->overhead = get_overhead();
   return rec;
 }
 
+/**
+ * \brief Écris le temps `time` en correspondance avec `x`
+ *
+ * L'`overhead` est d'abord retiré de `time`
+ * En cas d'erreur, il `exit` avec `EXIT_FAILURE`
+ *
+ * \param rec le `recorder` dans lequel écrire, il est supposé non-`NULL`
+ * \param x l'abscisse
+ * \param time le temps à écrire en ordonnée
+ */
 void write_record (recorder *rec, long int x, long int time) {
   write_record_n(rec, x, time, 1);
 }
 
+/**
+ * \brief Comme `write_record` mais divise `time` par `n` après
+ *        avoir retiré l'`overhead`
+ */
 void write_record_n (recorder *rec, long int x, long int time, long n) {
   fprintf(rec->output, "%ld, %ld\n", x, (time - rec->overhead) / n);
 }
 
 
+/**
+ * \brief Libère toutes les resources utilisées par `rec`
+ *
+ * \param rec le recorder auquel il faut libérer les resources
+ */
 void recorder_free (recorder *rec) {
   fclose(rec->output);
   free(rec);
