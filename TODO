@@ -26,7 +26,7 @@
 [x]		ficher texte vs fichiers binaires (int, float).
         	Montrer la couche de l'ASCII
 	S11: Benoît
-[.]		performance, mmap
+[x]		performance, mmap
         lis du début à la fin par block avec read ou mmap
 	S12: Nicolas
 [x]		fork -> modifier la mémoire ! lecture vs écriture
