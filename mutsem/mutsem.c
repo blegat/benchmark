@@ -1,3 +1,28 @@
+/**
+	\file mutsem.c
+	\brief Ce programme compare le temps nécessaire pour lock/unlock avec un mutex et celui pour wait/post avec une sémaphore
+
+	Pour cela, nous allons créer une chaîne de thread ayant chacun un mutex et une sémaphore "personnelle". Pour un nombre "N" donné, nous allons lancer "N" thread où chaque thread bloquera son mutex et sa sémaphore. Chaque thread attendra ensuite que le thread précédent ait débloqué son mutex/sémaphore, pour à son tour débloqué le sien. Parmis ces threads, il y a un thread spécial : le **first**.  Celui ci est chargé de débloqué en premier son mutex/sémaphore et de calculé le temps que cela prend pour lui revenir.
+
+	En schéma :
+
+	+-------+	+-------+			+-------+	+-------+
+	| first	|	| oth 1	|	  ...		| oth 2	| 	| oth N	| 
+	+-------+	+-------+			+-------+	+-------+
+	  |   ^___________|  ^____________|  ^____________|  ^____________|   ^
+	  |	   (1)		   (2)		   	  (3)		      |
+	  |						      		      |
+	  |___________________________________________________________________|
+				   (1)         			
+
+
+	(1) : first unlock son mut1, ce qui permet à oth N de lock son mut2 (puisqu'ils pointent vers le même mutex)
+	(2) : Puisque oth 1 a pu locker son mut2, il unlock son mut1
+	(3) : La chaîne continue
+	(4) : Lorsque first peut enfin faire un lock sur son mut2, il arrete le timer et écrit dans le record
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
@@ -89,29 +114,7 @@ void * other(void* args) {
 	return NULL;
 }
 	
-/**
-	\brief Ce programme compare le temps nécessaire pour lock/unlock avec un mutex et celui pour wait/post avec une sémaphore
 
-	Pour cela, nous allons créer une chaîne de thread ayant chacun un mutex et une sémaphore "personnelle". Pour un nombre "N" donné, nous allons lancer "N" thread où chaque thread bloquera son mutex et sa sémaphore. Chaque thread attendra ensuite que le thread précédent ait débloqué son mutex/sémaphore, pour à son tour débloqué le sien. Parmis ces threads, il y a un thread spécial : le **first**.  Celui ci est chargé de débloqué en premier son mutex/sémaphore et de calculé le temps que cela prend pour lui revenir.
-
-	En schéma :
-
-	+-------+	+-------+			+-------+	+-------+
-	| first	|	| oth 1	|	  ...		| oth 2	| 	| oth N	| 
-	+-------+	+-------+			+-------+	+-------+
-	  |   ^___________|  ^____________|  ^____________|  ^____________|   ^
-	  |	   (1)		   (2)		   	  (3)		      |
-	  |						      		      |
-	  |___________________________________________________________________|
-				   (1)         			
-
-
-	(1) : first unlock son mut1, ce qui permet à oth N de lock son mut2 (puisqu'ils pointent vers le même mutex)
-	(2) : Puisque oth 1 a pu locker son mut2, il unlock son mut1
-	(3) : La chaîne continue
-	(4) : Lorsque first peut enfin faire un lock sur son mut2, il arrete le timer et écrit dans le record
-
-*/
 int main (int argc, char *argv[])  {
 	// Déclare un timer, ainsi que deux recorder qui vont contenir les résultats de l'exécution du programme
 	t = timer_alloc();

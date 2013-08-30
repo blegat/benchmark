@@ -1,3 +1,12 @@
+/**
+	\file argfct.c
+	\brief Ce programme compare le temps nécessaire pour passer un argument de N byte à une fonction et celui nécessaire pour passer le pointeur vers cet argument
+
+	Compare donc les performances en passant des arguments de plus en plus gros sur le stack contre un pointeur de taille fixe
+	
+	Note : Pour ne pas polluer les tests, il a été décidé de ne pas utiliser de pointeurs de fonction.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
@@ -39,12 +48,7 @@ void fctval32 (struct arg32 arg)  {}
 void fctval64 (struct arg64 arg)  {}
 void fctval128(struct arg128 arg) {}
 
-/**
-	\brief Ce programme compare le temps nécessaire pour passer un argument de N byte à une fonction et celui nécessaire pour passer le pointeur vers cet argument
 
-	
-	Note : Pour ne pas polluer les tests, il a été décidé de ne pas utiliser de pointeurs de fonction.
-*/
 int main (int argc, char *argv[])  {
 	timer *t = timer_alloc();
 	recorder *val_rec = recorder_alloc("argfct-val.csv");

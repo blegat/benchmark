@@ -1,3 +1,16 @@
+/**
+	\file tab.c
+	\brief Compare les performances lorsque l'on parcourt un tableau par ligne ou par colonne
+
+	Ce programme additionne les valeurs d'un tableau en le parcourant :
+		* Soit par colonne
+		* Soit par ligne
+
+	Lorsque l'on spécifie un argument pour effectuer les perfs, sur les lignes ou les colonnes, on n'écrit pas dans les records et on ne n'exécute soit les lignes soit les colonnes selon l'arguments reçu.
+
+	Note : Le plus rapide profite de la localité spatiale
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
@@ -42,17 +55,7 @@ long int colonne(int i, timer *t, int ** tab) {
 	 return stop_timer(t);
 }
 
-/**
-	\brief Compare les performances lorsque l'on parcourt un tableau par ligne ou par colonne
 
-	Ce programme additionne les valeurs d'un tableau en le parcourant :
-		* Soit par colonne
-		* Soit par ligne
-
-	Lorsque l'on spécifie un argument pour effectuer les perfs, sur les lignes ou les colonnes, on n'écrit pas dans les records et on ne n'exécute soit les lignes soit les colonnes selon l'arguments reçu.
-
-	Note : Le plus rapide profite de la localité spatiale
-*/
 int main (int argc, char *argv[])  {
 	// Verification des arguments
   	int perfligne = argc>1 && strncmp(argv[1], "--ligne", 8);

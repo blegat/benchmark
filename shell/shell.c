@@ -1,16 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/mman.h>
-#include <fcntl.h>
-#include <string.h>
-
-#include "benchmark.h"
-
-#define MAX_SIZE 100
-
-//#define BM_USE_TIMES
-
 /**
+	\file shell.c
 	\brief Ce programme compare le temps d'exécution d'un script et d'un programme C qui effectue un nombre "N" d'instruction.
 	
 	Ce programme utilise deux programmes annexes : 
@@ -28,6 +17,20 @@
 		* shell-bash.csv : Pour les temps d'exécution du script
 		* shell-prog.csv : Pour les temps d'exécution du programme
 */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <string.h>
+
+#include "benchmark.h"
+
+#define MAX_SIZE 100
+
+//#define BM_USE_TIMES
+
+
 int main (int argc, char *argv[])  {
 	// Déclare un timer, ainsi que deux recorder qui vont contenir les résultats de l'exécution du programme
 	timer *t = timer_alloc();

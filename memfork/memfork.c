@@ -1,3 +1,13 @@
+/**
+	\file memfork.c
+	\brief Ce programme compare le temps nécessaire pour effectuer le "copy-on-write"
+
+	Pour cela, nous allons donc faire un fork, modifier deux fois les données dans le fils et comparer la différence entre les deux.
+	Cette différence représente le temps nécessaire au copy-on-write.
+
+	Dans le cas de l'utilisation de perf, on ne réécrit pas dans les records et n'effectue une seule des deux modifications. Dans ce cas la, on fait le perf sur la taille maximun
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
@@ -31,14 +41,7 @@ long int parcoursTab(timer* t, int i, char** tab) {
 	return stop_timer(t);
 }
 
-/**
-	\brief Ce programme compare le temps nécessaire pour effectuer le "copy-on-write"
 
-	Pour cela, nous allons donc faire un fork, modifier deux fois les données dans le fils et comparer la différence entre les deux.
-	Cette différence représente le temps nécessaire au copy-on-write.
-
-	Dans le cas de l'utilisation de perf, on ne réécrit pas dans les records et n'effectue une seule des deux modifications. Dans ce cas la, on fait le perf sur la taille maximun
-*/
 int main (int argc, char *argv[])  {
 	// Regarde les arguments
 	int perfbft = argc>1 && strncmp(argv[1], "--before", 9);
