@@ -5,4 +5,5 @@ SUBDIRS =   \
 			alloc \
 			io \
 			lib \
-			shell
+			shell \
+			textbin

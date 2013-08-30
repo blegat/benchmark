@@ -46,8 +46,9 @@ AC_SUBST([AM_LDFLAGS])
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([alloc/Makefile])
 AC_CONFIG_FILES([io/Makefile])
-AC_CONFIG_FILES([shell/Makefile])
 AC_CONFIG_FILES([lib/Makefile])
+AC_CONFIG_FILES([shell/Makefile])
+AC_CONFIG_FILES([textbin/Makefile])
 
 # finally this generates the Makefiles etc. for the build
 AC_OUTPUT
