@@ -1,4 +1,8 @@
-OBJ    = tab.o
+AM_CFLAGS = -I$(top_srcdir)/lib @AM_CFLAGS@
+bin_PROGRAMS = tab
+tab_SOURCES = tab.c
+tab_LDADD = $(top_builddir)/lib/libbenchmark.a $(AM_LDFLAGS)
+
 GRAPHS = tab-lig.csv tab-col.csv
 PROG   = tab
 TMP    = tmp.dat

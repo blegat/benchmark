@@ -14,7 +14,7 @@
 /**
 	\brief Ce programme compare l'utilisation de calloc ou de malloc pour allouer de l'espace mémoire
 
-	Ce programme va donc allouer de l'esapce avec calloc d'une part et malloc d'autre part, en comparant les temps nécessaires à chacun.	
+	Ce programme va donc allouer de l'espace avec calloc d'une part et malloc d'autre part, en comparant les temps nécessaires à chacun.	
 */
 int main (int argc, char *argv[])  {
 	// Déclare un timer, ainsi que deux recorder qui vont contenir les résultats de l'exécution du programme

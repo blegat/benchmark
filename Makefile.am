@@ -6,4 +6,18 @@ SUBDIRS =   \
 			io \
 			lib \
 			shell \
-			textbin
+			textbin \
+			argfct \
+			memfork \
+			mutsem \
+			tab \
+			amdahl \
+			calloc \
+			file \
+			fork \
+			mmap \
+			pipe \
+			shm \
+			thread \
+			types
+			
