@@ -1,7 +1,9 @@
 AM_CFLAGS = -I$(top_srcdir)/lib @AM_CFLAGS@
 bin_PROGRAMS = io
 io_SOURCES = io.c
-io_LDADD = $(top_builddir)/lib/libbenchmark.a $(AM_LDFLAGS)
+io_LDADD = $(top_builddir)/lib/libbenchmark.a \
+		   $(top_builddir)/lib/libcp.a \
+		   $(AM_LDFLAGS)
 
 PROG   = io
 GRAPHS = sys_sync.csv sys_nosync.csv sys_direct.csv std_buf.csv std_nobuf.csv

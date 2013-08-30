@@ -13,17 +13,6 @@
 #define N 100000
 #define F "tmp.dat"
 
-void rm (char *fname) {
-  int err;
-  if (access(fname, F_OK) != -1) {
-    err = unlink(fname);
-    if (err == -1) {
-      perror("unlink");
-      exit(EXIT_FAILURE);
-    }
-  }
-}
-
 char *get_num (int size) {
   int i;
   char *s = (char *) malloc(sizeof(char) * size);

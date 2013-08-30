@@ -1,7 +1,7 @@
 AM_CFLAGS = -I$(top_srcdir)/lib @AM_CFLAGS@
 
 # the library names to build (note we are building static libs only)
-lib_LIBRARIES = libbenchmark.a
+lib_LIBRARIES = libbenchmark.a libcp.a
 
 # where to install the headers on the system
 libbenchmark_adir = $(includedir)/benchmark
@@ -14,3 +14,8 @@ libbenchmark_a_HEADERS =    \
 libbenchmark_a_SOURCES =    \
                         $(libbenchmark_a_HEADERS) \
                         benchmark.c
+
+libcp_adir = $(includedir)/cp
+libcp_a_HEADERS = cp.h
+libcp_a_SOURCES = $(libcp_a_HEADERS) \
+				  cp.c
