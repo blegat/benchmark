@@ -77,12 +77,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Benchmark Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><code>benchmark.c</code> et <code><a class="el" href="benchmark_8h.html">benchmark.h</a></code> contiennent les outils de benchmark Chacun des exercice est dans <code>&lt;prog&gt;.c</code>. Pour compiler, il y a un <code>Makefile</code> générique qui inclu <code>&lt;prog&gt;.mk</code> qui définit des constantes propres à <code>&lt;prog&gt;</code>. Il y a un <code>&lt;prog&gt;.gpi</code> qui fournit le code pour plotter les <code>.csv</code> produit par <code>&lt;prog&gt;</code>. Dans le <code>Makefile</code>, il y a les règles pour compiler en <code>.o</code>, créer <code>&lt;prog&gt;</code>, créer les <code>.csv</code>, les afficher, sauver la figure en <code>.png</code> et <code>clean</code>. Pour compiler un certain exercice, il suffit de décommenter l'<code>include</code> correspondant dans le Makefile.</p>
-<p>J'ai essayé d'avoir une structure qui rend le Makefile assez utile tout en restant simple. Pour présenter cela en exercice, il faudrait retirer une partie de <code>&lt;prog&gt;.c</code> pour laisser aux étudiants trouver, j'ai noté dans chacun une idée avec le début de la partie à retirer à <code>// BEGIN</code> et la fin à <code>// END</code>. Après, j'hésite entre donner le Makefile en effectuant déjà l'include et donner un Makefile différent à chaque fois et donc avoir plein de fichiers séparés à télécharger ou garder exactement la structure que j'ai et leur demander de télécharger tout une fois en <code>tar</code> et de toujours travailler dans ce dossier comme je fais. Je pencherai vers la deuxième solution car ça éviterait que les étudiants perde du temps à retélécharger quelque chose, devoir tout copier/décompresser à un endroit, comprendre ce que chaque fichier fait, etc... à chaque fois. En plus, on pourra leur proposer d'utiliser Git car ils reviendront sur ce dossier semaine après semaine et ils verront comment Git rend ça clair. On pourra leur dire la première semaine, téléchargez tout, puis faire <code>git init</code> puis à la fin de l'énoncé on dit, faite <code>git commit -a -m "Fin de l'exercice 3.0"</code>, etc... On peut même imaginer que le code soit sur un repo de l'UCL comme pour les projet ainsi il devrait faire un <code>git clone</code> et si on désire changer quelque chose à <code>benchmark.c</code> ou quoi, on leur dira de faire <code>git fetch</code>, <code>git merge</code> et ils verront à quel point c'est pratique. </p>
-</div></div><!-- contents -->
+<div class="textblock"><h2>Introduction</h2>
+<p>Ce projet contient des benchmarks des appels systèmes Unix qui sont intéressants d'un point de vue didactique. Ils sont utilisés par le cours <a href="http://sinf1252.info.ucl.ac.be/">SINF1252</a> donné à l'UCL par le professeur Olivier Bonaventure.</p>
+<p>Ils ont été écrits par Maxime De Mol, Nicolas Houtain et Benoît Legat avec l'aide d'Oliver Bonaventure.</p>
+<p>Ils utilisent l'outil <a href="https://perf.wiki.kernel.org/index.php/Main_Page">perf</a> pour analyser différents conteurs ainsi que <a href="http://www.gnuplot.info/">gnuplot</a> pour afficher les benchmarks.</p>
+<p>Le projet est constitué</p>
+<ul>
+<li>d'un dossier <code>lib</code> contenant des petites librairies statiques développées pour le projet ainsi que divers scripts;</li>
+<li>ainsi qu'un dossier par benchmark. Le résultat du benchmark est affiché dans une page <code>html</code> qu'on peut obtenir en lançant <code>make show-html</code> dans le dossier correspondant.</li>
+</ul>
+<h2>Documentation</h2>
+<p>La documentation se trouve <a href="http://blegat.github.io/benchmark/index.html">ici</a> mais elle peut être générée à l'aide de <a href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a> ainsi </p>
+<pre class="fragment">$ doxygen Doxyfile
+</pre><p> Il suffit alors d'ouvrir <code>doc/html/index.html</code> pour voir la documentation.</p>
+<h2>Compilation</h2>
+<p>Pour générer les <code>Makefile</code> nécessaires à la compilation à partir des <code>Makefile.am</code>, exécutez </p>
+<pre class="fragment">$ ./bootstrap.sh
+</pre><p>Ça va non seulement générer un <code>Makefile</code> à la racine qui compile les librairies et tous les benchmarks mais aussi un <code>Makefile</code> dans le dossier <code>lib</code> qui compile les librairies et un dossier dans chaque dossier de benchmark qui peut compiler le benchmark mais aussi l'exécuter et générer et afficher une page <code>html</code> à l'aide <code>make show-html</code>.</p>
+<p>Par exemple, pour essayer le benchmark <code>io</code>, faite suivre ce <code>./bootstrap.sh</code> par </p>
+<pre class="fragment">$ make
+$ cd io
+$ make show-html</pre> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 30 2013 11:37:28 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 30 2013 11:40:38 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>
