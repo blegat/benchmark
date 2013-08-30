@@ -16,7 +16,8 @@
 #include <semaphore.h>
 #include <pthread.h>
 
-#include "benchmark.h"
+#include "../lib/benchmark.c"
+#include "../lib/benchmark.h"
 
 #define N 10000
 #define MULTIPLICATEUR 1024
@@ -117,7 +118,7 @@ int main (int argc, char *argv[])  {
 			tab=NULL;
 			for(j=0; j<i; j++) {
 				free(tab[j]);
-				tab[j]=NULL
+				tab[j]=NULL;
 			}
 
 		      	return EXIT_SUCCESS;
@@ -125,11 +126,15 @@ int main (int argc, char *argv[])  {
 		else {
 		     	// processus père
 		      	pid = waitpid(pid, &status, 0);
+			
+
 		      	if (pid == -1) {
 				perror("wait");
 				return EXIT_FAILURE;
 		      	}
 		}
+		
+		
 	}
 
 	// Libération du tableau et des records si ils sont alloués
@@ -140,12 +145,6 @@ int main (int argc, char *argv[])  {
 		timer_free(t);
 	}
 
-	free(tab);
-	tab=NULL;
-	for(j=0; j<i; j++) {
-		free(tab[j]);
-		tab[j]=NULL
-	}
 
   return EXIT_SUCCESS;
 }
