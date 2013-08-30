@@ -15,7 +15,7 @@ OPEN=xdg-open
 $(GRAPHS): $(bin_PROGRAMS)
 	./$(PROG)
 
-show-graph: $(GRAPHS)
+show-plot: $(GRAPHS)
 	gnuplot -p $(PROG).gpi
 
 $(PROG).png: $(GRAPHS) $(PROG).gpi
@@ -25,7 +25,7 @@ $(PROG).png: $(GRAPHS) $(PROG).gpi
 index.html: $(PROG).png ../lib/gen_html.sh README.html $(PERFS)
 	../lib/gen_html.sh $(PROG) $(PERFS) > index.html
 
-show-html: index.html
+show: index.html
 	$(OPEN) index.html &
 
 mrproper: clean
