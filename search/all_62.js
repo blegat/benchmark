@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['begin',['BEGIN',['../lib_2Makefile.html#a3cfd8706fc30b3f48d657e43b8051827',1,'Makefile']]],
   ['benchmark_2ec',['benchmark.c',['../benchmark_8c.html',1,'']]],
   ['benchmark_2eh',['benchmark.h',['../benchmark_8h.html',1,'']]],
   ['benchmark_5ffun',['benchmark_fun',['../alloc_8c.html#ad3ee4d2a5bf56589b4ddb523f622d5d3',1,'alloc.c']]],

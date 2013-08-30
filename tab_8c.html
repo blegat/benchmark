@@ -183,7 +183,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <p>On parcourt le double tableau par colonne, en retournant le temps nécessaire au parcours du tableau </p>
 <div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                                              {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">int</span> m,<a class="code" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>,res=0;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">int</span> m,n,res=0;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="benchmark_8c.html#ae951bc4acad582d20531e64af771854a" title="Stoque le temps actuel comme début de la mesure dans t">start_timer</a>(t);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">for</span>(m=0; m&lt;<a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>; m++) </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">for</span>(n=0; n&lt;<a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>; n++)  </div>
@@ -225,7 +225,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <p>On parcourt le double tableau par ligne, en retournant le temps nécessaire au parcours du tableau </p>
 <div class="fragment"><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                                            {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">int</span> m,<a class="code" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>,res=0;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">int</span> m,n,res=0;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="benchmark_8c.html#ae951bc4acad582d20531e64af771854a" title="Stoque le temps actuel comme début de la mesure dans t">start_timer</a>(t);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">for</span>(m=0; m&lt;<a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>; m++) </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">for</span>(n=0; n&lt;<a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>; n++)  </div>
@@ -269,7 +269,7 @@ Variables</h2></td></tr>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">int</span> perfligne = argc&gt;1 &amp;&amp; strncmp(argv[1], <span class="stringliteral">&quot;--ligne&quot;</span>, 8);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">int</span> perfcolonne = argc&gt;1 &amp;&amp;strncmp(argv[1], <span class="stringliteral">&quot;--colonne&quot;</span>, 10);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> * <a class="code" href="lib_2Makefile.html#aaccc9105df5383111407fd5b41255e23">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> * <a class="code" href="memfork_8c.html#a01fc3e05ab8c5206630e1589563b6874">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span>(!perfligne &amp;&amp; !perfcolonne) {</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="comment">// Déclare un timer, ainsi que deux recorder qui vont contenir les résultats de l&#39;exécution du programme</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="tab_8c.html#ae7f0e1453094e64e48afb8edcd77c599">lig_rec</a> = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;tab-lig.csv&quot;</span>);</div>
@@ -287,7 +287,7 @@ Variables</h2></td></tr>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">int</span> ** tab = malloc(i*<span class="keyword">sizeof</span>(<span class="keywordtype">int</span>*));</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">if</span>(tab == NULL) {</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            perror(<span class="stringliteral">&quot;malloc fail&quot;</span>);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <a class="code" href="Makefile.html#a6733eb5f605d09eaede9845835d71c4e">exit</a>(EXIT_FAILURE);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            exit(EXIT_FAILURE);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        }</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">for</span>(j=0; j&lt;<a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>; j++) </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            tab[j] = malloc(i*<span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
@@ -361,7 +361,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 30 2013 11:40:38 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 30 2013 12:00:43 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

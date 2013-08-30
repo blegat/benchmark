@@ -144,7 +144,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <div class="fragment"><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;                                   {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> *<a class="code" href="lib_2Makefile.html#aaccc9105df5383111407fd5b41255e23">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> *<a class="code" href="memfork_8c.html#a01fc3e05ab8c5206630e1589563b6874">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <a class="code" href="structrecorder.html">recorder</a> *open_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;open.csv&quot;</span>);</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <a class="code" href="structrecorder.html">recorder</a> *write_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;write.csv&quot;</span>);</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <a class="code" href="structrecorder.html">recorder</a> *read_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;read.csv&quot;</span>);</div>
@@ -157,7 +157,7 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <a class="code" href="benchmark_8c.html#ae5d5a5bc6d0beef5a27a052c168b130b">write_record</a>(open_rec, 1, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t));</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keywordflow">if</span>(fd == -1) {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    perror(<span class="stringliteral">&quot;open&quot;</span>);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="Makefile.html#a6733eb5f605d09eaede9845835d71c4e">exit</a>(EXIT_FAILURE);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    exit(EXIT_FAILURE);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  }</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">char</span> *<a class="code" href="structarg1.html#a478a1f90e1feb658207a36344d580875">s</a> = (<span class="keywordtype">char</span> *) malloc((<a class="code" href="file_8c.html#a0592dba56693fad79136250c11e5a7fe">MAX_SIZE</a> + 1) * <span class="keyword">sizeof</span>(char));</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  memset(s, 0, <a class="code" href="file_8c.html#a0592dba56693fad79136250c11e5a7fe">MAX_SIZE</a> + 1);</div>
@@ -176,7 +176,7 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="benchmark_8c.html#ae5d5a5bc6d0beef5a27a052c168b130b">write_record</a>(close_rec, 1, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t));</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordflow">if</span> (err == -1) {</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    perror(<span class="stringliteral">&quot;close&quot;</span>);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="Makefile.html#a6733eb5f605d09eaede9845835d71c4e">exit</a>(EXIT_FAILURE);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    exit(EXIT_FAILURE);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  }</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">// BEGIN</span></div>
@@ -185,7 +185,7 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="benchmark_8c.html#ae5d5a5bc6d0beef5a27a052c168b130b">write_record</a>(open_rec, file_size, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t));</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordflow">if</span> (fd == -1) {</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    perror(<span class="stringliteral">&quot;open&quot;</span>);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="Makefile.html#a6733eb5f605d09eaede9845835d71c4e">exit</a>(EXIT_FAILURE);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    exit(EXIT_FAILURE);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  }</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordflow">for</span> (size = 1; size &lt;= <a class="code" href="file_8c.html#a0592dba56693fad79136250c11e5a7fe">MAX_SIZE</a>; size *= 2) {</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="benchmark_8c.html#ae951bc4acad582d20531e64af771854a" title="Stoque le temps actuel comme début de la mesure dans t">start_timer</a>(t);</div>
@@ -201,7 +201,7 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="benchmark_8c.html#ae5d5a5bc6d0beef5a27a052c168b130b">write_record</a>(close_rec, file_size, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t));</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordflow">if</span>(err == -1){</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    perror(<span class="stringliteral">&quot;close&quot;</span>);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="Makefile.html#a6733eb5f605d09eaede9845835d71c4e">exit</a>(EXIT_FAILURE);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    exit(EXIT_FAILURE);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  }</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment">// END</span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
@@ -220,7 +220,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 30 2013 11:40:38 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 30 2013 12:00:43 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

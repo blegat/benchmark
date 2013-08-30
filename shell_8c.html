@@ -153,7 +153,7 @@ Functions</h2></td></tr>
 <p>Les résultats sont écrit dans : shell-bash.csv : Pour les temps d'exécution du script shell-prog.csv : Pour les temps d'exécution du programme </p>
 <div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                                   {</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// Déclare un timer, ainsi que deux recorder qui vont contenir les résultats de l&#39;exécution du programme</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> *<a class="code" href="lib_2Makefile.html#aaccc9105df5383111407fd5b41255e23">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> *<a class="code" href="memfork_8c.html#a01fc3e05ab8c5206630e1589563b6874">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="structrecorder.html">recorder</a> *bash_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;shell-bash.csv&quot;</span>);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="structrecorder.html">recorder</a> *prog_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;shell-prog.csv&quot;</span>);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
@@ -171,7 +171,7 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">char</span>*argBash = (<span class="keywordtype">char</span> *) malloc(24*<span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span>(argProgr == NULL || argBash == NULL) </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="Makefile.html#a6733eb5f605d09eaede9845835d71c4e">exit</a>(EXIT_FAILURE);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        exit(EXIT_FAILURE);</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">for</span>(i=1; i&lt;<a class="code" href="shell_8c.html#a0592dba56693fad79136250c11e5a7fe">MAX_SIZE</a>; i+=1) {</div>
@@ -207,7 +207,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 30 2013 11:40:38 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 30 2013 12:00:43 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

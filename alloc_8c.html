@@ -214,7 +214,7 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="benchmark_8c.html#ae951bc4acad582d20531e64af771854a" title="Stoque le temps actuel comme début de la mesure dans t">start_timer</a>(t);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code" href="alloc_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>; i++) {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">char</span> <a class="code" href="Makefile.html#a29266e12bd2aec417f9b1121ed84f1fb">c</a> = fun();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">char</span> c = fun();</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  }</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <a class="code" href="benchmark_8c.html#ad7afa527b6e1fc57073aaa13ccecc00b">write_record_n</a>(rec, x, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t), N);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
@@ -308,7 +308,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                  {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> *<a class="code" href="lib_2Makefile.html#aaccc9105df5383111407fd5b41255e23">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> *<a class="code" href="memfork_8c.html#a01fc3e05ab8c5206630e1589563b6874">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="comment">// brk/sbrk</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="structrecorder.html">recorder</a> *stack_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;stack.csv&quot;</span>);</div>
@@ -396,7 +396,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 30 2013 11:40:38 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 30 2013 12:00:43 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

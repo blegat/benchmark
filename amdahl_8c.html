@@ -129,7 +129,7 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a388b1fa88f271afd58b4c2187b250240"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="amdahl_8c.html#a388b1fa88f271afd58b4c2187b250240">primeFactors</a> (<a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a> <a class="el" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>)</td></tr>
+<tr class="memitem:a388b1fa88f271afd58b4c2187b250240"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="amdahl_8c.html#a388b1fa88f271afd58b4c2187b250240">primeFactors</a> (<a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a> n)</td></tr>
 <tr class="memdesc:a388b1fa88f271afd58b4c2187b250240"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcul les facteurs premiers de <code>n</code>  <a href="#a388b1fa88f271afd58b4c2187b250240">More...</a><br/></td></tr>
 <tr class="separator:a388b1fa88f271afd58b4c2187b250240"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a921a8066595f8666ebf73ec384a18573"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="amdahl_8c.html#a921a8066595f8666ebf73ec384a18573">scan</a> (void *param)</td></tr>
@@ -228,7 +228,7 @@ Functions</h2></td></tr>
 <p>On va tester la loi d'Amdahl et donc vérifier l'avantage au niveau de la vitesse gagner grâce à la parallelisation d'un code CPU intensif tel que la recherche du nombre ayant la plus de facteurs premiers dans un tableau de valeurs aléatoires. La recherche est faite avec 1 puis 2 puis 3 etc... threads/processus, avec à chaque fois le temps nécessaire enregistrer dans un fichier .csv puis afficher à la fin sous forme de graphe. </p>
 <div class="fragment"><div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                                  {</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> *<a class="code" href="lib_2Makefile.html#aaccc9105df5383111407fd5b41255e23">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> *<a class="code" href="memfork_8c.html#a01fc3e05ab8c5206630e1589563b6874">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <a class="code" href="structrecorder.html">recorder</a> *thread_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;thread.csv&quot;</span>);</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <a class="code" href="structrecorder.html">recorder</a> *proc_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;proc.csv&quot;</span>);</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="comment">// on init tous les `recorders` et le timer</span></div>
@@ -359,7 +359,7 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                <span class="comment">// envoie de la réponse par pipe</span></div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                close(fd[j][1]);</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                </div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                <a class="code" href="Makefile.html#a6733eb5f605d09eaede9845835d71c4e">exit</a>(0);</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                exit(0);</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pid[j] &lt; 0) {</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                err(-1,<span class="stringliteral">&quot;erreur de fork&quot;</span>);</div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            }</div>
@@ -425,14 +425,14 @@ Functions</h2></td></tr>
 <p>Calcul les facteurs premiers de <code>n</code> par la methode de brute force </p>
 <div class="fragment"><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        {</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>,count=0;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">for</span>(i=2;i&lt;=<a class="code" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>;i++)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">for</span>(i=2;i&lt;=n;i++)</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>%i==0)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">if</span>(n%i==0)</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        {</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            count++;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <a class="code" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>=<a class="code" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>/<a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            n=n/<a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            i--;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">if</span>(<a class="code" href="Makefile.html#af6becf84aa5cbe2b359794e435ce2ed8">n</a>==1)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">if</span>(n==1)</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        } </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    } </div>
@@ -487,7 +487,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 30 2013 11:40:38 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 30 2013 12:00:43 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>
