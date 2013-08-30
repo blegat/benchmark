@@ -1,86 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/mman.h>
-#include <fcntl.h>
 
 #include "benchmark.h"
+#include "copy.h"
 
-#define MAX_SIZE 0x100000 // 1 MB
+#define FILE_SIZE 0x1000000 // 1 MiB
+#define MAX_SIZE  0x1000000 // 1 MiB
 
-int main (int argc, char *argv[])  {
+#define IN "tmpin.dat"
+#define OUT "tmpout.dat"
+
+int main (int argc, char *argv[]) {
+  int err;
+
   timer *t = timer_alloc();
-  recorder *open_rec = recorder_alloc("open.csv");
-  recorder *close_rec = recorder_alloc("close.csv");
+  recorder *rw_rec = recorder_alloc("rw.csv");
   recorder *mmap_rec = recorder_alloc("mmap.csv");
-  recorder *munmap_rec = recorder_alloc("munmap.csv");
 
-  int err, size, fd;
-  char dummy = 0, *mapping = NULL;
-  ssize_t len;
-  for (size = getpagesize(); size <= MAX_SIZE; size *= 2) {
-    // set the size
-    fd = open("tmp.dat", O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR);
-    if (fd == -1) {
-      perror("open");
-      exit(EXIT_FAILURE);
-    }
-    if (lseek(fd, size - 1, SEEK_SET) == -1) {
-      perror("lseek");
-      exit(EXIT_FAILURE);
-    }
-    if (write(fd, (void *) &dummy, 1) == -1) {
-      perror("write");
-      return EXIT_FAILURE;
-    }
-    err = close(fd);
-    // FIXME remove from cache
-    // TODO cmp cp mmap et pas mmap
+  size_t len = 0;
+  int page_size = getpagesize();
 
-    // open
-    start_timer(t);
-    fd = open("tmp.dat", O_RDONLY);
-    write_record(open_rec, size, stop_timer(t));
-    if (fd == -1) {
-      perror("open");
-      exit(EXIT_FAILURE);
-    }
-
-    // BEGIN
-    // mmap
-    start_timer(t);
-    mapping = mmap(NULL, size, PROT_READ, MAP_SHARED, fd, 0);
-    write_record(mmap_rec, size, stop_timer(t));
-    if (fd == -1) {
-      perror("mmap");
-      exit(EXIT_FAILURE);
-    }
-
-    // munmap
-    start_timer(t);
-    err = munmap(mapping, size);
-    write_record(munmap_rec, size, stop_timer(t));
-    if(err == -1){
-      perror("munmap");
-      exit(EXIT_FAILURE);
-    }
-    // END
-
-    // close
-    start_timer(t);
-    err = close(fd);
-    write_record(close_rec, size, stop_timer(t));
-    if(err == -1){
-      perror("close");
-      exit(EXIT_FAILURE);
-    }
-
+  for (len = 0x40; len <= MAX_SIZE; len *= 2) {
+    read_write(t, rw_rec, IN, OUT, FILE_SIZE, len, 0);
   }
 
-  recorder_free(open_rec);
-  recorder_free(close_rec);
+  for (len = page_size; len <= MAX_SIZE; len *= 2) {
+    mmap_munmap(t, mmap_rec, IN, OUT, FILE_SIZE, len);
+  }
+
+  recorder_free(rw_rec);
   recorder_free(mmap_rec);
-  recorder_free(munmap_rec);
-  timer_free(t);
 
   return EXIT_SUCCESS;
 }

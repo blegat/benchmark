@@ -1,9 +1,7 @@
-set title 'Benchmark between open/close and mmap, munmap'
-set xlabel 'size of the file'
+set title 'Benchmark between read/write and mmap/munmap'
+set xlabel 'size [B] of the block that are read/written at once'
 set ylabel 'time [ns]'
-set key left top
+set key right top
 set logscale x
-plot 'open.csv' using 1:2 title 'open',\
-  'close.csv' using 1:2 title 'close',\
-  'mmap.csv' using 1:2 title 'mmap',\
-  'munmap.csv' using 1:2 title 'munmap'
+plot 'rw.csv' using 1:2 title 'rw',\
+  'mmap.csv' using 1:2 title 'mmap'
