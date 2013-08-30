@@ -1,8 +1,10 @@
 # initial information about the project
 AC_INIT([benchmark],[0.0],[olivier.bonaventure@uclouvain.be])
 
-# automake initialization (mandatory) including a check for automake API version >= 1.9
-AM_INIT_AUTOMAKE([1.9])
+# automake initialization (mandatory) including a check
+# for automake API version >= 1.9
+# foreign is for ignoring that there is no NEWS, README, ...
+AM_INIT_AUTOMAKE([1.9 -Wall foreign])
 
 LT_INIT
 
@@ -41,7 +43,8 @@ AC_SUBST([AM_CFLAGS])
 AC_SUBST([AM_LDFLAGS])
 
 # files to generate via autotools (prepare .am or .in source files)
-#AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([alloc/Makefile])
 AC_CONFIG_FILES([io/Makefile])
 AC_CONFIG_FILES([shell/Makefile])
 AC_CONFIG_FILES([lib/Makefile])
