@@ -2,7 +2,7 @@ AM_CFLAGS = -I$(top_srcdir)/lib @AM_CFLAGS@
 bin_PROGRAMS = io
 io_SOURCES = io.c
 io_LDADD = $(top_builddir)/lib/libbenchmark.a \
-		   $(top_builddir)/lib/libcp.a \
+		   $(top_builddir)/lib/libcopy.a \
 		   $(AM_LDFLAGS)
 
 PROG   = io

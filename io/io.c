@@ -14,10 +14,9 @@
 #include <fcntl.h>
 
 #include "benchmark.h"
+#include "copy.h"
 
-// FILE_SIZE is used by cp
 #define FILE_SIZE 0x40000 // 256 KiB
-#include "cp.h"
 
 #define BUF_SIZE 0x10000 // 64 KiB
 #define MAX_LEN 0X100000 // 1 MiB
@@ -35,15 +34,15 @@ int main (int argc, char *argv[])  {
   if (argc > 1) {
     // perf
     if (strncmp(argv[1], "--sys_sync", 11) == 0) {
-      read_write(NULL, NULL, IN, OUT, PERF_LEN, O_SYNC);
+      read_write(NULL, NULL, IN, OUT, FILE_SIZE, PERF_LEN, O_SYNC);
     } else if (strncmp(argv[1], "--sys_nosync", 13) == 0) {
-      read_write(NULL, NULL, IN, OUT, PERF_LEN, 0);
+      read_write(NULL, NULL, IN, OUT, FILE_SIZE, PERF_LEN, 0);
     } else if (strncmp(argv[1], "--sys_direct", 13) == 0) {
-      read_write(NULL, NULL, IN, OUT, PERF_LEN, O_SYNC | O_DIRECT);
+      read_write(NULL, NULL, IN, OUT, FILE_SIZE, PERF_LEN, O_SYNC | O_DIRECT);
     } else if (strncmp(argv[1], "--std_buf", 10) == 0) {
-      gets_puts(NULL, NULL, IN, OUT, PERF_LEN, 1, BUF_SIZE);
+      gets_puts(NULL, NULL, IN, OUT, FILE_SIZE, PERF_LEN, 1, BUF_SIZE);
     } else if (strncmp(argv[1], "--std_nobuf", 12) == 0) {
-      gets_puts(NULL, NULL, IN, OUT, PERF_LEN, 0, 0);
+      gets_puts(NULL, NULL, IN, OUT, FILE_SIZE, PERF_LEN, 0, 0);
     }
   } else {
     // benchmark
@@ -55,15 +54,15 @@ int main (int argc, char *argv[])  {
     recorder *sys_direct_rec = recorder_alloc("sys_direct.csv");
     // En dessous de 512, c'est très lent et le graphe est moins lisible
     for (len = 512; len <= MAX_LEN; len *= 0x2) {
-      read_write(t, sys_sync_rec, IN, OUT, len, O_SYNC);
+      read_write(t, sys_sync_rec, IN, OUT, FILE_SIZE, len, O_SYNC);
     }
     for (len = 2; len <= MAX_LEN; len *= 0x2) {
-      read_write(t, sys_nosync_rec, IN, OUT, len, 0);
+      read_write(t, sys_nosync_rec, IN, OUT, FILE_SIZE, len, 0);
     }
     // On doit être un multiple d'un block du file system donc il faut
     // commencer avec 512
     for (len = 512; len <= MAX_LEN; len *= 2) {
-      read_write(t, sys_direct_rec, IN, OUT, len, O_SYNC | O_DIRECT);
+      read_write(t, sys_direct_rec, IN, OUT, FILE_SIZE, len, O_SYNC | O_DIRECT);
     }
     recorder_free(sys_sync_rec);
     recorder_free(sys_nosync_rec);
@@ -72,10 +71,10 @@ int main (int argc, char *argv[])  {
     recorder *std_buf_rec = recorder_alloc("std_buf.csv");
     recorder *std_nobuf_rec = recorder_alloc("std_nobuf.csv");
     for (len = 2; len <= MAX_LEN; len *= 0x2) {
-      gets_puts(t, std_buf_rec, IN, OUT, len, 1, BUF_SIZE);
+      gets_puts(t, std_buf_rec, IN, OUT, FILE_SIZE, len, 1, BUF_SIZE);
     }
     for (len = 2; len <= MAX_LEN; len *= 0x2) {
-      gets_puts(t, std_nobuf_rec, IN, OUT, len, 0, 0);
+      gets_puts(t, std_nobuf_rec, IN, OUT, FILE_SIZE, len, 0, 0);
     }
     recorder_free(std_buf_rec);
     recorder_free(std_nobuf_rec);
