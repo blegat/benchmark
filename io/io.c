@@ -1,8 +1,9 @@
 /**
  * \file io.c
+ * \brief Compare les performances ce read/write avec fgets/fputs
  *
- * Compare les performances ce read/write avec fgets/fputs
- *
+ * Compare aussi l'impact de la `kernel buffer cache` et du buffer au
+ * niveau de `stdio`.
  * C'est inspiré du chapitre 13 du livre "The Linux programming interface"
  * par Michael Kerrisk
  */
