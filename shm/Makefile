@@ -1,5 +1,5 @@
 OBJ    = shm.o
-GRAPHS = shmget.csv shmat.csv shmdt.csv
+GRAPHS = shm.cvs heap.cvs
 PROG   = shm
 
 include ../lib/lib.mk
