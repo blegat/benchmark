@@ -1,3 +1,8 @@
+/**
+ * \file alloc.c
+ * \brief Comparaison entre l'allocation d'un tableau
+ * sur le heap et sur la stack
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -9,24 +14,39 @@
 #define SIZE_2 0x10000  // 64 KiB
 #define SIZE_3 0x100000 //  1 MiB
 
+/**
+ * \brief allocation d'un tableau de taille `SIZE_1` sur la stack
+ */
 char stack_1 () {
   char s[SIZE_1];
   s[SIZE_1 / 2] = 0;
   return s[0];
 }
 
+/**
+ * \brief allocation d'un tableau de taille `SIZE_2` sur la stack
+ */
 char stack_2 () {
   char s[SIZE_2];
   s[SIZE_2 / 2] = 0;
   return s[0];
 }
 
+/**
+ * \brief allocation d'un tableau de taille `SIZE_3` sur la stack
+ */
 char stack_3 () {
   char s[SIZE_3];
   s[SIZE_3 / 2] = 0;
   return s[0];
 }
 
+/**
+ * \brief allocation d'un tableau de taille `SIZE_1` sur le heap
+ *
+ * Le `free` a été commenté pour voir l'effet du remplissage du
+ * `heap`. Décommentez le pour voir ce que ça change.
+ */
 char heap_1 () {
   char *s = (char *) malloc(sizeof(char) * SIZE_1);
   s[SIZE_1 / 2] = 0;
@@ -34,6 +54,9 @@ char heap_1 () {
   //free(s);
 }
 
+/**
+ * \brief allocation d'un tableau de taille `SIZE_1` sur le heap
+ */
 char heap_2 () {
   char *s = (char *) malloc(sizeof(char) * SIZE_2);
   s[SIZE_2 / 2] = 0;
@@ -41,6 +64,9 @@ char heap_2 () {
   //free(s);
 }
 
+/**
+ * \brief allocation d'un tableau de taille `SIZE_1` sur le heap
+ */
 char heap_3 () {
   char *s = (char *) malloc(sizeof(char) * SIZE_3);
   s[SIZE_3 / 2] = 0;
@@ -48,6 +74,14 @@ char heap_3 () {
   //free(s);
 }
 
+/**
+ * \brief Mesure `N` appels de `fun`
+ *
+ * \param t `timer` utilisé pour la mesure du temps
+ * \param fun fonction dont on mesure les performances
+ * \param rec `recorder` dans lequel on enregistre le temps
+ * \param x abscisse à laquel on enregistre le temps
+ */
 void benchmark_fun (timer *t, char (*fun) (), recorder *rec, int x) {
   int i;
   start_timer(t);
