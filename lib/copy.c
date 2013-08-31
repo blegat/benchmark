@@ -1,3 +1,9 @@
+/**
+ * \file copy.c
+ * \brief fonctions utiles évaluer la performance d'une copie
+ * style `cp` avec différentes méthodes
+ */
+
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,6 +20,15 @@
 // since this is not benchmarked
 #define CREATE_BUF_SIZE 0x1000 // 4 KiB
 
+/**
+ * \brief Crée un fichier de nom `in` de taille `file_size`
+ *
+ * Crée un fichier de nom `in` contenant `file_size` bytes
+ * de valeur `'\0' + 1`.
+ *
+ * \param in le chemin vers le fichier qui doit être différent de `NULL`
+ * \param file_size la taille du fichier en byte
+ */
 void create_file (char *in, size_t file_size) {
   FILE *f = fopen(in, "w");
   char *s = (char*) malloc(sizeof(char) * (CREATE_BUF_SIZE + 1));
@@ -30,6 +45,15 @@ void create_file (char *in, size_t file_size) {
   fclose(f);
 }
 
+/**
+ * \brief Supprimer le fichier `fname` s'il existe
+ *
+ * Si le fichier `fname` existe, appelle `unlink` dessus,
+ * ça a l'effet de supprimer l'`inode` correspondant si son
+ * compteur passe à 0.
+ *
+ * \param fname le chemin vers le fichier qui doit être différent de `NULL`
+ */
 void rm (char *fname) {
   int err;
   if (access(fname, F_OK) != -1) {
@@ -41,6 +65,26 @@ void rm (char *fname) {
   }
 }
 
+/**
+ * \brief Copie le fichier `in` dans le fichier `out` sans `stdio`
+ *
+ * Vérifie d'abord que `in` et `out` n'existent pas avec `rm` puis
+ * crée `in` de taille `file_size` avec `create` et le copie
+ * dans `out` par block de taille `len`.
+ * Il écrit le temps de la copie dans `rec` avec `file_size`
+ * en abscisse en utilisant `t` comme `timer`.
+ *
+ * Il utilise `open`, `read`, `write` et `close` en donnant
+ * les arguments classiques plus ceux de `flags` à `open`.
+ *
+ * \param t le `timer` utilisé pour mesurer le temps
+ * \param rec le `recorder` utilisé pour enregistrer le temps
+ * \param in le chemin du fichier à copier
+ * \param out le chemin du fichier dans lequel copier
+ * \param file_size la taille du fichier
+ * \param len la taille des blocks
+ * \param flags les drapeaux supplémentaires pour `open`
+ */
 void read_write (timer *t, recorder *rec, char *in, char *out,
     size_t file_size, size_t len, int flags) {
   // for O_DIRECT, len must be a multiple of the logical block
@@ -115,7 +159,15 @@ void read_write (timer *t, recorder *rec, char *in, char *out,
   rm(out);
 }
 
-
+/**
+ * \brief Copie le fichier `in` dans le fichier `out` avec `stdio`
+ *
+ * Comme `read_write` mais en utilisant les fonctions de `stdio`
+ *
+ * \param has_buf s'il est évalué à `true`, on utilise un buffer pour stdio`,
+ *        sinon, on en utilise pas
+ * \param buf_size taille du buffer si `has_buf` est évalué à `true`
+ */
 void gets_puts (timer *t, recorder *rec, char *in, char *out,
     size_t file_size, size_t len, int has_buf, size_t buf_size) {
   // for O_DIRECT, len must be a multiple of the logical block
@@ -207,6 +259,14 @@ void gets_puts (timer *t, recorder *rec, char *in, char *out,
   rm(out);
 }
 
+/**
+ * \brief Copie le fichier `in` dans le fichier `out` avec `mmap`
+ *
+ * Comme `read_write` mais en utilisant `mmap` en mappant des blocks de
+ * `len` bytes
+ *
+ * \param len la tailles des blocks mappés
+ */
 void mmap_munmap (timer *t, recorder *rec, char *in, char *out,
     size_t file_size, size_t len) {
   int err;

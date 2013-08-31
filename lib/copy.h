@@ -9,7 +9,7 @@ void read_write (timer *t, recorder *rec, char *in, char *out,
     size_t file_size, size_t len, int flags);
 void gets_puts (timer *t, recorder *rec, char *in, char *out,
     size_t file_size, size_t len, int has_buf, size_t buf_size);
-void mmap_rw (timer *t, recorder *rec, char *in, char *out,
+void mmap_munmap (timer *t, recorder *rec, char *in, char *out,
     size_t file_size, size_t len);
 
 #endif
