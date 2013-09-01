@@ -129,13 +129,13 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a388b1fa88f271afd58b4c2187b250240"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="amdahl_8c.html#a388b1fa88f271afd58b4c2187b250240">primeFactors</a> (<a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a> n)</td></tr>
+<tr class="memitem:a388b1fa88f271afd58b4c2187b250240"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="amdahl_8c.html#a388b1fa88f271afd58b4c2187b250240">primeFactors</a> (int n)</td></tr>
 <tr class="memdesc:a388b1fa88f271afd58b4c2187b250240"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcul les facteurs premiers de <code>n</code>  <a href="#a388b1fa88f271afd58b4c2187b250240">More...</a><br/></td></tr>
 <tr class="separator:a388b1fa88f271afd58b4c2187b250240"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a921a8066595f8666ebf73ec384a18573"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="amdahl_8c.html#a921a8066595f8666ebf73ec384a18573">scan</a> (void *param)</td></tr>
 <tr class="memdesc:a921a8066595f8666ebf73ec384a18573"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcul les facteurs premiers dans une portion de tableau de Integer.  <a href="#a921a8066595f8666ebf73ec384a18573">More...</a><br/></td></tr>
 <tr class="separator:a921a8066595f8666ebf73ec384a18573"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="amdahl_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (<a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a> argc, char *argv[])</td></tr>
+<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="amdahl_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="memdesc:a0ddf1224851353fc92bfbff6f499fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enregistre les temps de calcul nécessaire à le nombre avec le plus de facteurs premiers.  <a href="#a0ddf1224851353fc92bfbff6f499fa97">More...</a><br/></td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -205,9 +205,9 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a> main </td>
+          <td class="memname">int main </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>argc</em>, </td>
         </tr>
         <tr>
@@ -229,8 +229,8 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                                  {</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    </div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> *<a class="code" href="memfork_8c.html#a01fc3e05ab8c5206630e1589563b6874">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <a class="code" href="structrecorder.html">recorder</a> *thread_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;thread.csv&quot;</span>);</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <a class="code" href="structrecorder.html">recorder</a> *proc_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;proc.csv&quot;</span>);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <a class="code" href="structrecorder.html" title="recorder écrit les temps dans un fichier .csv">recorder</a> *thread_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d" title="Alloue un recorder">recorder_alloc</a>(<span class="stringliteral">&quot;thread.csv&quot;</span>);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <a class="code" href="structrecorder.html" title="recorder écrit les temps dans un fichier .csv">recorder</a> *proc_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d" title="Alloue un recorder">recorder_alloc</a>(<span class="stringliteral">&quot;proc.csv&quot;</span>);</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="comment">// on init tous les `recorders` et le timer</span></div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    </div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    srand (1337);</div>
@@ -298,7 +298,7 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        }</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        </div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        printf(<span class="stringliteral">&quot;%d\n&quot;</span>,index);</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <a class="code" href="benchmark_8c.html#ad7afa527b6e1fc57073aaa13ccecc00b">write_record_n</a>(thread_rec,i,<a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t),<a class="code" href="amdahl_8c.html#af072d30ec9a575d52026166678811aef" title="Nombre max de threads/processus à utiliser.">NTHREAD</a>);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <a class="code" href="benchmark_8c.html#ad7afa527b6e1fc57073aaa13ccecc00b" title="Comme write_record mais divise time par n après avoir retiré l&#39;overhead">write_record_n</a>(thread_rec,i,<a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t),<a class="code" href="amdahl_8c.html#af072d30ec9a575d52026166678811aef" title="Nombre max de threads/processus à utiliser.">NTHREAD</a>);</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="comment">//sauvegarde du temps</span></div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        </div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        free(threads);</div>
@@ -355,7 +355,7 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                <span class="comment">//printf(&quot;index: %d\n&quot;,index);</span></div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                </div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                close(fd[j][0]);</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                <a class="code" href="file_8gpi.html#af03b615a2405d0e4a8fd17de07a3d1e7">write</a>(fd[j][1], &amp;index, <span class="keyword">sizeof</span>(index));</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                write(fd[j][1], &amp;index, <span class="keyword">sizeof</span>(index));</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                <span class="comment">// envoie de la réponse par pipe</span></div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                close(fd[j][1]);</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                </div>
@@ -368,7 +368,7 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="keywordflow">for</span> (j=0; j&lt;<a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>; j++) {</div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            </div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            close(fd[j][1]);</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            <a class="code" href="file_8gpi.html#a315cc2b5744a3f4752732581304980d3">read</a>(fd[j][0], &amp;ret, <span class="keyword">sizeof</span>(ret));</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            read(fd[j][0], &amp;ret, <span class="keyword">sizeof</span>(ret));</div>
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            <span class="comment">//réception de la réponse des fils</span></div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            close(fd[j][0]);</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            </div>
@@ -388,12 +388,12 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">         *int numCPU = sysconf( _SC_NPROCESSORS_ONLN );</span></div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">         *if (it &gt; numCPU ) it = numCPU;</span></div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <a class="code" href="benchmark_8c.html#ad7afa527b6e1fc57073aaa13ccecc00b">write_record_n</a>(proc_rec,i,<a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t),<a class="code" href="amdahl_8c.html#af072d30ec9a575d52026166678811aef" title="Nombre max de threads/processus à utiliser.">NTHREAD</a>);</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <a class="code" href="benchmark_8c.html#ad7afa527b6e1fc57073aaa13ccecc00b" title="Comme write_record mais divise time par n après avoir retiré l&#39;overhead">write_record_n</a>(proc_rec,i,<a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t),<a class="code" href="amdahl_8c.html#af072d30ec9a575d52026166678811aef" title="Nombre max de threads/processus à utiliser.">NTHREAD</a>);</div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="comment">// ecriture du temps</span></div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    }</div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <a class="code" href="benchmark_8c.html#a99ecac88b2611fb8dbc4f3659a1c176f">recorder_free</a>(thread_rec);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <a class="code" href="benchmark_8c.html#a99ecac88b2611fb8dbc4f3659a1c176f">recorder_free</a>(proc_rec);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <a class="code" href="benchmark_8c.html#a99ecac88b2611fb8dbc4f3659a1c176f" title="Libère toutes les resources utilisées par rec">recorder_free</a>(thread_rec);</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <a class="code" href="benchmark_8c.html#a99ecac88b2611fb8dbc4f3659a1c176f" title="Libère toutes les resources utilisées par rec">recorder_free</a>(proc_rec);</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <a class="code" href="benchmark_8c.html#aa55f3d9f5c34b774503b7b62122074db" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">timer_free</a>(t);</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    free(array);</div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="comment">// free de nos structures</span></div>
@@ -405,9 +405,9 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a> primeFactors </td>
+          <td class="memname">int primeFactors </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>n</em></td><td>)</td>
           <td></td>
         </tr>
@@ -487,7 +487,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 30 2013 12:14:02 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 1 2013 09:49:06 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

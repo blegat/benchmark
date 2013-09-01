@@ -97,12 +97,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li><code>GRAPHS</code>, les <code>.csv</code> générés;</li>
 <li><code>PROG</code>, le nom du programme;</li>
 <li><code>bin_PROGRAMS</code>, le nom des programmes nécessaires pour exécuter <code></code> (en plus de <code></code>);</li>
-<li><code>TMP</code>, les fichiers temporaires générés par le programme qu'il faut supprimer avec <code>make clean</code>. </li>
+<li><code>TMP</code>, les fichiers temporaires générés par le programme qu'il faut supprimer avec <code>make clean</code>.</li>
+</ul>
+<p>Les règles suivantes sont ajoutées à tous les benchmarks</p>
+<ul>
+<li><code>show-plot</code> montre les résultats du benchmark à l'aide de <code>gnuplot</code>;</li>
+<li><code>show</code> montre les résultats du benchmark, éventuellement de <code>perf</code> et affiche les commentaires en ouvrant un page web en local dans votre navigateur par défaut;</li>
+<li><code>clean</code> supprime tous vos fichiers intermédiaire de compilation;</li>
+<li><code>mrproper</code> les supprime aussi mais supprime aussi tous les résultats générés. </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 30 2013 12:14:02 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 1 2013 09:49:06 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

@@ -90,6 +90,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">shell.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Ce programme compare le temps d'exécution d'un script et d'un programme C qui effectue un nombre "N" d'instruction.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br/>
 <code>#include &lt;stdlib.h&gt;</code><br/>
 <code>#include &lt;sys/mman.h&gt;</code><br/>
@@ -104,11 +107,16 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (<a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a> argc, char *argv[])</td></tr>
-<tr class="memdesc:a0ddf1224851353fc92bfbff6f499fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ce programme compare le temps d'exécution d'un script et d'un programme C qui effectue un nombre "N" d'instruction.  <a href="#a0ddf1224851353fc92bfbff6f499fa97">More...</a><br/></td></tr>
+<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Ce programme compare le temps d'exécution d'un script et d'un programme C qui effectue un nombre "N" d'instruction. </p>
+<p>Ce programme utilise deux programmes annexes : shell-program : C'est un programme C qui effectue le nombre d'instruction donné en paramètre. shell-bash.sh : C'est un script qui effectue le nombre d'instruction donné en paramètre.</p>
+<p>Pour exécuter chaque programme, l'appel systeme "system" est utilisé. Celui-ci exécute la commande passé en paramètre. Typiquement, il recevra "./shell-program 500" : Pour exécuter 500 instructions avec le programme C "./shell-bash.sh 250" : Pour exécuter 250 instructions avec le script</p>
+<p>Le paramètre passé à "system" contient donc deux parties. D'une part ce qu'il faut exécuter, d'autre part le nombre d'instruction.</p>
+<p>Les résultats sont écrit dans : shell-bash.csv : Pour les temps d'exécution du script shell-prog.csv : Pour les temps d'exécution du programme </p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="a0592dba56693fad79136250c11e5a7fe"></a>
 <div class="memitem">
 <div class="memproto">
@@ -127,9 +135,9 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a> main </td>
+          <td class="memname">int main </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>argc</em>, </td>
         </tr>
         <tr>
@@ -145,69 +153,63 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Ce programme compare le temps d'exécution d'un script et d'un programme C qui effectue un nombre "N" d'instruction. </p>
-<p>Ce programme utilise deux programmes annexes : shell-program : C'est un programme C qui effectue le nombre d'instruction donné en paramètre. shell-bash.sh : C'est un script qui effectue le nombre d'instruction donné en paramètre.</p>
-<p>Pour exécuter chaque programme, l'appel systeme "system" est utilisé. Celui-ci exécute la commande passé en paramètre. Typiquement, il recevra "./shell-program 500" : Pour exécuter 500 instructions avec le programme C "./shell-bash.sh 250" : Pour exécuter 250 instructions avec le script</p>
-<p>Le paramètre passé à "system" contient donc deux parties. D'une part ce qu'il faut exécuter, d'autre part le nombre d'instruction.</p>
-<p>Les résultats sont écrit dans : shell-bash.csv : Pour les temps d'exécution du script shell-prog.csv : Pour les temps d'exécution du programme </p>
-<div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                                   {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// Déclare un timer, ainsi que deux recorder qui vont contenir les résultats de l&#39;exécution du programme</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> *<a class="code" href="memfork_8c.html#a01fc3e05ab8c5206630e1589563b6874">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="structrecorder.html">recorder</a> *bash_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;shell-bash.csv&quot;</span>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="structrecorder.html">recorder</a> *prog_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;shell-prog.csv&quot;</span>);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// Nom du programme C et du script à comparer</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">char</span> * progr = <span class="stringliteral">&quot;./shell-program &quot;</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">char</span> * bash =  <span class="stringliteral">&quot;./shell-bash.sh &quot;</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// Cette variable contient la transformation du nombre d&#39;instruction (i).</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// Puisque cette variable est un int, 7 caractères suffisent à sa représentation.</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">char</span>  nbr[7];</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">// Allocation des emplacements contenant la commande à exécuter</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">char</span>*argProgr = (<span class="keywordtype">char</span> *) malloc(24*<span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">char</span>*argBash = (<span class="keywordtype">char</span> *) malloc(24*<span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span>(argProgr == NULL || argBash == NULL) </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        exit(EXIT_FAILURE);</div>
+<div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                                   {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">// Déclare un timer, ainsi que deux recorder qui vont contenir les résultats de l&#39;exécution du programme</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> *<a class="code" href="memfork_8c.html#a01fc3e05ab8c5206630e1589563b6874">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="structrecorder.html" title="recorder écrit les temps dans un fichier .csv">recorder</a> *bash_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d" title="Alloue un recorder">recorder_alloc</a>(<span class="stringliteral">&quot;shell-bash.csv&quot;</span>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="structrecorder.html" title="recorder écrit les temps dans un fichier .csv">recorder</a> *prog_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d" title="Alloue un recorder">recorder_alloc</a>(<span class="stringliteral">&quot;shell-prog.csv&quot;</span>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// Nom du programme C et du script à comparer</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">char</span> * progr = <span class="stringliteral">&quot;./shell-program &quot;</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">char</span> * bash =  <span class="stringliteral">&quot;./shell-bash.sh &quot;</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">// Cette variable contient la transformation du nombre d&#39;instruction (i).</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// Puisque cette variable est un int, 7 caractères suffisent à sa représentation.</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">char</span>  nbr[7];</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// Allocation des emplacements contenant la commande à exécuter</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">char</span>*argProgr = (<span class="keywordtype">char</span> *) malloc(24*<span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">char</span>*argBash = (<span class="keywordtype">char</span> *) malloc(24*<span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">for</span>(i=1; i&lt;<a class="code" href="shell_8c.html#a0592dba56693fad79136250c11e5a7fe">MAX_SIZE</a>; i+=1) {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="comment">// Convertit &quot;i&quot; en char* et le place dans nbr</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        snprintf(nbr, 7, <span class="stringliteral">&quot;%d&quot;</span>, i);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="comment">// Concatene les deux parties de la commande </span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        strncpy(argProgr, progr, 24);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        strncpy(argBash, bash, 24);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        strncat(argProgr, nbr, 7);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        strncat(argBash, nbr, 7);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="comment">// Commence le timer et lance la commande, puis écrit le résultat dans le record approprié</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <a class="code" href="benchmark_8c.html#ae951bc4acad582d20531e64af771854a" title="Stoque le temps actuel comme début de la mesure dans t">start_timer</a>(t);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        system(argProgr);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="benchmark_8c.html#ae5d5a5bc6d0beef5a27a052c168b130b">write_record</a>(prog_rec, i, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t));</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="benchmark_8c.html#ae951bc4acad582d20531e64af771854a" title="Stoque le temps actuel comme début de la mesure dans t">start_timer</a>(t);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        system(argBash);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="benchmark_8c.html#ae5d5a5bc6d0beef5a27a052c168b130b">write_record</a>(bash_rec, i, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t));</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">// Libère la mémoire</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="benchmark_8c.html#a99ecac88b2611fb8dbc4f3659a1c176f">recorder_free</a>(bash_rec);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="benchmark_8c.html#a99ecac88b2611fb8dbc4f3659a1c176f">recorder_free</a>(prog_rec);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="benchmark_8c.html#aa55f3d9f5c34b774503b7b62122074db" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">timer_free</a>(t);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span>(argProgr == NULL || argBash == NULL) </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        exit(EXIT_FAILURE);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">for</span>(i=1; i&lt;<a class="code" href="shell_8c.html#a0592dba56693fad79136250c11e5a7fe">MAX_SIZE</a>; i+=1) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="comment">// Convertit &quot;i&quot; en char* et le place dans nbr</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        snprintf(nbr, 7, <span class="stringliteral">&quot;%d&quot;</span>, i);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="comment">// Concatene les deux parties de la commande </span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        strncpy(argProgr, progr, 24);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        strncpy(argBash, bash, 24);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        strncat(argProgr, nbr, 7);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        strncat(argBash, nbr, 7);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="comment">// Commence le timer et lance la commande, puis écrit le résultat dans le record approprié</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <a class="code" href="benchmark_8c.html#ae951bc4acad582d20531e64af771854a" title="Stoque le temps actuel comme début de la mesure dans t">start_timer</a>(t);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        system(argProgr);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="benchmark_8c.html#ae5d5a5bc6d0beef5a27a052c168b130b" title="Écris le temps time en correspondance avec x">write_record</a>(prog_rec, i, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t));</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <a class="code" href="benchmark_8c.html#ae951bc4acad582d20531e64af771854a" title="Stoque le temps actuel comme début de la mesure dans t">start_timer</a>(t);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        system(argBash);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <a class="code" href="benchmark_8c.html#ae5d5a5bc6d0beef5a27a052c168b130b" title="Écris le temps time en correspondance avec x">write_record</a>(bash_rec, i, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t));</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">// Libère la mémoire</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="benchmark_8c.html#a99ecac88b2611fb8dbc4f3659a1c176f" title="Libère toutes les resources utilisées par rec">recorder_free</a>(bash_rec);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="benchmark_8c.html#a99ecac88b2611fb8dbc4f3659a1c176f" title="Libère toutes les resources utilisées par rec">recorder_free</a>(prog_rec);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="benchmark_8c.html#aa55f3d9f5c34b774503b7b62122074db" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">timer_free</a>(t);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 30 2013 12:14:02 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 1 2013 09:49:06 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

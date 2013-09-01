@@ -104,7 +104,7 @@ Macros</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a0ffe5a30e172efa4677babbd6c0f5433"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="thread_8c.html#a0ffe5a30e172efa4677babbd6c0f5433">thread</a> (void *param)</td></tr>
 <tr class="separator:a0ffe5a30e172efa4677babbd6c0f5433"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="thread_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (<a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a> argc, char *argv[])</td></tr>
+<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="thread_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -126,9 +126,9 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a> main </td>
+          <td class="memname">int main </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="types_8gpi.html#a90ac29a4e6b29ef1a6c975f6b6a18820">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>argc</em>, </td>
         </tr>
         <tr>
@@ -149,8 +149,8 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordtype">int</span> err = 0, <a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <a class="code" href="structtimer.html" title="timer permet de mesurer le temps écoulé entre deux moments">timer</a> *<a class="code" href="memfork_8c.html#a01fc3e05ab8c5206630e1589563b6874">t</a> = <a class="code" href="benchmark_8c.html#a5ab321f15c24bbbe47964a24992bcaf0" title="Alloue un timer">timer_alloc</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <a class="code" href="structrecorder.html">recorder</a> *create_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;create.csv&quot;</span>);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <a class="code" href="structrecorder.html">recorder</a> *join_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d">recorder_alloc</a>(<span class="stringliteral">&quot;join.csv&quot;</span>);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <a class="code" href="structrecorder.html" title="recorder écrit les temps dans un fichier .csv">recorder</a> *create_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d" title="Alloue un recorder">recorder_alloc</a>(<span class="stringliteral">&quot;create.csv&quot;</span>);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <a class="code" href="structrecorder.html" title="recorder écrit les temps dans un fichier .csv">recorder</a> *join_rec = <a class="code" href="benchmark_8c.html#ad95219694bb0c574a6fd14720676f21d" title="Alloue un recorder">recorder_alloc</a>(<span class="stringliteral">&quot;join.csv&quot;</span>);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="comment">// BEGIN</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <a class="code" href="benchmark_8c.html#ae951bc4acad582d20531e64af771854a" title="Stoque le temps actuel comme début de la mesure dans t">start_timer</a>(t);</div>
@@ -159,7 +159,7 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">/*if (err != 0)</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">      error(1, err, &quot;pthread_create&quot;);*/</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  }</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="benchmark_8c.html#ad7afa527b6e1fc57073aaa13ccecc00b">write_record_n</a>(create_rec, <a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t), N);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="benchmark_8c.html#ad7afa527b6e1fc57073aaa13ccecc00b" title="Comme write_record mais divise time par n après avoir retiré l&#39;overhead">write_record_n</a>(create_rec, <a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t), N);</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="comment">// END</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  sleep(2); <span class="comment">// Pour s&#39;assurer que les pthread_join ne patientent pas</span></div>
@@ -171,11 +171,11 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">/*if (err != 0)</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">      error(1, err, &quot;pthread_join&quot;);*/</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="benchmark_8c.html#ad7afa527b6e1fc57073aaa13ccecc00b">write_record_n</a>(join_rec, <a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t), N);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="benchmark_8c.html#ad7afa527b6e1fc57073aaa13ccecc00b" title="Comme write_record mais divise time par n après avoir retiré l&#39;overhead">write_record_n</a>(join_rec, <a class="code" href="mutsem_8c.html#acb559820d9ca11295b4500f179ef6392">i</a>, <a class="code" href="benchmark_8c.html#a93de47d47e5cb0a72b36343365e77e7e" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">stop_timer</a>(t), N);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="comment">// END</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="benchmark_8c.html#a99ecac88b2611fb8dbc4f3659a1c176f">recorder_free</a>(join_rec);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="benchmark_8c.html#a99ecac88b2611fb8dbc4f3659a1c176f">recorder_free</a>(create_rec);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="benchmark_8c.html#a99ecac88b2611fb8dbc4f3659a1c176f" title="Libère toutes les resources utilisées par rec">recorder_free</a>(join_rec);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="benchmark_8c.html#a99ecac88b2611fb8dbc4f3659a1c176f" title="Libère toutes les resources utilisées par rec">recorder_free</a>(create_rec);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="benchmark_8c.html#aa55f3d9f5c34b774503b7b62122074db" title="Retourne le temps en nanosecondes depuis le début de mesure dans t">timer_free</a>(t);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
@@ -206,7 +206,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 30 2013 12:14:02 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 1 2013 09:49:06 for Benchmark by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

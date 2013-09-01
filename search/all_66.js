@@ -11,8 +11,7 @@ var searchData=
   ['fctval64',['fctval64',['../argfct_8c.html#a366aeba38199bbd32b4cdad6e9b7c259',1,'argfct.c']]],
   ['fctval8',['fctval8',['../argfct_8c.html#a2c884f8c1e9337a6357414d3cf076fe9',1,'argfct.c']]],
   ['file_2ec',['file.c',['../file_8c.html',1,'']]],
-  ['file_2egpi',['file.gpi',['../file_8gpi.html',1,'']]],
+  ['file_5fsize',['FILE_SIZE',['../io_8c.html#af3c3df6c9906ede8f09fa2af74cb28d5',1,'FILE_SIZE():&#160;io.c'],['../mmap_8c.html#af3c3df6c9906ede8f09fa2af74cb28d5',1,'FILE_SIZE():&#160;mmap.c']]],
   ['first',['first',['../mutsem_8c.html#a6603bdae2ed88835b654ade74824a256',1,'mutsem.c']]],
-  ['fork_2ec',['fork.c',['../fork_8c.html',1,'']]],
-  ['fork_2egpi',['fork.gpi',['../fork_8gpi.html',1,'']]]
+  ['fork_2ec',['fork.c',['../fork_8c.html',1,'']]]
 ];
