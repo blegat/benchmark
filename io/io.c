@@ -47,7 +47,7 @@ int main (int argc, char *argv[])  {
   } else {
     // benchmark
     timer *t = timer_alloc();
-    int len = 0;
+    size_t len = 0;
 
     recorder *sys_sync_rec = recorder_alloc("sys_sync.csv");
     recorder *sys_nosync_rec = recorder_alloc("sys_nosync.csv");
