@@ -1,3 +1,16 @@
+/**
+ * \file textbin.c
+ * \brief Compare la sauvegarde de nombres en binaire et en ascii
+ *
+ * Écris et lis des nombres sauvegardés en binaire puis en ascii.
+ * La sauvegarde en binaire se fait avec `read` et `write` et celle
+ * en ascii se fait avec `fprintf` et `fscanf` auquel on
+ * a désactivé le buffer de `stdio` pour que ce soit plus équitable.
+ *
+ * Problème
+ * * `0xff` partout donne 0 pour un nombre à virgule flottante
+ */
+
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,6 +26,16 @@
 #define N 100000
 #define F "tmp.dat"
 
+/**
+ * \brief Renvoie un nombre de taille `size`
+ *
+ * Renvoie un pointeur vers un nombre de taille `size` alloué
+ * dynamiquement avec tous les bits mis à 1.
+ *
+ * Il ne faut donc pas oublier de le libérer avec `free`.
+ *
+ * \param size la taille du nombre en byte.
+ */
 char *get_num (int size) {
   int i;
   char *s = (char *) malloc(sizeof(char) * size);
@@ -26,6 +49,15 @@ char *get_num (int size) {
   return s;
 }
 
+/**
+ * \brief Benchmark l'écriture et lecture en binaire d'un nombre
+ *        de taille `size`
+ *
+ * \param t `timer` à utiliser pour mesurer le temps
+ * \param read_rec `recorder` pour la lecture
+ * \param write_rec `recorder` pour l'écriture
+ * \param size taille du nombre à écrire
+ */
 void bin (timer *t, recorder *read_rec, recorder *write_rec,
     int size) {
   int err, i, len;
@@ -70,6 +102,8 @@ void bin (timer *t, recorder *read_rec, recorder *write_rec,
   fsync(fdin);
   write_record(read_rec, len, stop_timer(t));
 
+  free(s);
+
   err = close(fdin);
   if (err == -1){
     perror("close");
@@ -85,6 +119,21 @@ void bin (timer *t, recorder *read_rec, recorder *write_rec,
 }
 
 
+/**
+ * \brief Benchmark l'écriture et lecture en ascii d'un nombre
+ *        de taille `size`
+ *
+ * Mesure les performances d'écriture, lecture de `N` nombre
+ * en ascii avec `fprintf`, `fscanf`.
+ *
+ * \param t `timer` à utiliser pour mesurer le temps
+ * \param read_rec `recorder` pour la lecture
+ * \param write_rec `recorder` pour l'écriture
+ * \param size taille du nombre à écrire
+ * \param format format du nombre pour `printf`, `scanf`.
+ *        Il vaut mieux ajouter un charactère de séparation également
+ *        e.g. "%d "
+ */
 void text (timer *t, recorder *read_rec, recorder *write_rec,
     int size, char *format) {
   int err, i;
@@ -147,6 +196,8 @@ void text (timer *t, recorder *read_rec, recorder *write_rec,
   fsync(fdin); // Write data to the disk
   write_record(read_rec, size, stop_timer(t));
 
+  free(s);
+
   err = fclose(fin);
   if (err == EOF){
     perror("fclose");
@@ -176,6 +227,7 @@ int main (int argc, char *argv[])  {
   text(t, text_write_rec, text_read_rec, sizeof(long int), "%ld ");
   bin(t, bin_write_rec, bin_read_rec, sizeof(long long int));
   text(t, text_write_rec, text_read_rec, sizeof(long long int), "%lld ");
+
   bin(t, bin_write_rec, bin_read_rec, sizeof(float));
   text(t, text_write_rec, text_read_rec, sizeof(float), "%f ");
   bin(t, bin_write_rec, bin_read_rec, sizeof(double));
