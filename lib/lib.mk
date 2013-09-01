@@ -9,6 +9,15 @@
 #//!            (en plus de `$(PROG)`);
 #//! * `TMP`, les fichiers temporaires générés par le programme
 #//!          qu'il faut supprimer avec `make clean`.
+#//!
+#//! Les règles suivantes sont ajoutées à tous les benchmarks
+#//! * `show-plot` montre les résultats du benchmark à l'aide de `gnuplot`;
+#//! * `show` montre les résultats du benchmark, éventuellement de `perf`
+#//!    et affiche les commentaires en ouvrant un page web en local dans votre
+#//!    navigateur par défaut;
+#//! * `clean` supprime tous vos fichiers intermédiaire de compilation;
+#//! * `mrproper` les supprime aussi mais supprime aussi tous les résultats
+#//!    générés.
 
 OPEN=xdg-open
 
@@ -31,4 +40,4 @@ show: index.html
 mrproper: clean
 	$(RM) $(GRAPHS) $(PERFS) $(PROG).png index.html $(TMP)
 
-.PHONY: mrproper valgrind
+.PHONY: mrproper show show-plot
