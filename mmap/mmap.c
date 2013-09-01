@@ -1,3 +1,8 @@
+/**
+ * \file mmap.c
+ * \brief Compare les performances d'une copie avec et sans `mmap`
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
