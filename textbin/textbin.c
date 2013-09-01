@@ -19,11 +19,12 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <error.h>
+#include <limits.h>
+#include <float.h>
 
 #include "benchmark.h"
 
-#define N 100000
+#define N 100
 #define F "tmp.dat"
 
 /**
@@ -36,15 +37,16 @@
  *
  * \param size la taille du nombre en byte.
  */
-char *get_num (int size) {
+char *get_num (int size, void *value) {
   int i;
   char *s = (char *) malloc(sizeof(char) * size);
+  char *v = (char *) value;
   if (s == NULL) {
     perror("malloc");
     exit(EXIT_FAILURE);
   }
   for (i = 0; i < size; i++) {
-    s[i] = 0xff;
+    s[i] = v[i];
   }
   return s;
 }
@@ -59,7 +61,7 @@ char *get_num (int size) {
  * \param size taille du nombre à écrire
  */
 void bin (timer *t, recorder *read_rec, recorder *write_rec,
-    int size) {
+    int size, void *value) {
   int err, i, len;
 
   rm(F);
@@ -78,7 +80,7 @@ void bin (timer *t, recorder *read_rec, recorder *write_rec,
   fsync(fdin);
   fsync(fdout);
 
-  char *s = get_num(size);
+  char *s = get_num(size, value);
 
   start_timer(t);
   for (i = 0; i < N; i++) {
@@ -135,7 +137,7 @@ void bin (timer *t, recorder *read_rec, recorder *write_rec,
  *        e.g. "%d "
  */
 void text (timer *t, recorder *read_rec, recorder *write_rec,
-    int size, char *format) {
+    int size, char *format, void *value) {
   int err, i;
 
   rm(F);
@@ -154,7 +156,12 @@ void text (timer *t, recorder *read_rec, recorder *write_rec,
   fflush(fin);
   fflush(fout);
 
-  char *s = get_num(size);
+  printf(format, *((char *) value));
+  for (i = 0; i < size; i++) {
+    printf("[%x]\n", ((char *) value)[i]);
+  }
+
+  char *s = get_num(size, value);
 
   /**
    * Pour être équitable avec `write` et `read`,
@@ -162,6 +169,11 @@ void text (timer *t, recorder *read_rec, recorder *write_rec,
    */
   setvbuf(fin, NULL, _IONBF, 0);
   setvbuf(fout, NULL, _IONBF, 0);
+
+  printf(format, *s);
+  for (i = 0; i < size; i++) {
+    printf("[%x]\n", s[i]);
+  }
 
   start_timer(t);
   for (i = 0; i < N; i++) {
@@ -209,7 +221,7 @@ void text (timer *t, recorder *read_rec, recorder *write_rec,
     exit(EXIT_FAILURE);
   }
 
-  rm(F);
+  //rm(F);
 }
 
 int main (int argc, char *argv[])  {
@@ -219,22 +231,45 @@ int main (int argc, char *argv[])  {
   recorder *bin_read_rec = recorder_alloc("bin_read.csv");
   recorder *bin_write_rec = recorder_alloc("bin_write.csv");
 
-  bin(t, bin_write_rec, bin_read_rec, sizeof(short));
-  text(t, text_write_rec, text_read_rec, sizeof(short), "%hd ");
-  bin(t, bin_write_rec, bin_read_rec, sizeof(int));
-  text(t, text_write_rec, text_read_rec, sizeof(int), "%d ");
-  bin(t, bin_write_rec, bin_read_rec, sizeof(long int));
-  text(t, text_write_rec, text_read_rec, sizeof(long int), "%ld ");
-  bin(t, bin_write_rec, bin_read_rec, sizeof(long long int));
-  text(t, text_write_rec, text_read_rec, sizeof(long long int), "%lld ");
+  short s = SHRT_MAX;
+  bin(t, bin_write_rec, bin_read_rec,
+      sizeof(short), (void *) &s);
+  text(t, text_write_rec, text_read_rec,
+      sizeof(short), "%hd ", (void *) &s);
+  int i = INT_MAX;
+  bin(t, bin_write_rec, bin_read_rec,
+      sizeof(int), (void *) &i);
+  text(t, text_write_rec, text_read_rec,
+      sizeof(int), "%d ", (void *) &i);
+  long int li = LONG_MAX;
+  bin(t, bin_write_rec, bin_read_rec,
+      sizeof(long int), (void *) &li);
+  text(t, text_write_rec, text_read_rec,
+      sizeof(long int), "%ld ", (void *) &li);
+  long long int lli = LLONG_MAX;
+  bin(t, bin_write_rec, bin_read_rec,
+      sizeof(long long int), (void *) &lli);
+  text(t, text_write_rec, text_read_rec,
+      sizeof(long long int), "%lld ", (void *) &lli);
 
-  bin(t, bin_write_rec, bin_read_rec, sizeof(float));
-  text(t, text_write_rec, text_read_rec, sizeof(float), "%f ");
-  bin(t, bin_write_rec, bin_read_rec, sizeof(double));
-  text(t, text_write_rec, text_read_rec, sizeof(double), "%lf ");
-  bin(t, bin_write_rec, bin_read_rec, sizeof(long double));
-  text(t, text_write_rec, text_read_rec, sizeof(long double), "%Lf ");
-
+  float f = FLT_MAX;
+  printf("%f\n\n", f);
+  void *value = (void *) &f;
+  printf("%f ", *((char *) value));
+  bin(t, bin_write_rec, bin_read_rec,
+      sizeof(float), (void *) &f);
+  text(t, text_write_rec, text_read_rec,
+      sizeof(float), "%f ", (void *) &f);
+  double d = DBL_MAX;
+  bin(t, bin_write_rec, bin_read_rec,
+      sizeof(double), (void *) &d);
+  text(t, text_write_rec, text_read_rec,
+      sizeof(double), "%lf ", (void *) &d);
+  long double ld = LDBL_MAX;
+  bin(t, bin_write_rec, bin_read_rec,
+      sizeof(long double), (void *) &ld);
+  text(t, text_write_rec, text_read_rec,
+      sizeof(long double), "%Lf ", (void *) &ld);
 
   timer_free(t);
 
