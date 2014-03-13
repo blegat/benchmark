@@ -24,7 +24,7 @@ OPEN=xdg-open
 $(GRAPHS): $(bin_PROGRAMS)
 	./$(PROG)
 
-show-plot: $(GRAPHS)
+show-plot: $(GRAPHS) $(PROG).gpi
 	gnuplot -p $(PROG).gpi
 
 $(PROG).png: $(GRAPHS) $(PROG).gpi
