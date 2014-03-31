@@ -25,10 +25,10 @@ $(GRAPHS): $(bin_PROGRAMS)
 	./$(PROG)
 
 show-plot: $(GRAPHS) $(PROG).gpi
-	gnuplot -p $(PROG).gpi
+	$(gnuplot) -p $(PROG).gpi
 
 $(PROG).png: $(GRAPHS) $(PROG).gpi
-	gnuplot -p -e "set terminal png size 800,600 enhanced font 'Helvetica,12';\
+	$(gnuplot) -p -e "set terminal png size 800,600 enhanced font 'Helvetica,12';\
 	  set output '$(PROG).png'" $(PROG).gpi
 
 index.html: $(PROG).png ../lib/gen_html.sh README.html $(PERFS)
