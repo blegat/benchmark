@@ -1,3 +1,5 @@
+#ifndef __BENCHMARK_H__
+#define __BENCHMARK_H__
 /*  _____ _
  * |_   _(_)_ __ ___   ___ _ __
  *   | | | | '_ ` _ \ / _ \ '__|
@@ -40,3 +42,5 @@ void write_record (recorder *rec, long int x, long int time);
 void write_record_n (recorder *rec, long int x, long int time, long n);
 
 void recorder_free (recorder *rec);
+
+#endif
