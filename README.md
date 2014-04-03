@@ -77,9 +77,9 @@ puis téléchargez et installer le
 Si vous n'avez les droits root sur la machine
 (c'est le cas si vous êtes sur une machine des salles), vous ne pourrez pas l'installer,
 et il faudra spécifier au benchmark d'utiliser votre gnuplot compilé dans `~/src/gnuplot-4.6.5/src`.
-Pour cela, faites (FIXME: cette commande semble ne pas donner le résultat excompté et fait comme `bootstrap.sh`)
+Pour cela, faites
 
-    $ PATH=~/src/gnuplot-4.6.5/src:${PATH} ./bootstrap.sh
+    $ PATH=<path/to/gnuplot-4.6.5>/src:${PATH} ./bootstrap.sh
 
 à la place de `./bootstrap.sh` dans le dossier benchmark.
 
