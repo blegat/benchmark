@@ -7,3 +7,5 @@ fi
 autoreconf --install || exit 1
 
 ./configure $@
+
+cd lib && make
