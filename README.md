@@ -33,9 +33,18 @@ ainsi
 Il suffit alors d'ouvrir `doc/html/index.html` pour voir la documentation.
 
 ## Compilation
+Commencez par vous assurez que vous avez les dépendances nécessaires
+
+    $ sudo apt-get install build-essential dh-autoreconf gnuplot
+
+Il est nécessaire d'avoir un gnuplot récent (4.2 est trop vieux, 4.6 marche bien).
+Si vous êtes sur une des machines des salles, il vous faudra donc l'installer from source (voir plus loin).
+
 Pour générer les `Makefile` nécessaires à la compilation à partir
 des `Makefile.am`, exécutez
 
+    $ git clone https://github.com/blegat/benchmark.git
+    $ cd benchmark
     $ ./bootstrap.sh
 
 Ça va non seulement générer un `Makefile` à la racine qui compile
@@ -47,6 +56,41 @@ l'exécuter et générer et afficher une page `html` à l'aide `make show-html`.
 Par exemple, pour essayer le benchmark `io`, faite suivre ce `./bootstrap.sh`
 par
 
-    $ make
     $ cd io
     $ make show-html
+
+### Utiliser gnuplot from source
+
+Assurez-vous d'installer `libgd2-xpm-dev` pour avoir le support de png dans gnuplot
+
+    $ sudo apt-get install libgd2-xpm-dev
+
+puis téléchargez et installer le
+(`./configure` devrait trouver `libgd` et activer le support de png pour gnuplot)
+
+    $ wget http://sourceforge.net/projects/gnuplot/files/gnuplot/4.6.5/gnuplot-4.6.5.tar.gz
+    $ tar xzvf gnuplot-4.6.5.tar.gz
+    $ cd gnuplot-4.6.5
+    $ ./configure
+    $ make
+
+Si vous n'avez les droits root sur la machine
+(c'est le cas si vous êtes sur une machine des salles), vous ne pourrez pas l'installer,
+et il faudra spécifier au benchmark d'utiliser votre gnuplot compilé dans `~/src/gnuplot-4.6.5/src`.
+Pour cela, faites (FIXME: cette commande semble ne pas donner le résultat excompté et fait comme `bootstrap.sh`)
+
+    $ PATH=~/src/gnuplot-4.6.5/src:${PATH} ./bootstrap.sh
+
+à la place de `./bootstrap.sh` dans le dossier benchmark.
+
+Si vous avez les droits root, faites simplement
+
+    $ sudo make install
+
+dans le dossier gnuplot.
+
+
+### Troobleshooting
+
+Si vous avez l'erreur "required file `./ltmain.sh`" en faisant `./configure` ou `./bootstrap.sh`,
+assurez vous que votre dossier `gnuplot-4.6.5` n'est pas dans `benchmark` et vice versa.
