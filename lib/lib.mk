@@ -19,7 +19,11 @@
 #//! * `mrproper` les supprime aussi mais supprime aussi tous les résultats
 #//!    générés.
 
-OPEN=xdg-open
+if OS_IS_MAC
+  OPEN=open
+else
+  OPEN=xdg-open
+endif
 
 $(GRAPHS): $(bin_PROGRAMS)
 	./$(PROG)
