@@ -19,11 +19,7 @@
 #//! * `mrproper` les supprime aussi mais supprime aussi tous les résultats
 #//!    générés.
 
-ifeq ($(UNAME_S),Darwin)
-  OPEN=open
-else
-  OPEN=xdg-open
-endif
+OPEN=xdg-open
 
 $(GRAPHS): $(bin_PROGRAMS)
 	./$(PROG)
