@@ -118,7 +118,9 @@ void read_write (timer *t, recorder *rec, char *in, char *out,
   char *s = NULL;
   err = posix_memalign((void **) &s, 512, len);
   if (err != 0) {
-    error(0, err, "posix_memalign");
+    // The value of errno is indeterminate after a call to posix_memalign()
+    errno = err; // so set it to use perror()
+    perror("posix_memalign");
     exit(EXIT_FAILURE);
   }
 

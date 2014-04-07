@@ -11,7 +11,13 @@
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <fcntl.h>
+
+#ifndef O_DIRECT
+#warning O_DIRECT not defined on this platform
+#define O_DIRECT 0
+#endif
 
 #include "benchmark.h"
 #include "copy.h"
