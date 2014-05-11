@@ -8,7 +8,7 @@ textbin_LDADD = $(top_builddir)/lib/libbenchmark.a \
 PROG   = textbin
 GRAPHS = text_write.csv text_read.csv bin_write.csv bin_read.csv
 
-.PHONY = run-template
+.PHONY: run-template
 
 include ../lib/lib.mk
 
