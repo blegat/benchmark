@@ -8,20 +8,19 @@ textbin_LDADD = $(top_builddir)/lib/libbenchmark.a \
 PROG   = textbin
 GRAPHS = text_write.csv text_read.csv bin_write.csv bin_read.csv
 
+.PHONY = run-template
+
 include ../lib/lib.mk
 
-deps_template=template.sh template.c template.h start.c textbintemplate.c
+run-template: template.sh template.c template.h start.c textbintemplate.c
+	$(SHELL) $<
 
-textbinutil.c: ${deps_template}
-	./template.sh
-
-textbinutil.h: ${deps_template}
-	./template.sh
+textbinutil.c: run-template
+textbinutil.h: run-template
 
 # Ugly hack to make the generation of textbinutil.h a dependency on the generation of textbin.c on first build
 # TODO Make textbinutil.h a dependency to textbin.o then renames textbintemplate.c to textbin.c and remove
 #      cp textbintemplate.c textbin.c
 #      from template.sh
 
-textbin.c: ${deps_template}
-	./template.sh
+textbin.c: run-template
