@@ -20,7 +20,7 @@ Le projet est constitué
   statiques développées pour le projet ainsi que divers scripts;
 * ainsi qu'un dossier par benchmark.
   Le résultat du benchmark est affiché dans une page `html`
-  qu'on peut obtenir en lançant `make show-html` dans le dossier correspondant.
+  qu'on peut obtenir en lançant `make show` dans le dossier correspondant.
 
 ## Documentation
 La documentation se trouve
@@ -51,13 +51,13 @@ des `Makefile.am`, exécutez
 les librairies et tous les benchmarks mais aussi un `Makefile` dans
 le dossier `lib` qui compile les librairies et un dossier dans
 chaque dossier de benchmark qui peut compiler le benchmark mais aussi
-l'exécuter et générer et afficher une page `html` à l'aide `make show-html`.
+l'exécuter et générer et afficher une page `html` à l'aide `make show`.
 
 Par exemple, pour essayer le benchmark `io`, faite suivre ce `./bootstrap.sh`
 par
 
     $ cd io
-    $ make show-html
+    $ make show
 
 ### Utiliser gnuplot from source
 
