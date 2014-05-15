@@ -36,6 +36,7 @@ Il suffit alors d'ouvrir `doc/html/index.html` pour voir la documentation.
 Commencez par vous assurez que vous avez les dépendances nécessaires
 
     $ sudo apt-get install build-essential dh-autoreconf gnuplot libgd2-xpm-dev libtool autoconf
+    $ sudo apt-get install linux-tools-common linux-tools-generic # perf
 
 Il est nécessaire d'avoir un gnuplot récent (4.2 est trop vieux, 4.6 marche bien).
 Si vous êtes sur une des machines des salles, il vous faudra donc l'installer from source (voir plus loin).
